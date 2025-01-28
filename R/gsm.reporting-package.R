@@ -16,6 +16,7 @@
 #' @importFrom cli cli_text
 #' @importFrom cli cli_warn
 #' @importFrom glue glue
+#' @importFrom tibble tibble
 #' @importFrom yaml read_yaml
 ## usethis namespace: end
 NULL
