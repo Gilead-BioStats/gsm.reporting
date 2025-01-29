@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
+remotes::install_github("Gilead-BioStats/gsm.kri@dev")
 library(gsm)
 library(gsm.kri)
 library(gsm.mapping)
