@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 library(gsm)
 library(gsm.kri)
 library(gsm.mapping)
+library(gsm.reporting)
 library(DT)
 library(gt)
 
