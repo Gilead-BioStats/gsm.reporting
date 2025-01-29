@@ -19,9 +19,11 @@ Imports:
     yaml
 Remotes:
     gsm=Gilead-BioStats/gsm@gsm-core-test
+    gsm.kri= Gilead-BioStats/gsm.kri@dev
 Suggests: 
     testthat (>= 3.0.0),
-    knitr
+    knitr,
+    gsm.kri
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
