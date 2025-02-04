@@ -13,7 +13,7 @@ The {gsm} ecosystem provides a standardized Risk Based Quality Monitoring (RBQM)
 </center>
 
 
-The `{gsm.reporting}` package provides the necessary functions and workflows to produce the reporting data model that is used byt many packages to produce visualizations and reports.
+The `{gsm.reporting}` package provides the necessary functions and workflows to produce the reporting data model that is used by many packages to produce visualizations and reports.
 This README provides a high-level overview of {gsm.reporting}; see the [gsm Reporting Vignette](https://gilead-biostats.github.io/gsm.reporting/gsmReporting.html) for additional details.
 
 With all necessary inputs to the reporting model created via functions in `{gsm.mapping}` and `{gsm.core}`, `{gsm.reporting}` generates the reporting data model data frames. These data frames created are as follows:
