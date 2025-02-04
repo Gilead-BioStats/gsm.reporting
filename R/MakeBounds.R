@@ -5,7 +5,17 @@
 #'
 #' Calculate bounds across a set of metrics.
 #'
-#' @inheritParams shared-params
+#' @param dfMetrics `data.frame` Metric-specific metadata for use in charts and
+#'   reporting. Created by passing an `lWorkflow` object to [MakeMetric()].
+#'   Expected columns: `File`, `MetricID`, `Group`, `Abbreviation`, `Metric`,
+#'   `Numerator`, `Denominator`, `Model`, `Score`, and `Threshold`. For more
+#'   details see the Data Model vignette: `vignette("DataModel", package =
+#'   "gsm")`.
+#' @param dfResults `data.frame` A stacked summary of analysis pipeline output.
+#'   Created by passing a list of results returned by [Summarize()] to
+#'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
+#'   `Denominator`, `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`,
+#'   `SnapshotDate`.
 #' @param strMetrics Character vector of `MetricID`s to include in `dfBounds`.
 #'   All unique values from `dfResults$MetricID` used by default.
 #' @param strStudyID Study ID. Uses `dfResults$StudyID` by default. If more than
