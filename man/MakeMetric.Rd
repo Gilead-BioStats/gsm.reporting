@@ -8,7 +8,7 @@ MakeMetric(lWorkflows)
 }
 \arguments{
 \item{lWorkflows}{A list of workflows, like the one returned by
-\code{\link[=MakeWorkflowList]{MakeWorkflowList()}}.}
+\code{\link[gsm:MakeWorkflowList]{gsm::MakeWorkflowList()}}.}
 }
 \value{
 A data frame.
@@ -22,7 +22,7 @@ per \code{MetricID}.
 }
 \examples{
 library(gsm)
-lWorkflows <- MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri")
+lWorkflows <- MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri", strPackage = "gsm.kri")
 dfMetrics <- MakeMetric(lWorkflows)
 
 }

@@ -18,8 +18,18 @@ Imports:
     tidyr,
     yaml
 Remotes:
-    gsm=Gilead-BioStats/gsm
-Suggests: 
+    clindata=Gilead-BioStats/clindata,
+    gsm=Gilead-BioStats/gsm@gsm-core-test,
+    gsm.kri=Gilead-BioStats/gsm.kri@fix-9,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@fix-gsm_version
+Suggests:
+    clindata,
+    DT,
+    gsm.kri,
+    gsm.mapping,
+    gt,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
