@@ -6,7 +6,7 @@ meta:
 steps:
   # lWorkflows is a named list of metric workflows.
   - output: Reporting_Metrics
-    name: MakeMetric
+    name: gsm.reporting::MakeMetric
     params:
       lWorkflows: lWorkflows
 

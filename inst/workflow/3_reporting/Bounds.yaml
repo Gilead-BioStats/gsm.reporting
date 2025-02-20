@@ -23,7 +23,7 @@ spec:
 steps:
   # Calculate bounds for confidence intervals.
   - output: Reporting_Bounds
-    name: MakeBounds
+    name: gsm.reporting::MakeBounds
     params:
       dfResults: Reporting_Results
       dfMetrics: Reporting_Metrics
