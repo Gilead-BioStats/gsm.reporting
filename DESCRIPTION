@@ -19,7 +19,7 @@ Imports:
     yaml
 Remotes:
     gsm=Gilead-BioStats/gsm@gsm-core-test,
-    gsm.datasim=Gilead-BioStats/gsm.datasim@fix-34,
+    gsm.datasim=Gilead-BioStats/gsm.datasim@dev,
     gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Suggests:
