@@ -16,8 +16,11 @@ library(gsm)
 library(gsm.kri)
 library(gsm.mapping)
 library(gsm.reporting)
+library(gsm.datasim)
+library(dplyr)
 library(DT)
 library(gt)
+set.seed(1)
 
 dt <- function(data){
   data %>%
@@ -65,26 +68,57 @@ To run the analysis workflow on all 13 KRIs using `clindata` Raw+ data, use the 
 3. `mapped$Mapped_ENROLL` - mapped data.frame of enrolled participants
 
 ```{r include = TRUE, message = FALSE}
+core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
+                   "PD", "PK", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-# Create Mapped Data - filter/map raw data
-lSource <- list(
-    Source_SUBJ = clindata::rawplus_dm,
-    Source_AE = clindata::rawplus_ae,
-    Source_PD = clindata::ctms_protdev,
-    Source_LB = clindata::rawplus_lb,
-    Source_STUDCOMP = clindata::rawplus_studcomp,
-    Source_SDRGCOMP = clindata::rawplus_sdrgcomp %>% dplyr::filter(.data$phase == 'Blinded Study Drug Completion'),
-    Source_DATACHG = clindata::edc_data_points,
-    Source_DATAENT = clindata::edc_data_pages,
-    Source_QUERY = clindata::edc_queries,
-    Source_ENROLL = clindata::rawplus_enroll,
-    Source_SITE = clindata::ctms_site,
-    Source_STUDY = clindata::ctms_study
+basic_sim <- gsm.datasim::generate_rawdata_for_single_study(
+  SnapshotCount = 1,
+  SnapshotWidth = "months",
+  ParticipantCount = 30,
+  SiteCount = 5,
+  StudyID = "ABC",
+  workflow_path = "workflow/1_mappings",
+  mappings = core_mappings,
+  package = "gsm.mapping",
+  desired_specs = NULL
+)
+
+lSource <- basic_sim[[1]]
+
+lRaw <- list(
+  Raw_SUBJ = lSource$Raw_SUBJ,
+  Raw_AE = lSource$Raw_AE,
+  Raw_PD = lSource$Raw_PD %>%
+    rename(subjid = subjectenrollmentnumber),
+  Raw_LB = lSource$Raw_LB,
+  Raw_STUDCOMP = lSource$Raw_STUDCOMP %>%
+    select(subjid, compyn),
+  Raw_SDRGCOMP = lSource$Raw_SDRGCOMP,
+  Raw_DATACHG = lSource$Raw_DATACHG %>%
+    rename(subject_nsv = subjectname),
+  Raw_DATAENT = lSource$Raw_DATAENT %>%
+    rename(subject_nsv = subjectname),
+  Raw_QUERY = lSource$Raw_QUERY %>%
+    rename(subject_nsv = subjectname),
+  Raw_ENROLL = lSource$Raw_ENROLL,
+  Raw_SITE = lSource$Raw_SITE %>%
+    rename(studyid = protocol) %>%
+    rename(invid = pi_number) %>%
+    rename(InvestigatorFirstName = pi_first_name) %>%
+    rename(InvestigatorLastName = pi_last_name) %>%
+    rename(City = city) %>%
+    rename(State = state) %>%
+    rename(Country = country) %>%
+    rename(Status = site_status),
+  Raw_STUDY = lSource$Raw_STUDY %>%
+    rename(studyid = protocol_number) %>%
+    rename(Status = status),
+  Raw_PK = lSource$Raw_PK
 )
 
 # Step 0 - Data Ingestion - standardize tables/columns names
 mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", 
-                                strNames = c("SUBJ", "AE", "PD", "LB", "STUDCOMP", "SDRGCOMP", "DATACHG", "DATAENT", "QUERY", "ENROLL", "SITE", "STUDY"),
+                                strNames = core_mappings,
                                 strPackage = "gsm.mapping")
 mappings_spec <- CombineSpecs(mappings_wf)
 lRaw <- Ingest(lSource, mappings_spec)
@@ -119,11 +153,11 @@ The `dfGroups` data frame is critical to providing site-, study- and country-lev
 
 ```{r include = TRUE, message = FALSE}
 #Transform CTMS Site and Study Level data
-dfCTMSSite <- RunQuery(df = clindata::ctms_site, 
+dfCTMSSite <- RunQuery(df = lSource$Raw_SITE, 
                        strQuery = "SELECT pi_number as GroupID, site_status as Status, pi_first_name as InvestigatorFirstName, pi_last_name as InvestigatorLastName, city as City, state as State, country as Country, * FROM df") |>
   MakeLongMeta(strGroupLevel = 'Site')
 
-dfCTMSStudy <- RunQuery(df = clindata::ctms_study, 
+dfCTMSStudy <- RunQuery(df = lSource$Raw_STUDY, 
                         strQuery = "SELECT protocol_number as GroupID, status as Status, * FROM df") |>
   MakeLongMeta(strGroupLevel = 'Study')
 
@@ -309,48 +343,52 @@ The second option is to run the `snapshot.yaml` workflow, which takes in all raw
 ```{r eval = FALSE, include = TRUE}
 # Step 1 - Create Mapped Data - filter/map raw data
 # Source Data
-lSource <- list(
-    Source_SUBJ = clindata::rawplus_dm,
-    Source_AE = clindata::rawplus_ae,
-    Source_PD = clindata::ctms_protdev,
-    Source_LB = clindata::rawplus_lb,
-    Source_STUDCOMP = clindata::rawplus_studcomp,
-    Source_SDRGCOMP = clindata::rawplus_sdrgcomp %>% dplyr::filter(.data$phase == 'Blinded Study Drug Completion'),
-    Source_DATACHG = clindata::edc_data_points,
-    Source_DATAENT = clindata::edc_data_pages,
-    Source_QUERY = clindata::edc_queries,
-    Source_ENROLL = clindata::rawplus_enroll,
-    Source_SITE = clindata::ctms_site,
-    Source_STUDY = clindata::ctms_study
+core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
+                   "PD", "PK", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
+
+basic_sim <- gsm.datasim::generate_rawdata_for_single_study(
+  SnapshotCount = 1,
+  SnapshotWidth = "months",
+  ParticipantCount = 30,
+  SiteCount = 5,
+  StudyID = "ABC",
+  workflow_path = "workflow/1_mappings",
+  mappings = core_mappings,
+  package = "gsm.mapping",
+  desired_specs = NULL
 )
 
-# Step 0 - Data Ingestion - standardize tables/columns names
+lSource <- basic_sim[[1]]
+
 lRaw <- list(
-    Raw_SUBJ = lSource$Source_SUBJ,
-    Raw_AE = lSource$Source_AE,
-    Raw_PD = lSource$Source_PD %>%
-      dplyr::rename(subjid = subjectenrollmentnumber),
-    Raw_LB = lSource$Source_LB,
-    Raw_STUDCOMP = lSource$Source_STUDCOMP,
-    Raw_SDRGCOMP = lSource$Source_SDRGCOMP,
-    Raw_DATACHG = lSource$Source_DATACHG %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_DATAENT = lSource$Source_DATAENT %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_QUERY = lSource$Source_QUERY %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_ENROLL = lSource$Source_ENROLL,
-    Raw_SITE = lSource$Source_SITE %>%
-      dplyr::rename(studyid = protocol) %>%
-      dplyr::rename(invid = pi_number) %>%
-      dplyr::rename(InvestigatorFirstName = pi_first_name) %>%
-      dplyr::rename(InvestigatorLastName = pi_last_name) %>%
-      dplyr::rename(City = city) %>%
-      dplyr::rename(State = state) %>%
-      dplyr::rename(Country = country),
-    Raw_STUDY = lSource$Source_STUDY %>%
-      dplyr::rename(studyid = protocol_number) %>%
-      dplyr::rename(Status = status)
+  Raw_SUBJ = lSource$Raw_SUBJ,
+  Raw_AE = lSource$Raw_AE,
+  Raw_PD = lSource$Raw_PD %>%
+    rename(subjid = subjectenrollmentnumber),
+  Raw_LB = lSource$Raw_LB,
+  Raw_STUDCOMP = lSource$Raw_STUDCOMP %>%
+    select(subjid, compyn),
+  Raw_SDRGCOMP = lSource$Raw_SDRGCOMP,
+  Raw_DATACHG = lSource$Raw_DATACHG %>%
+    rename(subject_nsv = subjectname),
+  Raw_DATAENT = lSource$Raw_DATAENT %>%
+    rename(subject_nsv = subjectname),
+  Raw_QUERY = lSource$Raw_QUERY %>%
+    rename(subject_nsv = subjectname),
+  Raw_ENROLL = lSource$Raw_ENROLL,
+  Raw_SITE = lSource$Raw_SITE %>%
+    rename(studyid = protocol) %>%
+    rename(invid = pi_number) %>%
+    rename(InvestigatorFirstName = pi_first_name) %>%
+    rename(InvestigatorLastName = pi_last_name) %>%
+    rename(City = city) %>%
+    rename(State = state) %>%
+    rename(Country = country) %>%
+    rename(Status = site_status),
+  Raw_STUDY = lSource$Raw_STUDY %>%
+    rename(studyid = protocol_number) %>%
+    rename(Status = status),
+  Raw_PK = lSource$Raw_PK
 )
 
 # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
