@@ -83,7 +83,9 @@ lSource <- list(
 )
 
 # Step 0 - Data Ingestion - standardize tables/columns names
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", 
+                                strNames = c("SUBJ", "AE", "PD", "LB", "STUDCOMP", "SDRGCOMP", "DATACHG", "DATAENT", "QUERY", "ENROLL", "SITE", "STUDY"),
+                                strPackage = "gsm.mapping")
 mappings_spec <- CombineSpecs(mappings_wf)
 lRaw <- Ingest(lSource, mappings_spec)
 
