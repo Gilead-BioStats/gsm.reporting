@@ -18,13 +18,11 @@ Imports:
     tidyr,
     yaml
 Remotes:
-    gsm=Gilead-BioStats/gsm@gsm-core-test,
-    gsm.datasim=Gilead-BioStats/gsm.datasim@dev,
+    gsm=Gilead-BioStats/gsm@fix-2036,
     gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Suggests:
     DT,
-    gsm.datasim,
     gsm.kri,
     gsm.mapping,
     gt,

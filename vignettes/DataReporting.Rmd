@@ -16,7 +16,6 @@ library(gsm)
 library(gsm.kri)
 library(gsm.mapping)
 library(gsm.reporting)
-library(gsm.datasim)
 library(dplyr)
 library(DT)
 library(gt)
@@ -69,21 +68,9 @@ To run the analysis workflow on all 13 KRIs using `clindata` Raw+ data, use the 
 
 ```{r include = TRUE, message = FALSE}
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
-                   "PD", "PK", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
+                   "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-basic_sim <- gsm.datasim::generate_rawdata_for_single_study(
-  SnapshotCount = 1,
-  SnapshotWidth = "months",
-  ParticipantCount = 30,
-  SiteCount = 5,
-  StudyID = "ABC",
-  workflow_path = "workflow/1_mappings",
-  mappings = core_mappings,
-  package = "gsm.mapping",
-  desired_specs = NULL
-)
-
-lSource <- basic_sim[[1]]
+lSource <- gsm::lSource
 
 lRaw <- list(
   Raw_SUBJ = lSource$Raw_SUBJ,
@@ -344,21 +331,9 @@ The second option is to run the `snapshot.yaml` workflow, which takes in all raw
 # Step 1 - Create Mapped Data - filter/map raw data
 # Source Data
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
-                   "PD", "PK", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
+                   "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-basic_sim <- gsm.datasim::generate_rawdata_for_single_study(
-  SnapshotCount = 1,
-  SnapshotWidth = "months",
-  ParticipantCount = 30,
-  SiteCount = 5,
-  StudyID = "ABC",
-  workflow_path = "workflow/1_mappings",
-  mappings = core_mappings,
-  package = "gsm.mapping",
-  desired_specs = NULL
-)
-
-lSource <- basic_sim[[1]]
+lSource <- gsm::lSource
 
 lRaw <- list(
   Raw_SUBJ = lSource$Raw_SUBJ,
