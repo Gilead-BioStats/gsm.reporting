@@ -18,7 +18,7 @@ Imports:
     tidyr,
     yaml
 Remotes:
-    gsm=Gilead-BioStats/gsm@fix-2036,
+    gsm=Gilead-BioStats/gsm@dev,
     gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Suggests:
