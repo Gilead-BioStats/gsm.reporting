@@ -1,5 +1,6 @@
 ---
 title: "Step-by-Step Reporting Workflow"
+description: "This vignette walks users through the mechanics of the functions and workflows that produce the Reporting outputs in the {gsm} pipeline."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Step-by-Step Reporting Workflow}
@@ -36,13 +37,13 @@ dt <- function(data){
 
 # Introduction
 
-This vignette walks users through the mechanics of the functions and workflows that produce all of the Reporting output within the `{gsm}` package. `{gsm}` leverages Key Risk Indicators (KRIs) and thresholds to conduct study-level, country-level and site-level Risk Based Monitoring for clinical trials.
+This vignette walks users through the mechanics of the functions and workflows that produce all of the Reporting output within the `{gsm.reporting}` package. The `{gsm}` suite of packages leverages Key Risk Indicators (KRIs) and thresholds to conduct study-level, country-level and site-level Risk Based Monitoring for clinical trials.
 
 These functions and workflows produce data frames, visualizations, metadata, and reports to be used in reporting and error checking at clinical sites. The image below illustrates the overarching context in which the reporting workflow runs, taking inputs from both the output of the analytics workflow, as well as raw study-, site-, and country-level data in the Raw/Raw+ format.
 
 ![](data_model_detailed.png){width="100%"}
 
-All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see (`vignette("gsmExtensions")`).
+All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `gsm.core::RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see the [`{gsm}` Extensions vignette](https://gilead-biostats.github.io/gsm/articles/gsmExtensions.html)`).
 
 Each of the individual functions can also be run independently outside of a specified yaml workflow.
 
@@ -52,7 +53,7 @@ For the purposes of this documentation, we will evaluate the input(s) and output
   
 ## Case Study - Step-by-Step Full Site-Level Report
   
-We will use sample clinical data from the [`{clindata}`](https://github.com/Gilead-BioStats/clindata) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
+We will use sample clinical data simulated from the [`{gsm.datasim}`](https://github.com/Gilead-BioStats/gsm.datasim) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
 
 Additional supporting functions are explored in [Appendix 1](#appendix-1).
 
@@ -273,7 +274,7 @@ lCharts$Analysis_kri0001$scatterJS
 All of the components are created to generate the HTML report for the study we are working on. In order to generate this report and save it locally, simply feed `lCharts`, `dfResults`, `dfGroups`, `dfMetrics` and (optionally) an absolute directory path and file to which the report will be saved (`strOutputDir` and `strOutputFile`, respectively) into `Report_KRI()` and the HTML output will be knit from the `Report_KRI.Rmd` template. All intermediate files from the knitting process will be saved in a temporary folder.
 
 ```{r eval = FALSE, include = TRUE}
-lReport <- Report_KRI(lCharts = lCharts,
+lReport <- gsm.kri::Report_KRI(lCharts = lCharts,
                       dfResults = dfResults,
                       dfGroups = dfGroups,
                       dfMetrics = dfMetrics,
@@ -336,7 +337,7 @@ lRaw <- list(
 )
 
 # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mapped <- RunWorkflows(mappings_wf, lRaw)
 
 # Step 2 - Create Metrics - calculate metrics using mapped data
@@ -353,7 +354,7 @@ lReports <- RunWorkflows(module_wf, reporting)
 
 #### 3.2 - Automate data ingestion using Ingest() and CombineSpecs()
 # Step 0 - Data Ingestion - standardize tables/columns names
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- CombineSpecs(mappings_wf)
 lRaw <- Ingest(lSource, mappings_spec)
 
