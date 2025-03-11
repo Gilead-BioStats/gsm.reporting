@@ -23,7 +23,7 @@ Created by passing a list of results returned by \code{\link[=Summarize]{Summari
 reporting. Created by passing an \code{lWorkflow} object to \code{\link[=MakeMetric]{MakeMetric()}}.
 Expected columns: \code{File}, \code{MetricID}, \code{Group}, \code{Abbreviation}, \code{Metric},
 \code{Numerator}, \code{Denominator}, \code{Model}, \code{Score}, and \code{Threshold}. For more
-details see the Data Model vignette: \code{vignette("DataModel", package = "gsm")}.}
+details see the Data Model vignette: \code{vignette("DataModel", package = "gsm.core")}.}
 
 \item{strMetrics}{Character vector of \code{MetricID}s to include in \code{dfBounds}.
 All unique values from \code{dfResults$MetricID} used by default.}
@@ -45,7 +45,7 @@ A data frame.
 Calculate bounds across a set of metrics.
 }
 \examples{
-library(gsm)
+library(gsm.core)
 dfBounds <- MakeBounds(
   dfResults = reportingResults,
   dfMetrics = reportingMetrics

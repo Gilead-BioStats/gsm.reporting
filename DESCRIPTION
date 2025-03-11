@@ -11,14 +11,14 @@ Imports:
     cli,
     dplyr,
     glue,
-    gsm,
+    gsm.core,
     log4r,
     purrr,
     tibble,
     tidyr,
     yaml
 Remotes:
-    gsm=Gilead-BioStats/gsm@dev,
+    gsm.core=Gilead-BioStats/gsm.core@dev,
     gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Suggests:
