@@ -22,7 +22,11 @@ per \code{MetricID}.
 }
 \examples{
 library(gsm.core)
-lWorkflows <- MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri", strPackage = "gsm.kri")
+lWorkflows <- MakeWorkflowList(
+  strPath = "workflow/2_metrics",
+  strNames = "kri",
+  strPackage = "gsm.kri"
+)
 dfMetrics <- MakeMetric(lWorkflows)
 
 }
