@@ -1,9 +1,9 @@
 test_that("MakeBounds makes dfBounds", {
-  gsm::reportingResults %>% dplyr::count(SnapshotDate)
+  gsm.core::reportingResults %>% dplyr::count(SnapshotDate)
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm::reportingResults, SnapshotDate == "2012-12-31"),
-      dfMetrics = gsm::reportingMetrics
+      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2012-12-31"),
+      dfMetrics = gsm.core::reportingMetrics
     )
   })
 })
@@ -11,8 +11,8 @@ test_that("MakeBounds makes dfBounds", {
 test_that("MakeBounds uses user-supplied strMetrics", {
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm::reportingResults, SnapshotDate == "2012-12-31"),
-      dfMetrics = gsm::reportingMetrics,
+      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2012-12-31"),
+      dfMetrics = gsm.core::reportingMetrics,
       strMetrics = "Analysis_kri0001"
     )
   })
@@ -22,8 +22,8 @@ test_that("MakeBounds fails for NULLed arguments", {
   expect_error(
     {
       MakeBounds(
-        dfResults = gsm::reportingResults,
-        dfMetrics = gsm::reportingMetrics,
+        dfResults = gsm.core::reportingResults,
+        dfMetrics = gsm.core::reportingMetrics,
         strMetrics = NULL
       )
     },
@@ -32,8 +32,8 @@ test_that("MakeBounds fails for NULLed arguments", {
   expect_error(
     {
       MakeBounds(
-        dfResults = gsm::reportingResults,
-        dfMetrics = gsm::reportingMetrics,
+        dfResults = gsm.core::reportingResults,
+        dfMetrics = gsm.core::reportingMetrics,
         dSnapshotDate = NULL
       )
     },
@@ -42,8 +42,8 @@ test_that("MakeBounds fails for NULLed arguments", {
   expect_error(
     {
       MakeBounds(
-        dfResults = gsm::reportingResults,
-        dfMetrics = gsm::reportingMetrics,
+        dfResults = gsm.core::reportingResults,
+        dfMetrics = gsm.core::reportingMetrics,
         strStudyID = NULL
       )
     },
@@ -57,8 +57,8 @@ test_that("MakeBounds fails gracefully for multiple arg values", {
       expect_message(
         {
           dfBounds <- MakeBounds(
-            dfResults = gsm::reportingResults,
-            dfMetrics = gsm::reportingMetrics
+            dfResults = gsm.core::reportingResults,
+            dfMetrics = gsm.core::reportingMetrics
           )
         },
         "Creating stacked dfBounds data"
@@ -72,8 +72,8 @@ test_that("MakeBounds fails gracefully for multiple arg values", {
       expect_message(
         {
           dfBounds <- MakeBounds(
-            dfResults = dplyr::filter(gsm::reportingResults, SnapshotDate == "2012-12-31"),
-            dfMetrics = gsm::reportingMetrics,
+            dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2012-12-31"),
+            dfMetrics = gsm.core::reportingMetrics,
             strStudyID = c("a", "b")
           )
         },
@@ -86,11 +86,11 @@ test_that("MakeBounds fails gracefully for multiple arg values", {
 })
 
 test_that("MakeBounds makes poisson dfBounds", {
-  reportingMetrics <- gsm::reportingMetrics
+  reportingMetrics <- gsm.core::reportingMetrics
   reportingMetrics$Type <- "poisson"
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm::reportingResults, SnapshotDate == "2012-12-31"),
+      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2012-12-31"),
       dfMetrics = reportingMetrics
     )
   })

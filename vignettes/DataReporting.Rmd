@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(gsm)
+library(gsm.core)
 library(gsm.kri)
 library(gsm.mapping)
 library(gsm.reporting)
@@ -43,7 +43,7 @@ These functions and workflows produce data frames, visualizations, metadata, and
 
 ![](data_model_detailed.png){width="100%"}
 
-All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `gsm.core::RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see the [`{gsm}` Extensions vignette](https://gilead-biostats.github.io/gsm/articles/gsmExtensions.html)`).
+All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `gsm.core::RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see the [`{gsm.core}` Extensions vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html)`).
 
 Each of the individual functions can also be run independently outside of a specified yaml workflow.
 
@@ -71,7 +71,7 @@ To run the analysis workflow on all 13 KRIs using `clindata` Raw+ data, use the 
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
                    "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-lSource <- gsm::lSource
+lSource <- gsm.core::lSource
 
 # Step 0 - Data Ingestion - standardize tables/columns names
 mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", 
@@ -303,7 +303,7 @@ The second option is to run the `snapshot.yaml` workflow, which takes in all raw
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
                    "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-lSource <- gsm::lSource
+lSource <- gsm.core::lSource
 
 lRaw <- list(
   Raw_SUBJ = lSource$Raw_SUBJ,
