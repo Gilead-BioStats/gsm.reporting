@@ -5,7 +5,9 @@ Authors@R: c(
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", email = "laura.maxwell@atorusresearch.com", role = c("aut"))
     )
-Description: What the package does (one paragraph).
+Description: The Good Statistical Monitoring or 'gsm' suite of R packages provides a
+    framework for statistical data monitoring. 'gsm.reporting' provides workflows
+    to generate the reporting data model needed to generate reports.
 License: Apache License (>= 2)
 Imports: 
     cli,
