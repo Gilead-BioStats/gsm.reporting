@@ -1,6 +1,5 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-<<<<<<< HEAD
 Version: 1.0.0
 Authors@R: c( 
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
