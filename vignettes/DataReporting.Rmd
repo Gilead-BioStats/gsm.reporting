@@ -1,5 +1,6 @@
 ---
 title: "Step-by-Step Reporting Workflow"
+description: "This vignette walks users through the mechanics of the functions and workflows that produce the Reporting outputs in the {gsm} pipeline."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Step-by-Step Reporting Workflow}
@@ -12,12 +13,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(gsm)
+library(gsm.core)
 library(gsm.kri)
 library(gsm.mapping)
 library(gsm.reporting)
+library(dplyr)
 library(DT)
 library(gt)
+set.seed(1)
 
 dt <- function(data){
   data %>%
@@ -34,13 +37,13 @@ dt <- function(data){
 
 # Introduction
 
-This vignette walks users through the mechanics of the functions and workflows that produce all of the Reporting output within the `{gsm}` package. `{gsm}` leverages Key Risk Indicators (KRIs) and thresholds to conduct study-level, country-level and site-level Risk Based Monitoring for clinical trials.
+This vignette walks users through the mechanics of the functions and workflows that produce all of the Reporting output within the `{gsm.reporting}` package. The `{gsm}` suite of packages leverages Key Risk Indicators (KRIs) and thresholds to conduct study-level, country-level and site-level Risk Based Monitoring for clinical trials.
 
 These functions and workflows produce data frames, visualizations, metadata, and reports to be used in reporting and error checking at clinical sites. The image below illustrates the overarching context in which the reporting workflow runs, taking inputs from both the output of the analytics workflow, as well as raw study-, site-, and country-level data in the Raw/Raw+ format.
 
 ![](data_model_detailed.png){width="100%"}
 
-All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see (`vignette("gsmExtensions")`).
+All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls upon the `gsm.core::RunWorkflow()` function on the yaml files in the `workflow/3_reporting` directory. To create a report, the output of the reporting yamls is fed into the yamls in the `workflow/4_modules` directory to produce and html document with all charts and tables created in the reporting workflow. For a more detailed discussion of the yaml file and directory structure, see the [`{gsm.core}` Extensions vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html)`).
 
 Each of the individual functions can also be run independently outside of a specified yaml workflow.
 
@@ -50,7 +53,7 @@ For the purposes of this documentation, we will evaluate the input(s) and output
   
 ## Case Study - Step-by-Step Full Site-Level Report
   
-We will use sample clinical data from the [`{clindata}`](https://github.com/Gilead-BioStats/clindata) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
+We will use sample clinical data simulated from the [`{gsm.datasim}`](https://github.com/Gilead-BioStats/gsm.datasim) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
 
 Additional supporting functions are explored in [Appendix 1](#appendix-1).
 
@@ -65,25 +68,15 @@ To run the analysis workflow on all 13 KRIs using `clindata` Raw+ data, use the 
 3. `mapped$Mapped_ENROLL` - mapped data.frame of enrolled participants
 
 ```{r include = TRUE, message = FALSE}
+core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
+                   "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-# Create Mapped Data - filter/map raw data
-lSource <- list(
-    Source_SUBJ = clindata::rawplus_dm,
-    Source_AE = clindata::rawplus_ae,
-    Source_PD = clindata::ctms_protdev,
-    Source_LB = clindata::rawplus_lb,
-    Source_STUDCOMP = clindata::rawplus_studcomp,
-    Source_SDRGCOMP = clindata::rawplus_sdrgcomp %>% dplyr::filter(.data$phase == 'Blinded Study Drug Completion'),
-    Source_DATACHG = clindata::edc_data_points,
-    Source_DATAENT = clindata::edc_data_pages,
-    Source_QUERY = clindata::edc_queries,
-    Source_ENROLL = clindata::rawplus_enroll,
-    Source_SITE = clindata::ctms_site,
-    Source_STUDY = clindata::ctms_study
-)
+lSource <- gsm.core::lSource
 
 # Step 0 - Data Ingestion - standardize tables/columns names
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", 
+                                strNames = core_mappings,
+                                strPackage = "gsm.mapping")
 mappings_spec <- CombineSpecs(mappings_wf)
 lRaw <- Ingest(lSource, mappings_spec)
 
@@ -117,11 +110,11 @@ The `dfGroups` data frame is critical to providing site-, study- and country-lev
 
 ```{r include = TRUE, message = FALSE}
 #Transform CTMS Site and Study Level data
-dfCTMSSite <- RunQuery(df = clindata::ctms_site, 
+dfCTMSSite <- RunQuery(df = lSource$Raw_SITE, 
                        strQuery = "SELECT pi_number as GroupID, site_status as Status, pi_first_name as InvestigatorFirstName, pi_last_name as InvestigatorLastName, city as City, state as State, country as Country, * FROM df") |>
   MakeLongMeta(strGroupLevel = 'Site')
 
-dfCTMSStudy <- RunQuery(df = clindata::ctms_study, 
+dfCTMSStudy <- RunQuery(df = lSource$Raw_STUDY, 
                         strQuery = "SELECT protocol_number as GroupID, status as Status, * FROM df") |>
   MakeLongMeta(strGroupLevel = 'Study')
 
@@ -281,7 +274,7 @@ lCharts$Analysis_kri0001$scatterJS
 All of the components are created to generate the HTML report for the study we are working on. In order to generate this report and save it locally, simply feed `lCharts`, `dfResults`, `dfGroups`, `dfMetrics` and (optionally) an absolute directory path and file to which the report will be saved (`strOutputDir` and `strOutputFile`, respectively) into `Report_KRI()` and the HTML output will be knit from the `Report_KRI.Rmd` template. All intermediate files from the knitting process will be saved in a temporary folder.
 
 ```{r eval = FALSE, include = TRUE}
-lReport <- Report_KRI(lCharts = lCharts,
+lReport <- gsm.kri::Report_KRI(lCharts = lCharts,
                       dfResults = dfResults,
                       dfGroups = dfGroups,
                       dfMetrics = dfMetrics,
@@ -307,52 +300,44 @@ The second option is to run the `snapshot.yaml` workflow, which takes in all raw
 ```{r eval = FALSE, include = TRUE}
 # Step 1 - Create Mapped Data - filter/map raw data
 # Source Data
-lSource <- list(
-    Source_SUBJ = clindata::rawplus_dm,
-    Source_AE = clindata::rawplus_ae,
-    Source_PD = clindata::ctms_protdev,
-    Source_LB = clindata::rawplus_lb,
-    Source_STUDCOMP = clindata::rawplus_studcomp,
-    Source_SDRGCOMP = clindata::rawplus_sdrgcomp %>% dplyr::filter(.data$phase == 'Blinded Study Drug Completion'),
-    Source_DATACHG = clindata::edc_data_points,
-    Source_DATAENT = clindata::edc_data_pages,
-    Source_QUERY = clindata::edc_queries,
-    Source_ENROLL = clindata::rawplus_enroll,
-    Source_SITE = clindata::ctms_site,
-    Source_STUDY = clindata::ctms_study
-)
+core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
+                   "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ")
 
-# Step 0 - Data Ingestion - standardize tables/columns names
+lSource <- gsm.core::lSource
+
 lRaw <- list(
-    Raw_SUBJ = lSource$Source_SUBJ,
-    Raw_AE = lSource$Source_AE,
-    Raw_PD = lSource$Source_PD %>%
-      dplyr::rename(subjid = subjectenrollmentnumber),
-    Raw_LB = lSource$Source_LB,
-    Raw_STUDCOMP = lSource$Source_STUDCOMP,
-    Raw_SDRGCOMP = lSource$Source_SDRGCOMP,
-    Raw_DATACHG = lSource$Source_DATACHG %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_DATAENT = lSource$Source_DATAENT %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_QUERY = lSource$Source_QUERY %>%
-      dplyr::rename(subject_nsv = subjectname),
-    Raw_ENROLL = lSource$Source_ENROLL,
-    Raw_SITE = lSource$Source_SITE %>%
-      dplyr::rename(studyid = protocol) %>%
-      dplyr::rename(invid = pi_number) %>%
-      dplyr::rename(InvestigatorFirstName = pi_first_name) %>%
-      dplyr::rename(InvestigatorLastName = pi_last_name) %>%
-      dplyr::rename(City = city) %>%
-      dplyr::rename(State = state) %>%
-      dplyr::rename(Country = country),
-    Raw_STUDY = lSource$Source_STUDY %>%
-      dplyr::rename(studyid = protocol_number) %>%
-      dplyr::rename(Status = status)
+  Raw_SUBJ = lSource$Raw_SUBJ,
+  Raw_AE = lSource$Raw_AE,
+  Raw_PD = lSource$Raw_PD %>%
+    rename(subjid = subjectenrollmentnumber),
+  Raw_LB = lSource$Raw_LB,
+  Raw_STUDCOMP = lSource$Raw_STUDCOMP %>%
+    select(subjid, compyn),
+  Raw_SDRGCOMP = lSource$Raw_SDRGCOMP,
+  Raw_DATACHG = lSource$Raw_DATACHG %>%
+    rename(subject_nsv = subjectname),
+  Raw_DATAENT = lSource$Raw_DATAENT %>%
+    rename(subject_nsv = subjectname),
+  Raw_QUERY = lSource$Raw_QUERY %>%
+    rename(subject_nsv = subjectname),
+  Raw_ENROLL = lSource$Raw_ENROLL,
+  Raw_SITE = lSource$Raw_SITE %>%
+    rename(studyid = protocol) %>%
+    rename(invid = pi_number) %>%
+    rename(InvestigatorFirstName = pi_first_name) %>%
+    rename(InvestigatorLastName = pi_last_name) %>%
+    rename(City = city) %>%
+    rename(State = state) %>%
+    rename(Country = country) %>%
+    rename(Status = site_status),
+  Raw_STUDY = lSource$Raw_STUDY %>%
+    rename(studyid = protocol_number) %>%
+    rename(Status = status),
+  Raw_PK = lSource$Raw_PK
 )
 
 # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mapped <- RunWorkflows(mappings_wf, lRaw)
 
 # Step 2 - Create Metrics - calculate metrics using mapped data
@@ -369,7 +354,7 @@ lReports <- RunWorkflows(module_wf, reporting)
 
 #### 3.2 - Automate data ingestion using Ingest() and CombineSpecs()
 # Step 0 - Data Ingestion - standardize tables/columns names
-mappings_wf <- MakeWorkflowList(strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- CombineSpecs(mappings_wf)
 lRaw <- Ingest(lSource, mappings_spec)
 
