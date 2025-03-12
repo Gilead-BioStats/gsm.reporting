@@ -1,5 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
+<<<<<<< HEAD
 Version: 1.0.0
 Authors@R: c( 
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
@@ -7,10 +8,13 @@ Authors@R: c(
     person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = "aut"),
     person("Gilead Sciences", role = "cph")
     )
-Description: The Good Statistical Monitoring or 'gsm' suite of R packages provides a
-    framework for statistical data monitoring. 'gsm.reporting' provides workflows
-    to generate the reporting data model needed to generate reports.
+Description: The Good Statistical Monitoring or 'gsm' suite of R packages
+    provides a framework for statistical data monitoring. 'gsm.reporting'
+    provides workflows to generate the reporting data model needed to
+    generate reports.
 License: Apache License (>= 2)
+URL: https://gilead-biostats.github.io/gsm.reporting/,
+    https://github.com/Gilead-BioStats/gsm.reporting/
 Imports: 
     cli,
     dplyr,
@@ -21,10 +25,6 @@ Imports:
     tibble,
     tidyr,
     yaml
-Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@dev,
-    gsm.kri=Gilead-BioStats/gsm.kri@dev,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Suggests:
     DT,
     gsm.kri,
@@ -33,6 +33,12 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Remotes:
+    gsm.core=Gilead-BioStats/gsm.core@dev,
+    gsm.kri=Gilead-BioStats/gsm.kri@dev,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@dev
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
@@ -40,4 +46,3 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-VignetteBuilder: knitr
