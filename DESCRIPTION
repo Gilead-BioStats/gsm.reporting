@@ -35,9 +35,9 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@dev,
-    gsm.kri=Gilead-BioStats/gsm.kri@dev,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@dev
+    gsm.core=Gilead-BioStats/gsm.core@v1.0.0,
+    gsm.kri=Gilead-BioStats/gsm.kri@v1.0.0,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@v1.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
