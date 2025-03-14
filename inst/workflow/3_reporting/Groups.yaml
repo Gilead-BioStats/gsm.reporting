@@ -15,7 +15,7 @@ spec:
       required:  true
 steps:
   - output: Reporting_Groups
-    name: bind_rows
+    name: dplyr::bind_rows
     params:
       Study: Mapped_STUDY
       Site: Mapped_SITE

@@ -4,16 +4,30 @@
 \name{gsm.reporting-package}
 \alias{gsm.reporting}
 \alias{gsm.reporting-package}
-\title{gsm.reporting: What the Package Does (One Line, Title Case)}
+\title{gsm.reporting: Good Statistical Monitoring Reporting}
 \description{
-What the package does (one paragraph).
+The Good Statistical Monitoring or 'gsm' suite of R packages provides a framework for statistical data monitoring. 'gsm.reporting' provides workflows to generate the reporting data model needed to generate reports.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gilead-biostats.github.io/gsm.reporting/}
+  \item \url{https://github.com/Gilead-BioStats/gsm.reporting/}
+}
+
 }
 \author{
 \strong{Maintainer}: Jeremy Wildfire \email{jwildfire@gmail.com}
 
 Authors:
 \itemize{
-  \item Laura Maxwell \email{laura.maxwell@atorusresearch.com}
+  \item Laura Maxwell \email{lkmaxwell23@gmail.com}
+  \item Zelos Zhu \email{zelos.zhu@atorusresearch.com}
+}
+
+Other contributors:
+\itemize{
+  \item Gilead Sciences [copyright holder]
 }
 
 }

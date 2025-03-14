@@ -10,7 +10,7 @@ spec:
 steps:
   # Capture study ID from the GroupID column in the study metadata.
   - output: GroupID
-    name: pull
+    name: dplyr::pull
     params:
       .data: Mapped_STUDY
       var: GroupID
@@ -20,7 +20,7 @@ steps:
       x: GroupID
   # Stack all analysis results data into a single data frame.
   - output: Results_Summary
-    name: BindResults
+    name: gsm.reporting::BindResults
     params:
       lAnalysis: lAnalyzed
       strName: "Analysis_Summary"
