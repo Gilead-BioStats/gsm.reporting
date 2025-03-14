@@ -9,7 +9,7 @@ Calculate bounds across a set of metrics."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">gsm.reporting</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ Calculate bounds across a set of metrics."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Calculate Bounds for display in scatterplots</h1>
-      <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.reporting/blob/19/merge/R/MakeBounds.R" class="external-link"><code>R/MakeBounds.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.reporting/blob/main/R/MakeBounds.R" class="external-link"><code>R/MakeBounds.R</code></a></small>
       <div class="d-none name"><code>MakeBounds.Rd</code></div>
     </div>
 
@@ -61,7 +61,7 @@ Calculate bounds across a set of metrics."></head><body>
 
 <dl><dt id="arg-dfresults">dfResults<a class="anchor" aria-label="anchor" href="#arg-dfresults"></a></dt>
 <dd><p><code>data.frame</code> A stacked summary of analysis pipeline output.
-Created by passing a list of results returned by <code><a href="https://rdrr.io/pkg/gsm.core/man/Summarize.html" class="external-link">Summarize()</a></code> to
+Created by passing a list of results returned by <code><a href="https://gilead-biostats.github.io/gsm.core/reference/Summarize.html" class="external-link">Summarize()</a></code> to
 <code><a href="BindResults.html">BindResults()</a></code>. Expected columns: <code>GroupID</code>, <code>GroupLevel</code>, <code>Numerator</code>,
 <code>Denominator</code>, <code>Metric</code>, <code>Score</code>, <code>Flag</code>, <code>MetricID</code>, <code>StudyID</code>,
 <code>SnapshotDate</code>.</p></dd>
@@ -72,7 +72,7 @@ Created by passing a list of results returned by <code><a href="https://rdrr.io/
 reporting. Created by passing an <code>lWorkflow</code> object to <code><a href="MakeMetric.html">MakeMetric()</a></code>.
 Expected columns: <code>File</code>, <code>MetricID</code>, <code>Group</code>, <code>Abbreviation</code>, <code>Metric</code>,
 <code>Numerator</code>, <code>Denominator</code>, <code>Model</code>, <code>Score</code>, and <code>Threshold</code>. For more
-details see the Data Model vignette: <code>vignette("DataModel", package = "gsm.core")</code>.</p></dd>
+details see the Data Model vignette: <code><a href="https://gilead-biostats.github.io/gsm.core/articles/DataModel.html" class="external-link">vignette("DataModel", package = "gsm.core")</a></code>.</p></dd>
 
 
 <dt id="arg-strmetrics">strMetrics<a class="anchor" aria-label="anchor" href="#arg-strmetrics"></a></dt>
@@ -114,7 +114,7 @@ function returns <code>NULL</code>.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Jeremy Wildfire, Laura Maxwell.</p>
+  <p>Developed by Jeremy Wildfire, Laura Maxwell, Zelos Zhu.</p>
 </div>
 
 <div class="pkgdown-footer-right">
