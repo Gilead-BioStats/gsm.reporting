@@ -110,26 +110,26 @@ The `dfGroups` data frame is critical to providing site-, study- and country-lev
 
 ```{r include = TRUE, message = FALSE}
 #Transform CTMS Site and Study Level data
-dfCTMSSite <- RunQuery(df = lSource$Raw_SITE, 
-                       strQuery = "SELECT pi_number as GroupID, site_status as Status, pi_first_name as InvestigatorFirstName, pi_last_name as InvestigatorLastName, city as City, state as State, country as Country, * FROM df") |>
-  MakeLongMeta(strGroupLevel = 'Site')
+dfCTMSSite <- gsm.core::RunQuery(df = lSource$Raw_SITE, 
+                                 strQuery = "SELECT pi_number as GroupID, site_status as Status, pi_first_name as InvestigatorFirstName, pi_last_name as InvestigatorLastName, city as City, state as State, country as Country, * FROM df") |>
+  gsm.mapping::MakeLongMeta(strGroupLevel = 'Site')
 
-dfCTMSStudy <- RunQuery(df = lSource$Raw_STUDY, 
-                        strQuery = "SELECT protocol_number as GroupID, status as Status, * FROM df") |>
-  MakeLongMeta(strGroupLevel = 'Study')
+dfCTMSStudy <- gsm.core::RunQuery(df = lSource$Raw_STUDY,
+                                  strQuery = "SELECT protocol_number as GroupID, status as Status, * FROM df") |>
+  gsm.mapping::MakeLongMeta(strGroupLevel = 'Study')
 
 # Get Participant and Site counts for Country, Site and Study
-dfSiteCounts <- RunQuery(df = mapped$Mapped_ENROLL,
-                             strQuery = "SELECT invid as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY invid") |>
-  MakeLongMeta(strGroupLevel = "Site")
+dfSiteCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
+                                   strQuery = "SELECT invid as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY invid") |>
+  gsm.mapping::MakeLongMeta(strGroupLevel = "Site")
 
-dfStudyCounts <- RunQuery(df = mapped$Mapped_ENROLL,
+dfStudyCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
                              strQuery = "SELECT studyid as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY studyid") |>
-  MakeLongMeta(strGroupLevel = "Study")
+  gsm.mapping::MakeLongMeta(strGroupLevel = "Study")
 
-dfCountryCounts <- RunQuery(df = mapped$Mapped_ENROLL,
+dfCountryCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
                              strQuery = "SELECT country as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY country") |>
-  MakeLongMeta(strGroupLevel = "Country")
+  gsm.mapping::MakeLongMeta(strGroupLevel = "Country")
 
 
 # Combine CTMS and Counts data as dfGroups
@@ -159,7 +159,7 @@ The `dfMetrics` table contains the metadata for each of the KRIs in the report. 
 
 
 ```{r include = TRUE}
-dfMetrics <- MakeMetric(lWorkflows = metrics_wf)
+dfMetrics <- gsm.reporting::MakeMetric(lWorkflows = metrics_wf)
 ```
 
 The resulting `dfMetrics` dataframe contains the following columns:
@@ -185,10 +185,10 @@ datatable(dfMetrics)
 The reporting workflow requires that all metrics are stacked into a single data frame, `dfResults`. This stacked data frame is created by feeding the `lAnalysis` list from the analysis workflow into `BindResults()` along with the snapshot date and the study id.
 
 ```{r include = TRUE}
-dfResults <- BindResults(lAnalysis = lAnalysis,
-                         strName = "Analysis_Summary",
-                         dSnapshotDate = Sys.Date(),
-                         strStudyID = "ABC-123")
+dfResults <- gsm.reporting::BindResults(lAnalysis = lAnalysis,
+                                        strName = "Analysis_Summary",
+                                        dSnapshotDate = Sys.Date(),
+                                        strStudyID = "ABC-123")
 ```
 
 The resulting `dfResults` data frame contains the following columns:
@@ -215,8 +215,8 @@ formatRound(columns = "Metric", digits = 3)
 Several of the charts created for the KRI reports use confidence intervals and bounds to delineate the observations based on the flag they receive (no flag, amber or red). In order to create the data frame that contains the information about these boundaries, `dfBounds`, `dfResults` and `dfMetrics` is fed into the `MakeBounds()` function. The `MakeBounds()` function is a wrapper around the `Analyze_*_PredictBounds()` functions that create the bounds based on the model used to estimate the metric(Normal Approximation or Poisson).
 
 ```{r include = TRUE}
-dfBounds <- MakeBounds(dfResults = dfResults,
-                        dfMetrics = dfMetrics)
+dfBounds <- gsm.reporting::MakeBounds(dfResults = dfResults,
+                                      dfMetrics = dfMetrics)
 ```
 
 The resulting `dfBounds` data frame contains the following columns:
@@ -241,10 +241,10 @@ formatRound(columns = "Metric", digits = 3)
 Now that all of the data frames in  the reporting data model have been created, we can create the charts that display this data in a useful and easily interpreted way. All four of the data frames created in Step 1 are fed into the `MakeCharts()` function to create all relevant charts given the input data. `MakeCharts()` is a wrapper around several helper functions that generate each static visualization and JS widget individually. Appendix 1 goes into more detail about each of these individual functions.
 
 ```{r include = TRUE, warning = FALSE, message = FALSE}
-lCharts <- MakeCharts(dfResults = dfResults,
-                      dfGroups = dfGroups,
-                      dfBounds = dfBounds,
-                      dfMetrics = dfMetrics)
+lCharts <- gsm.kri::MakeCharts(dfResults = dfResults,
+                               dfGroups = dfGroups,
+                               dfBounds = dfBounds,
+                               dfMetrics = dfMetrics)
 ```
 
 The output of `MakeCharts` is a list containing the following charts:
@@ -275,10 +275,10 @@ All of the components are created to generate the HTML report for the study we a
 
 ```{r eval = FALSE, include = TRUE}
 lReport <- gsm.kri::Report_KRI(lCharts = lCharts,
-                      dfResults = dfResults,
-                      dfGroups = dfGroups,
-                      dfMetrics = dfMetrics,
-                      strOutputFile = "test_kri_report.html")
+                               dfResults = dfResults,
+                               dfGroups = dfGroups,
+                               dfMetrics = dfMetrics,
+                               strOutputFile = "test_kri_report.html")
 ```
 
 Below, you will see a screenshot from the beginning of the report. All charts for all metrics that were included throughout the analysis and reporting workflows will be included in this report.
@@ -291,9 +291,7 @@ Below, you will see a screenshot from the beginning of the report. All charts fo
 
 While it is helpful to understand how each step of this process works, we have provided a series of YAML workflow files that make running reports on multiple KRIs easy and with the ability to be automated. 
 
-Here, you will see two options for how to run your workflows. The first is to run the analytics workflow(s), followed by the reporting workflow `data_reporting.yaml` followed by the charts and reports workflow `reports.yaml`. This allows the user to examine the output of each workflow individually before moving on to the next step.
-
-The second option is to run the `snapshot.yaml` workflow, which takes in all raw data (including site and study data) and a few extra metadata arguments at the beginning of the workflow, and the result is a list with all data frames and charts from both models, as well as a report html saved to your working directory.
+Here, you will see how to run your workflows. The general approach is to run the analytics workflow(s), followed by the reporting workflow `data_reporting.yaml` followed by the charts and reports workflow `reports.yaml`. This allows the user to examine the output of each workflow individually before moving on to the next step.
 
 ### Option 1 - Run All Workflows Separately
 
@@ -305,73 +303,25 @@ core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
 
 lSource <- gsm.core::lSource
 
-lRaw <- list(
-  Raw_SUBJ = lSource$Raw_SUBJ,
-  Raw_AE = lSource$Raw_AE,
-  Raw_PD = lSource$Raw_PD %>%
-    rename(subjid = subjectenrollmentnumber),
-  Raw_LB = lSource$Raw_LB,
-  Raw_STUDCOMP = lSource$Raw_STUDCOMP %>%
-    select(subjid, compyn),
-  Raw_SDRGCOMP = lSource$Raw_SDRGCOMP,
-  Raw_DATACHG = lSource$Raw_DATACHG %>%
-    rename(subject_nsv = subjectname),
-  Raw_DATAENT = lSource$Raw_DATAENT %>%
-    rename(subject_nsv = subjectname),
-  Raw_QUERY = lSource$Raw_QUERY %>%
-    rename(subject_nsv = subjectname),
-  Raw_ENROLL = lSource$Raw_ENROLL,
-  Raw_SITE = lSource$Raw_SITE %>%
-    rename(studyid = protocol) %>%
-    rename(invid = pi_number) %>%
-    rename(InvestigatorFirstName = pi_first_name) %>%
-    rename(InvestigatorLastName = pi_last_name) %>%
-    rename(City = city) %>%
-    rename(State = state) %>%
-    rename(Country = country) %>%
-    rename(Status = site_status),
-  Raw_STUDY = lSource$Raw_STUDY %>%
-    rename(studyid = protocol_number) %>%
-    rename(Status = status),
-  Raw_PK = lSource$Raw_PK
-)
-
-# Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
-mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
-mapped <- RunWorkflows(mappings_wf, lRaw)
-
-# Step 2 - Create Metrics - calculate metrics using mapped data
-metrics_wf <- MakeWorkflowList(strPath = "workflow/2_metrics", strPackage = "gsm.kri")
-analyzed <- RunWorkflows(metrics_wf, mapped)
-
-# Step 3 - Create Reporting Layer - create reports using metrics data
-reporting_wf <- MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
-reporting <- RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed, lWorkflows = metrics_wf)))
-
-# Step 4 - Create KRI Reports - create KRI report using reporting data
-module_wf <- MakeWorkflowList(strPath = "workflow/4_modules", strPackage = "gsm.kri")
-lReports <- RunWorkflows(module_wf, reporting)
-
-#### 3.2 - Automate data ingestion using Ingest() and CombineSpecs()
 # Step 0 - Data Ingestion - standardize tables/columns names
-mappings_wf <- MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
-mappings_spec <- CombineSpecs(mappings_wf)
-lRaw <- Ingest(lSource, mappings_spec)
+mappings_wf <- gsm.core::MakeWorkflowList(strNames = core_mappings, strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
+lRaw <- gsm.mapping::Ingest(lSource, mappings_spec)
 
 # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
-mapped <- RunWorkflows(mappings_wf, lRaw)
+mapped <- gsm.core::RunWorkflows(mappings_wf, lRaw)
 
 # Step 2 - Create Metrics - calculate metrics using mapped data
-metrics_wf <- MakeWorkflowList(strPath = "workflow/2_metrics", strPackage = "gsm.kri")
-analyzed <- RunWorkflows(metrics_wf, mapped)
+metrics_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/2_metrics", strPackage = "gsm.kri")
+analyzed <- gsm.core::RunWorkflows(metrics_wf, mapped)
 
 # Step 3 - Create Reporting Layer - create reports using metrics data
-reporting_wf <- MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
-reporting <- RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed, lWorkflows = metrics_wf)))
+reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+reporting <- gsm.core::RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed, lWorkflows = metrics_wf)))
 
 # Step 4 - Create KRI Report - create KRI report using reporting data
-module_wf <- MakeWorkflowList(strPath = "workflow/4_modules", strPackage = "gsm.kri")
-lReports <- RunWorkflows(module_wf, reporting)
+module_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/4_modules", strPackage = "gsm.kri")
+lReports <- gsm.core::RunWorkflows(module_wf, reporting)
 ```
 
 
@@ -393,25 +343,25 @@ lReports <- RunWorkflows(module_wf, reporting)
   
 ### Mapping Functions
   
-  -   `RunQuery()`: Run a SQL query to create new data.frames with filtering and column name specifications.
+  -   `gsm.core::RunQuery()`: Run a SQL query to create new data.frames with filtering and column name specifications.
   
 
 ### Visualization Functions
 
--   `Visualize_Scatter()`: Creates scatter plot of Total Exposure (in days, on log scale) vs Total Number of Event(s) of Interest (on linear scale). Each data point represents one site. Outliers are plotted in red with the site label attached. This plot is only created when statistical method is **not** defined as `identity`. Chart is called `scatter` in the `lCharts` object.
--   `Visualize_Score()`: Provides a standard visualization for Score or KRI. Charts are called `barScore` or `barMetric` in the `lCharts` object.
--   `Visualize_Metric()`: Creates all available charts and tables for a metric using the data provided.
+-   `gsm.kri::Visualize_Scatter()`: Creates scatter plot of Total Exposure (in days, on log scale) vs Total Number of Event(s) of Interest (on linear scale). Each data point represents one site. Outliers are plotted in red with the site label attached. This plot is only created when statistical method is **not** defined as `identity`. Chart is called `scatter` in the `lCharts` object.
+-   `gsm.kri::Visualize_Score()`: Provides a standard visualization for Score or KRI. Charts are called `barScore` or `barMetric` in the `lCharts` object.
+-   `gsm.kri::Visualize_Metric()`: Creates all available charts and tables for a metric using the data provided.
 
 
 ### Widget Functions
 
-- `Widget_GroupOverview()`: Creates an interactive table displaying the flag distribution for all groups across all metrics.
-- `Widget_BarChart()`:  Creates an interactive bar chart visualization for Score or KRI. Charts are called `barScoreJS` or `barMetricJS` in the `lCharts` object.
-- `Widget_ScatterPlot()`: Creates an interactive scatter plot of Total Exposure (in days, on log scale) vs Total Number of Event(s) of Interest (on linear scale). Each data point represents one site. Outliers are plotted in red with the site label attached.Chart is called `scatterJS` in the `lCharts` object.
-- `Widget_TimeSeries()`: Creates an interactive time series scatter plot of the score, metric or numerator. Charts are called `timeSeriesContinuousScoreJS`, `timeSeriesContinuousMetricJS`, or `timeSeriesContinuousNumeratorJS` in the `lCharts` object.
+- `gsm.kri::Widget_GroupOverview()`: Creates an interactive table displaying the flag distribution for all groups across all metrics.
+- `gsm.kri::Widget_BarChart()`:  Creates an interactive bar chart visualization for Score or KRI. Charts are called `barScoreJS` or `barMetricJS` in the `lCharts` object.
+- `gsm.kri::Widget_ScatterPlot()`: Creates an interactive scatter plot of Total Exposure (in days, on log scale) vs Total Number of Event(s) of Interest (on linear scale). Each data point represents one site. Outliers are plotted in red with the site label attached.Chart is called `scatterJS` in the `lCharts` object.
+- `gsm.kri::Widget_TimeSeries()`: Creates an interactive time series scatter plot of the score, metric or numerator. Charts are called `timeSeriesContinuousScoreJS`, `timeSeriesContinuousMetricJS`, or `timeSeriesContinuousNumeratorJS` in the `lCharts` object.
 
 ### Table Functions
 
-- `Report_MetricTable()`: Creates a sortable table displaying the flags per group (e.g. Site, Country) for one metric at a time.
+- `gsm.kri::Report_MetricTable()`: Creates a sortable table displaying the flags per group (e.g. Site, Country) for one metric at a time.
 
                                                                                                                                                                                        
