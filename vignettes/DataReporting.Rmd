@@ -65,7 +65,7 @@ To run the analysis workflow on all 13 KRIs using `clindata` Raw+ data, use the 
 
 1. `lAnalysis` -  list of data frames in the analysis data model
 2. `lWorkflow` - list containing the metadata for each of the KRIs
-3. `mapped$Mapped_ENROLL` - mapped data.frame of enrolled participants
+3. `mapped$Mapped_SUBJ` - mapped data.frame of enrolled participants
 
 ```{r include = TRUE, message = FALSE}
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB",
@@ -119,15 +119,15 @@ dfCTMSStudy <- gsm.core::RunQuery(df = lSource$Raw_STUDY,
   gsm.mapping::MakeLongMeta(strGroupLevel = 'Study')
 
 # Get Participant and Site counts for Country, Site and Study
-dfSiteCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
+dfSiteCounts <- gsm.core::RunQuery(df = mapped$Mapped_SUBJ,
                                    strQuery = "SELECT invid as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY invid") |>
   gsm.mapping::MakeLongMeta(strGroupLevel = "Site")
 
-dfStudyCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
+dfStudyCounts <- gsm.core::RunQuery(df = mapped$Mapped_SUBJ,
                              strQuery = "SELECT studyid as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY studyid") |>
   gsm.mapping::MakeLongMeta(strGroupLevel = "Study")
 
-dfCountryCounts <- gsm.core::RunQuery(df = mapped$Mapped_ENROLL,
+dfCountryCounts <- gsm.core::RunQuery(df = mapped$Mapped_SUBJ,
                              strQuery = "SELECT country as GroupID, COUNT(DISTINCT subjectid) as ParticipantCount, COUNT(DISTINCT invid) as SiteCount FROM df GROUP BY country") |>
   gsm.mapping::MakeLongMeta(strGroupLevel = "Country")
 
