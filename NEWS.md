@@ -1,3 +1,7 @@
+# gsm.reporting v1.0.1
+
+This patch release updates tests in order to align with the new package data from `gsm.core v1.1.0` 
+
 # gsm.reporting v1.0.0
 
 We are pleased to introduce the first major release of the `gsm.reporting` package, which powers the GSM reporting data model and orchestrates the workflows for generating reports within the GSM pipeline. This release marks a significant milestone, the release of a modularized ecosystem for the GSM pipeline.
