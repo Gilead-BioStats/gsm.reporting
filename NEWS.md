@@ -1,3 +1,8 @@
+# gsm.reporting 1.0.2
+
+This patch release updates the description file to incorporate min version for `gsm` packages.
+
+
 # gsm.reporting v1.0.1
 
 This patch release updates tests in order to align with the new package data from `gsm.core v1.1.0` 
