@@ -15,6 +15,7 @@
 #'   - MetricID
 #' @param strSnapshotDateColumn `character` The name of the column containing the
 #'   snapshot date. Default: `SnapshotDate`.
+#' @param intSnapshots `integer` The number of snapshots to calculate changes for.
 #' @param strMetricColumns `character` A vector of numeric column names with which calculate change from
 #'   previous snapshot. Default:
 #'   - Numerator
@@ -26,8 +27,8 @@
 #' @return `data.frame` A transposed table of results with a column for each attribute, its value,
 #'   and the change from the previous snapshot.
 #'
-#' @example
-#' dfChChChChanges <- CalculateChanges(gsm.core::reportingResults)
+#' @examples
+#' dfChChChChanges <- CalculateChange(gsm.core::reportingResults)
 #'
 #' @export
 
@@ -40,6 +41,7 @@ CalculateChange <- function(
         "MetricID"
     ),
     strSnapshotDateColumn = "SnapshotDate",
+    intSnapshots = 1,
     strMetricColumns = c(
         "Numerator",
         "Denominator",
@@ -84,8 +86,8 @@ CalculateChange <- function(
             .by_group = TRUE
         ) %>%
         dplyr::mutate(
-            Change = Value - dplyr::lag(Value),
-            PercentChange = Change / dplyr::lag(Value) * 100
+            Change = Value - dplyr::lag(Value, n = intSnapshots),
+            PercentChange = Change / dplyr::lag(Value, n = intSnapshots) * 100
         ) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(across(all_of(c(
