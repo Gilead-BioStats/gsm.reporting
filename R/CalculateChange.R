@@ -49,7 +49,8 @@ CalculateChange <- function(
         "Metric",
         "Score",
         "Flag"
-    )
+    ),
+    strDfOutput = "long"
 ) {
     stop_if(
         cnd = !is.data.frame(dfResults),
@@ -91,6 +92,9 @@ CalculateChange <- function(
       dfResults <- dfResults %>%
         dplyr::filter(SnapshotDate %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
 
+    } else {
+      dCurrentSnapshotDate <- max(dfResults$SnapshotDate)  %>% as.Date()
+      dPrevSnapshotDate <- sort(dfResults$SnapshotDate %>% unique())[-2]
     }
 
     # Calculate change from previous snapshot.
@@ -121,6 +125,15 @@ CalculateChange <- function(
             'Param',
             strSnapshotDateColumn
         ))))
+
+    if (strDfOutput == "wide") {
+      dfChanges <- dfChanges %>%
+        tidyr::pivot_wider(names_from = Param,
+                           values_from = c(Value, Change, PercentChange),
+                           names_glue = "{Param}_{.value}",) %>%
+        dplyr::mutate(PrevSnapshotDate = case_when(SnapshotDate == dCurrentSnapshotDate ~ dPrevSnapshotDate,
+                         T ~ NA))
+    }
 
     return(dfChanges)
 }
