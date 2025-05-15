@@ -42,6 +42,7 @@ CalculateChange <- function(
     ),
     strSnapshotDateColumn = "SnapshotDate",
     intSnapshots = 1,
+    dPrevSnapshotDate = NULL,
     strMetricColumns = c(
         "Numerator",
         "Denominator",
@@ -67,6 +68,31 @@ CalculateChange <- function(
         )
     }
 
+    # If dPrevSnapshotDate is not null, then filter the data to only the current and previous snapshot dates.
+    # This is primarily for gismo implementation when intermediary snapshots are taken but not reported.
+    if (!is.null(dPrevSnapshotDate)) {
+
+      # determine current snapshot date and ensure both are formatted as dates
+      dCurrentSnapshotDate <- max(dfResults$SnapshotDate)  %>% as.Date()
+      dPrevSnapshotDate <- dPrevSnapshotDate %>% as.Date()
+
+      # ensure dPrevSnapshotDate is a date in dfResults$SnapshotDate
+      # and that it is not equal to the current snapshot date.
+      stop_if(
+        cnd = !dPrevSnapshotDate %in% dfResults$SnapshotDate,
+        message = glue::glue("`{dPrevSnapshotDate} not found in `dfResults$SnapshotDate`.")
+      )
+      stop_if(
+        cnd = dPrevSnapshotDate == dCurrentSnapshotDate,
+        message = glue::glue("`dPrevSnapshotDate cannot be equal to the current snapshot date in dfResults`.")
+      )
+
+      # filter dfResults based on SnapshotDate
+      dfResults <- dfResults %>%
+        dplyr::filter(SnapshotDate %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
+
+    }
+
     # Calculate change from previous snapshot.
     dfChanges <- dfResults %>%
         tidyr::pivot_longer(
@@ -75,7 +101,7 @@ CalculateChange <- function(
             values_to = "Value"
         ) %>%
         dplyr::mutate(
-            Param = factor(Param, levels = strMetricColumns)
+            Param = factor(.data$Param, levels = strMetricColumns)
         ) %>%
         dplyr::group_by(across(all_of(c(
             strIDColumns,
@@ -86,8 +112,8 @@ CalculateChange <- function(
             .by_group = TRUE
         ) %>%
         dplyr::mutate(
-            Change = Value - dplyr::lag(Value, n = intSnapshots),
-            PercentChange = Change / dplyr::lag(Value, n = intSnapshots) * 100
+            Change = Value - dplyr::lag(.data$Value, n = intSnapshots),
+            PercentChange = .data$Change / dplyr::lag(.data$Value, n = intSnapshots) * 100
         ) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(across(all_of(c(
