@@ -15,6 +15,8 @@
 #'   - MetricID
 #' @param strSnapshotDateColumn `character` The name of the column containing the
 #'   snapshot date. Default: `SnapshotDate`.
+#' @param dPrevSnapshotDate `Date` The date of the previous snapshot to be compared.
+#'   Optional. Default = `NULL`.
 #' @param intSnapshots `integer` The number of snapshots to calculate changes for.
 #' @param strMetricColumns `character` A vector of numeric column names with which calculate change from
 #'   previous snapshot. Default:
@@ -23,6 +25,8 @@
 #'   - Metric
 #'   - Score
 #'   - Flag
+#' @param strDfOutput `character` The desired output format of dfChanges. Options are "wide" and "long".
+#'    Default = `"long"`
 #'
 #' @return `data.frame` A transposed table of results with a column for each attribute, its value,
 #'   and the change from the previous snapshot.

@@ -9,7 +9,9 @@ CalculateChange(
   strIDColumns = c("StudyID", "GroupLevel", "GroupID", "MetricID"),
   strSnapshotDateColumn = "SnapshotDate",
   intSnapshots = 1,
-  strMetricColumns = c("Numerator", "Denominator", "Metric", "Score", "Flag")
+  dPrevSnapshotDate = NULL,
+  strMetricColumns = c("Numerator", "Denominator", "Metric", "Score", "Flag"),
+  strDfOutput = "long"
 )
 }
 \arguments{
@@ -33,6 +35,9 @@ snapshot date. Default: \code{SnapshotDate}.}
 
 \item{intSnapshots}{\code{integer} The number of snapshots to calculate changes for.}
 
+\item{dPrevSnapshotDate}{\code{Date} The date of the previous snapshot to be compared.
+Optional. Default = \code{NULL}.}
+
 \item{strMetricColumns}{\code{character} A vector of numeric column names with which calculate change from
 previous snapshot. Default:
 \itemize{
@@ -42,6 +47,9 @@ previous snapshot. Default:
 \item Score
 \item Flag
 }}
+
+\item{strDfOutput}{\code{character} The desired output format of dfChanges. Options are "wide" and "long".
+Default = \code{"long"}}
 }
 \value{
 \code{data.frame} A transposed table of results with a column for each attribute, its value,
