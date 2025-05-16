@@ -1,35 +1,38 @@
+## set up test data and params
+
+dfResults <- data.frame(
+  StudyID = c(1, 1, 1, 2, 2, 2),
+  GroupLevel = c("A", "A", "A", "B", "B", "B"),
+  GroupID = c(1, 1, 1, 2, 2, 2),
+  MetricID = c("Metric A", "Metric A", "Metric A", "Metric B", "Metric B", "Metric B"),
+  SnapshotDate = as.Date(c("2023-01-01", "2023-02-01", "2023-03-01", "2023-01-01", "2023-02-01", "2023-03-01")),
+  Numerator = c(10, 20, 30, 5, 10, 15),
+  Denominator = c(100, 200, 300, 50, 100, 150),
+  Metric = c(.1, .1, .1, .1, .1, .1),
+  Score = c(0.1, 0.2, 0.3, 0.05, 0.1, 0.15),
+  Flag = c(-2, -1, 0, 0, 1, 2)
+)
+
+strIDColumns <- c(
+  "StudyID",
+  "GroupLevel",
+  "GroupID",
+  "MetricID"
+)
+
+strSnapshotDateColumn <- "SnapshotDate"
+
+strMetricColumns <- c(
+  "Numerator",
+  "Denominator",
+  "Metric",
+  "Score",
+  "Flag"
+)
+
 test_that(
     '[ CalculateChange ] correctly calculates change from the previous snapshot.',
     {
-        dfResults <- data.frame(
-            StudyID = c(1, 1, 1, 2, 2, 2),
-            GroupLevel = c("A", "A", "A", "B", "B", "B"),
-            GroupID = c(1, 1, 1, 2, 2, 2),
-            MetricID = c("Metric A", "Metric A", "Metric A", "Metric B", "Metric B", "Metric B"),
-            SnapshotDate = as.Date(c("2023-01-01", "2023-02-01", "2023-03-01", "2023-01-01", "2023-02-01", "2023-03-01")),
-            Numerator = c(10, 20, 30, 5, 10, 15),
-            Denominator = c(100, 200, 300, 50, 100, 150),
-            Metric = c(.1, .1, .1, .1, .1, .1),
-            Score = c(0.1, 0.2, 0.3, 0.05, 0.1, 0.15),
-            Flag = c(-2, -1, 0, 0, 1, 2)
-        )
-
-        strIDColumns <- c(
-            "StudyID",
-            "GroupLevel",
-            "GroupID",
-            "MetricID"
-        )
-
-        strSnapshotDateColumn <- "SnapshotDate"
-
-        strMetricColumns <- c(
-            "Numerator",
-            "Denominator",
-            "Metric",
-            "Score",
-            "Flag"
-        )
 
         # [ CalculateChange ] returns a transposed data frame with one record per combination of the
         # following columns, where [ Param ] is the name of the column and [ Value ] is the value of
@@ -211,3 +214,27 @@ test_that(
         )
     }
 )
+
+test_that(
+  '[ CalculateChange ] correctly calculates change from the snapshot when provided the date.',
+  {
+    dfChanges <- CalculateChange(
+      dfResults = dfResults,
+      dPrevSnapshotDate = "2023-01-01"
+    )
+    expect_equal(unique(dfChanges$SnapshotDate), c("2023-01-01", "2023-03-01") %>% as.Date())
+
+    #expect error for dPrevSnapshotDate that doesn't exist in dfResults
+    expect_error(dfChanges <- CalculateChange(
+      dfResults = dfResults,
+      dPrevSnapshotDate = "2023-03-01"),
+    regexp = "cannot be equal to the current snapshot date"
+    )
+
+    #expect error when dPrevSnapshotDate is equal to the current snapshot date
+    expect_error(dfChanges <- CalculateChange(
+      dfResults = dfResults,
+      dPrevSnapshotDate = "2023-01-15"),
+      regexp = "not found"
+    )
+})
