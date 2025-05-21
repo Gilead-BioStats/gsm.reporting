@@ -25,4 +25,8 @@ steps:
       lAnalysis: lAnalyzed
       strName: "Analysis_Summary"
       strStudyID: strStudyID
+  - output: Reporting_Results
+    name: gsm.reporting::CalculateChange
+    params:
+      dfResults: Results_Summary
 
