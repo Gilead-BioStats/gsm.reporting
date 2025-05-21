@@ -122,7 +122,7 @@ CalculateChange <- function(
         dplyr::ungroup() %>%
         dplyr::arrange(across(all_of(c(
             strIDColumns,
-            'Previous',
+            'PrevSnapshotDate',
             'Param',
             strSnapshotDateColumn
         )))) %>%
