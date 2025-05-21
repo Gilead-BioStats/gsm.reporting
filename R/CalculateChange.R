@@ -17,7 +17,6 @@
 #'   snapshot date. Default: `SnapshotDate`.
 #' @param dPrevSnapshotDate `Date` The date of the previous snapshot to be compared.
 #'   Optional. Default = `NULL`.
-#' @param intSnapshots `integer` The number of snapshots to calculate changes for.
 #' @param strMetricColumns `character` A vector of numeric column names with which calculate change from
 #'   previous snapshot. Default:
 #'   - Numerator
@@ -25,8 +24,6 @@
 #'   - Metric
 #'   - Score
 #'   - Flag
-#' @param strDfOutput `character` The desired output format of dfChanges. Options are "wide" and "long".
-#'    Default = `"long"`
 #'
 #' @return `data.frame` A transposed table of results with a column for each attribute, its value,
 #'   and the change from the previous snapshot.
@@ -45,7 +42,6 @@ CalculateChange <- function(
         "MetricID"
     ),
     strSnapshotDateColumn = "SnapshotDate",
-    intSnapshots = 1,
     dPrevSnapshotDate = NULL,
     strMetricColumns = c(
         "Numerator",
@@ -53,8 +49,7 @@ CalculateChange <- function(
         "Metric",
         "Score",
         "Flag"
-    ),
-    strDfOutput = "long"
+    )
 ) {
     stop_if(
         cnd = !is.data.frame(dfResults),
@@ -78,7 +73,7 @@ CalculateChange <- function(
     if (!is.null(dPrevSnapshotDate)) {
 
       # determine current snapshot date and ensure both are formatted as dates
-      dCurrentSnapshotDate <- max(dfResults$SnapshotDate)  %>% as.Date()
+      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
       dPrevSnapshotDate <- dPrevSnapshotDate %>% as.Date()
 
       # ensure dPrevSnapshotDate is a date in dfResults$SnapshotDate
@@ -94,11 +89,11 @@ CalculateChange <- function(
 
       # filter dfResults based on SnapshotDate
       dfResults <- dfResults %>%
-        dplyr::filter(SnapshotDate %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
+        dplyr::filter(.data[[strSnapshotDateColumn]] %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
 
     } else {
-      dCurrentSnapshotDate <- max(dfResults$SnapshotDate)  %>% as.Date()
-      dPrevSnapshotDate <- sort(dfResults$SnapshotDate %>% unique())[-2]
+      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
+      dPrevSnapshotDate <- sort(dfResults[[strSnapshotDateColumn]] %>% unique())[-2]
     }
 
     # Calculate change from previous snapshot.
@@ -120,24 +115,20 @@ CalculateChange <- function(
             .by_group = TRUE
         ) %>%
         dplyr::mutate(
-            Change = Value - dplyr::lag(.data$Value, n = intSnapshots),
-            PercentChange = .data$Change / dplyr::lag(.data$Value, n = intSnapshots) * 100
+            Change = Value - dplyr::lag(.data$Value),
+            PercentChange = .data$Change / dplyr::lag(.data$Value) * 100,
+            PrevSnapshotDate = dplyr::lag(.data[[strSnapshotDateColumn]])
         ) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(across(all_of(c(
             strIDColumns,
+            'Previous',
             'Param',
             strSnapshotDateColumn
-        ))))
-
-    if (strDfOutput == "wide") {
-      dfChanges <- dfChanges %>%
-        tidyr::pivot_wider(names_from = Param,
-                           values_from = c(Value, Change, PercentChange),
-                           names_glue = "{Param}_{.value}",) %>%
-        dplyr::mutate(PrevSnapshotDate = case_when(SnapshotDate == dCurrentSnapshotDate ~ dPrevSnapshotDate,
-                         T ~ NA))
-    }
+        )))) %>%
+      tidyr::pivot_wider(names_from = Param,
+                         values_from = c(Value, Change, PercentChange),
+                         names_glue = "{Param}_{.value}",)
 
     return(dfChanges)
 }
