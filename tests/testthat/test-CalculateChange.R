@@ -53,96 +53,84 @@ test_that(
         # Check that the output has the expected number of rows.
         expect_equal(
             nrow(dfChanges),
-            nrow(dfResults) * length(strMetricColumns)
+            nrow(dfResults)
         )
 
         # Check that the output has the expected columns.
         expect_true(all(c(
             strIDColumns,
             strSnapshotDateColumn,
-            "Param",
-            "Value",
-            "Change",
-            "PercentChange"
+            "PrevSnapshotDate",
+            paste(strMetricColumns,"Value", sep = "_"),
+            paste(strMetricColumns,"Change", sep = "_"),
+            paste(strMetricColumns,"PercentChange", sep = "_")
         ) %in% colnames(dfChanges)))
 
-        # Check that the output has the expected column names.
-        expect_equal(
-            colnames(dfChanges),
-            c(
-                strIDColumns,
-                strSnapshotDateColumn,
-                "Param",
-                "Value",
-                "Change",
-                "PercentChange"
-            )
-        )
 
         # Check that the output has the expected values.
         expect_equal(
-            dfChanges$Value[dfChanges$Param == "Numerator"],
-            c(10, 20, 30, 5, 10, 15)
+            dfChanges$Numerator_Value,
+            c(20, 30, 10, 10, 15, 5)
         )
         expect_equal(
-            dfChanges$Value[dfChanges$Param == "Denominator"],
-            c(100, 200, 300, 50, 100, 150)
+            dfChanges$Denominator_Value,
+            c(200, 300, 100, 100, 150, 50)
         )
         expect_equal(
-            dfChanges$Value[dfChanges$Param == "Metric"],
+            dfChanges$Metric_Value,
             c(.1, .1, .1, .1, .1, .1)
         )
         expect_equal(
-            dfChanges$Value[dfChanges$Param == "Score"],
-            c(0.1, 0.2, 0.3, 0.05, 0.1, 0.15)
+            dfChanges$Score_Value,
+            c(0.2, 0.3, 0.1, 0.1, 0.15, 0.05)
         )
         expect_equal(
-            dfChanges$Value[dfChanges$Param == "Flag"],
-            c(-2, -1, 0, 0, 1, 2)
+            dfChanges$Flag_Value,
+            c(-1, 0, -2, 1, 2, 0)
         )
 
         # Check that the output has the expected change values.
         expect_equal(
-            dfChanges$Change[dfChanges$Param == "Numerator"],
-            c(NA, 10, 10, NA, 5, 5)
+            dfChanges$Numerator_Change,
+            c(10, 10, NA, 5, 5, NA)
         )
         expect_equal(
-            dfChanges$Change[dfChanges$Param == "Denominator"],
-            c(NA, 100, 100, NA, 50, 50)
+            dfChanges$Denominator_Change,
+            c(100, 100, NA, 50, 50, NA)
         )
         expect_equal(
-            dfChanges$Change[dfChanges$Param == "Metric"],
-            c(NA, 0, 0, NA, 0, 0)
+            dfChanges$Metric_Change,
+            c(0, 0, NA, 0, 0, NA)
         )
         expect_equal(
-            dfChanges$Change[dfChanges$Param == "Score"],
-            c(NA, 0.1, 0.1, NA, 0.05, 0.05)
+            dfChanges$Score_Change,
+            c(0.1, 0.1, NA, 0.05, 0.05, NA)
         )
         expect_equal(
-            dfChanges$Change[dfChanges$Param == "Flag"],
-            c(NA, 1, 1, NA, 1, 1)
+            dfChanges$Flag_Change,
+            c(1, 1, NA, 1, 1, NA)
         )
 
         # Check that the output has the expected percent change values.
         expect_equal(
-            dfChanges$PercentChange[dfChanges$Param == "Numerator"],
-            c(NA, 100, 50, NA, 100, 50)
+            dfChanges$Numerator_PercentChange,
+            c(100, 50, NA, 100, 50, NA)
         )
         expect_equal(
-            dfChanges$PercentChange[dfChanges$Param == "Denominator"],
-            c(NA, 100, 50, NA, 100, 50)
+            dfChanges$Denominator_PercentChange,
+            c(100, 50, NA, 100, 50, NA)
         )
         expect_equal(
-            dfChanges$PercentChange[dfChanges$Param == "Metric"],
-            c(NA, 0, 0, NA, 0, 0)
+            dfChanges$Metric_PercentChange,
+            c(0, 0, NA, 0, 0, NA)
         )
         expect_equal(
-            dfChanges$PercentChange[dfChanges$Param == "Score"],
-            c(NA, 100, 50, NA, 100, 50)
+            dfChanges$Score_PercentChange,
+            c(100, 50, NA, 100, 50, NA)
         )
         expect_equal(
-            dfChanges$PercentChange[dfChanges$Param == "Flag"],
-            c(NA, -50, -100, NA, Inf, 100)
+            dfChanges$Flag_PercentChange,
+            c(-50, -100, NA, Inf, 100, NA)
         )
     }
 )
@@ -222,7 +210,7 @@ test_that(
       dfResults = dfResults,
       dPrevSnapshotDate = "2023-01-01"
     )
-    expect_equal(unique(dfChanges$SnapshotDate), c("2023-01-01", "2023-03-01") %>% as.Date())
+    expect_equal(unique(dfChanges$SnapshotDate), c("2023-03-01", "2023-01-01") %>% as.Date())
 
     #expect error for dPrevSnapshotDate that doesn't exist in dfResults
     expect_error(dfChanges <- CalculateChange(
