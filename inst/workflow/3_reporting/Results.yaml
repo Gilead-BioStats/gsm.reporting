@@ -25,8 +25,15 @@ steps:
       lAnalysis: lAnalyzed
       strName: "Analysis_Summary"
       strStudyID: strStudyID
+  # Stack latest snapshot with previous snapshots.
   - output: Reporting_Results
     name: gsm.reporting::CalculateChange
     params:
       dfResults: Results_Summary
+      dfPrevious: Reporting_Results_Previous
+  # Subset on latest snapshot.
+  - output: Reporting_Results
+    name: gsm.kri::FilterByLatestSnapshot
+    params:
+      df: Reporting_Results_With_Changes
 
