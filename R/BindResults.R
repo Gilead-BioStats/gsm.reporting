@@ -40,8 +40,11 @@ BindResults <- function(
     ) %>%
     purrr::list_rbind()
 
-  if (!is.null(dSnapshotDate)) {
-    dfResults$SnapshotDate <- dSnapshotDate
+  # If NULL or the placeholder string was passed in, use Sys.Date()
+  if (is.null(dSnapshotDate) || (is.character(dSnapshotDate) && dSnapshotDate == "dSnapshotDate")) {
+    dfResults$SnapshotDate <- Sys.Date()
+  } else {
+    dfResults$SnapshotDate <- as.Date(dSnapshotDate)
   }
 
   if (!is.null(strStudyID)) {
