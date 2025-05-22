@@ -26,7 +26,7 @@ steps:
       strName: "Analysis_Summary"
       strStudyID: strStudyID
   # Stack latest snapshot with previous snapshots.
-  - output: Reporting_Results
+  - output: Reporting_Results_With_Changes
     name: gsm.reporting::CalculateChange
     params:
       dfResults: Results_Summary
