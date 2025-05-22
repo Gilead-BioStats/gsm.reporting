@@ -21,6 +21,8 @@
 #'   - MetricID
 #' @param strSnapshotDateColumn `character` The name of the column containing the
 #'   snapshot date. Default: `SnapshotDate`.
+#' @param dPrevSnapshotDate `Date` The date of the previous snapshot to be compared.
+#'   Optional. Default = `NULL`.
 #' @param strMetricColumns `character` A vector of numeric column names with which calculate change from
 #'   previous snapshot. Default:
 #'   - Numerator
@@ -47,6 +49,7 @@ CalculateChange <- function(
         "MetricID"
     ),
     strSnapshotDateColumn = "SnapshotDate",
+    dPrevSnapshotDate = NULL,
     strMetricColumns = c(
         "Numerator",
         "Denominator",
@@ -89,33 +92,33 @@ CalculateChange <- function(
                strMetricColumns)))
 
 
-    # # If dPrevSnapshotDate is not null, then filter the data to only the current and previous snapshot dates.
-    # # This is primarily for gismo implementation when intermediary snapshots are taken but not reported.
-    # if (!is.null(dPrevSnapshotDate)) {
-    #
-    #   # determine current snapshot date and ensure both are formatted as dates
-    #   dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
-    #   dPrevSnapshotDate <- dPrevSnapshotDate %>% as.Date()
-    #
-    #   # ensure dPrevSnapshotDate is a date in dfResults$SnapshotDate
-    #   # and that it is not equal to the current snapshot date.
-    #   stop_if(
-    #     cnd = !dPrevSnapshotDate %in% dfResults$SnapshotDate,
-    #     message = glue::glue("`{dPrevSnapshotDate} not found in `dfResults$SnapshotDate`.")
-    #   )
-    #   stop_if(
-    #     cnd = dPrevSnapshotDate == dCurrentSnapshotDate,
-    #     message = glue::glue("`dPrevSnapshotDate cannot be equal to the current snapshot date in dfResults`.")
-    #   )
-    #
-    #   # filter dfResults based on SnapshotDate
-    #   dfResults <- dfResults %>%
-    #     dplyr::filter(.data[[strSnapshotDateColumn]] %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
-    #
-    # } else {
-    #   dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
-    #   dPrevSnapshotDate <- sort(dfResults[[strSnapshotDateColumn]] %>% unique())[-2]
-    # }
+    # If dPrevSnapshotDate is not null, then filter the data to only the current and previous snapshot dates.
+    # This is primarily for gismo implementation when intermediary snapshots are taken but not reported.
+    if (!is.null(dPrevSnapshotDate)) {
+
+      # determine current snapshot date and ensure both are formatted as dates
+      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
+      dPrevSnapshotDate <- dPrevSnapshotDate %>% as.Date()
+
+      # ensure dPrevSnapshotDate is a date in dfResults$SnapshotDate
+      # and that it is not equal to the current snapshot date.
+      stop_if(
+        cnd = !dPrevSnapshotDate %in% dfResults$SnapshotDate,
+        message = glue::glue("`{dPrevSnapshotDate} not found in `dfResults$SnapshotDate`.")
+      )
+      stop_if(
+        cnd = dPrevSnapshotDate == dCurrentSnapshotDate,
+        message = glue::glue("`dPrevSnapshotDate cannot be equal to the current snapshot date in dfResults`.")
+      )
+
+      # filter dfResults based on SnapshotDate
+      dfResults <- dfResults %>%
+        dplyr::filter(.data[[strSnapshotDateColumn]] %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
+
+    } else {
+      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
+      dPrevSnapshotDate <- sort(dfResults[[strSnapshotDateColumn]] %>% unique())[-2]
+    }
 
     # Calculate change from previous snapshot.
     dfChanges <- dfResults_combined %>%

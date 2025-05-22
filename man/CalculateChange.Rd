@@ -9,6 +9,7 @@ CalculateChange(
   dfPrevious = NULL,
   strIDColumns = c("StudyID", "GroupLevel", "GroupID", "MetricID"),
   strSnapshotDateColumn = "SnapshotDate",
+  dPrevSnapshotDate = NULL,
   strMetricColumns = c("Numerator", "Denominator", "Metric", "Score", "Flag")
 )
 }
@@ -37,6 +38,9 @@ results. Default:
 
 \item{strSnapshotDateColumn}{\code{character} The name of the column containing the
 snapshot date. Default: \code{SnapshotDate}.}
+
+\item{dPrevSnapshotDate}{\code{Date} The date of the previous snapshot to be compared.
+Optional. Default = \code{NULL}.}
 
 \item{strMetricColumns}{\code{character} A vector of numeric column names with which calculate change from
 previous snapshot. Default:
