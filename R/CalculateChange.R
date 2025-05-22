@@ -21,8 +21,6 @@
 #'   - MetricID
 #' @param strSnapshotDateColumn `character` The name of the column containing the
 #'   snapshot date. Default: `SnapshotDate`.
-#' @param dPrevSnapshotDate `Date` The date of the previous snapshot to be compared.
-#'   Optional. Default = `NULL`.
 #' @param strMetricColumns `character` A vector of numeric column names with which calculate change from
 #'   previous snapshot. Default:
 #'   - Numerator
@@ -49,7 +47,6 @@ CalculateChange <- function(
         "MetricID"
     ),
     strSnapshotDateColumn = "SnapshotDate",
-    dPrevSnapshotDate = NULL,
     strMetricColumns = c(
         "Numerator",
         "Denominator",
@@ -86,10 +83,10 @@ CalculateChange <- function(
     }
 
     # Bind dfResults and dfPrevious and keep appropriate columns
-    dfResults_combined <- dplyr::bind_rows(dfResults, dfPrevious) %>%
-      select(c(strIDColumns,
+    dfResults_combined <- dplyr::bind_rows(dfPrevious, dfResults) %>%
+      select(all_of(c(strIDColumns,
                strSnapshotDateColumn,
-               strMetricColumns))
+               strMetricColumns)))
 
 
     # # If dPrevSnapshotDate is not null, then filter the data to only the current and previous snapshot dates.

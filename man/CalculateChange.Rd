@@ -6,14 +6,21 @@
 \usage{
 CalculateChange(
   dfResults,
+  dfPrevious = NULL,
   strIDColumns = c("StudyID", "GroupLevel", "GroupID", "MetricID"),
   strSnapshotDateColumn = "SnapshotDate",
-  dPrevSnapshotDate = NULL,
   strMetricColumns = c("Numerator", "Denominator", "Metric", "Score", "Flag")
 )
 }
 \arguments{
 \item{dfResults}{\code{data.frame} A stacked summary of analysis pipeline output.
+Created by passing a list of results returned by \code{\link[=Summarize]{Summarize()}} to
+\code{\link[=BindResults]{BindResults()}}. Expected columns: \code{GroupID}, \code{GroupLevel}, \code{Numerator},
+\code{Denominator}, \code{Metric}, \code{Score}, \code{Flag}, \code{MetricID}, \code{StudyID},
+\code{SnapshotDate}.}
+
+\item{dfPrevious}{\code{data.frame} A stacked summary of analysis pipeline output
+from the previous snapshot.
 Created by passing a list of results returned by \code{\link[=Summarize]{Summarize()}} to
 \code{\link[=BindResults]{BindResults()}}. Expected columns: \code{GroupID}, \code{GroupLevel}, \code{Numerator},
 \code{Denominator}, \code{Metric}, \code{Score}, \code{Flag}, \code{MetricID}, \code{StudyID},
@@ -30,9 +37,6 @@ results. Default:
 
 \item{strSnapshotDateColumn}{\code{character} The name of the column containing the
 snapshot date. Default: \code{SnapshotDate}.}
-
-\item{dPrevSnapshotDate}{\code{Date} The date of the previous snapshot to be compared.
-Optional. Default = \code{NULL}.}
 
 \item{strMetricColumns}{\code{character} A vector of numeric column names with which calculate change from
 previous snapshot. Default:
