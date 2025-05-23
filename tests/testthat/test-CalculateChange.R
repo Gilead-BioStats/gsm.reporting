@@ -56,7 +56,7 @@ test_that(
         # - SnapshotDate
         dfChanges <- CalculateChange(
             dfResults = dfResults,
-            dfPrevious = dfPrevious
+            dfResultsLongitudinal = dfPrevious
         )
 
         # Check that the output is a data frame.
@@ -73,7 +73,7 @@ test_that(
             strIDColumns,
             strSnapshotDateColumn,
             "PrevSnapshotDate",
-            paste(strMetricColumns,"Value", sep = "_"),
+            paste(strMetricColumns,"Previous", sep = "_"),
             paste(strMetricColumns,"Change", sep = "_"),
             paste(strMetricColumns,"PercentChange", sep = "_")
         ) %in% colnames(dfChanges)))
@@ -81,23 +81,23 @@ test_that(
 
         # Check that the output has the expected values.
         expect_equal(
-            dfChanges$Numerator_Value,
+            dfChanges$Numerator,
             c(10, 10, 25, 20, 40, 30,  5,  5,  5, 10, 15, 15)
         )
         expect_equal(
-            dfChanges$Denominator_Value,
+            dfChanges$Denominator,
             c(100, 100, 250, 200, 400, 300,  50,  50,  50, 100, 150, 150)
         )
         expect_equal(
-            dfChanges$Metric_Value,
+            dfChanges$Metric,
             c(.1, .1, .1, .1, .1, .1, .1, .1, .1, .1, .1, .1)
         )
         expect_equal(
-            dfChanges$Score_Value,
+            dfChanges$Score,
             c(0.10, 0.10, 0.20, 0.20, 0.30, 0.30, 0.05, 0.05, 0.10, 0.10, 0.15, 0.15)
         )
         expect_equal(
-            dfChanges$Flag_Value,
+            dfChanges$Flag,
             c(-2, -2,  0, -1,  1,  0,  0,  0,  0,  1,  2,  2)
         )
 
