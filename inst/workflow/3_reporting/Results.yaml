@@ -30,7 +30,7 @@ steps:
     name: gsm.reporting::CalculateChange
     params:
       dfResults: Results_Summary
-      dfPrevious: Reporting_Results_Previous
+      dfResultsLongitudinal: Reporting_Results_Longitudinal
   # Subset on latest snapshot.
   - output: Reporting_Results
     name: gsm.kri::FilterByLatestSnapshot
