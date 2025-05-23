@@ -64,7 +64,7 @@ CalculateChange <- function(
     )
 
     # If dfResultsLongitudinal is not a data.frame, just return the dfResults
-    if (!is.data.frame(dfResultsLongitudinal) | nrow(dfResultsLongitudinal) == 0) {
+    if (!is.data.frame(dfResultsLongitudinal) || nrow(dfResultsLongitudinal) == 0) {
       cli::cli_alert_info("`dfResultsLongitudinal` not supplied properly, so dfResults will be returned unchanged.")
       return(dfResults)
     }
