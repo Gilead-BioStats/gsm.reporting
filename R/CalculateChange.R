@@ -7,7 +7,7 @@
 #'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
 #'   `Denominator`, `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`,
 #'   `SnapshotDate`.
-#' @param dfPrevious `data.frame` A stacked summary of analysis pipeline output
+#' @param dfResultsLongitudinal `data.frame` A stacked summary of analysis pipeline output
 #'   from the previous snapshot.
 #'   Created by passing a list of results returned by [Summarize()] to
 #'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
@@ -41,7 +41,7 @@
 
 CalculateChange <- function(
     dfResults,
-    dfPrevious = NULL,
+    dfResultsLongitudinal = NULL,
     strIDColumns = c(
         "StudyID",
         "GroupLevel",
@@ -63,13 +63,13 @@ CalculateChange <- function(
         message = "`dfResults` must be a data frame."
     )
 
-    # If dfPrevious is not a data.frame, just return the dfResults
-    if (!is.data.frame(dfPrevious)) {
-      cli::cli_alert_info("`dfPrevious` not supplied properly, so dfResults will be returned unchanged.")
+    # If dfResultsLongitudinal is not a data.frame, just return the dfResults
+    if (!is.data.frame(dfResultsLongitudinal)) {
+      cli::cli_alert_info("`dfResultsLongitudinal` not supplied properly, so dfResults will be returned unchanged.")
       return(dfResults)
     }
 
-    # Check that all columns exist in [ dfResults ] and [ dfPrevious ].
+    # Check that all columns exist in [ dfResults ] and [ dfResultsLongitudinal ].
     for (strColumn in c(
         strIDColumns,
         strSnapshotDateColumn,
@@ -80,30 +80,47 @@ CalculateChange <- function(
             message = glue::glue("`{strColumn} not found in `dfResults`.")
         )
       stop_if(
-        cnd = !strColumn %in% colnames(dfPrevious),
-        message = glue::glue("`{strColumn} not found in `dfPrevious`.")
+        cnd = !strColumn %in% colnames(dfResultsLongitudinal),
+        message = glue::glue("`{strColumn} not found in `dfResultsLongitudinal`.")
       )
     }
 
-    # Bind dfResults and dfPrevious and keep appropriate columns
-    dfResults_combined <- dplyr::bind_rows(dfPrevious, dfResults) %>%
+    # Determine current snapshot date and ensure formatted as date
+    dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]], na.rm = T)  %>% as.Date()
+
+    # Filter out current snapshot from longitudinal data if present
+    if (!is.null(dfResultsLongitudinal) && nrow(dfResultsLongitudinal) > 0) {
+      if (current_date %in% dfResultsLongitudinal[[strSnapshotDateColumn]]) {
+        cli::cli_alert_info("Current snapshot date ({current_date}) found in longitudinal data — removing to avoid duplication.")
+      }
+
+      # Remove current snapshot from longitudinal data
+      dfResultsLongitudinal <- dfResultsLongitudinal %>%
+        dplyr::filter(.data[[strSnapshotDateColumn]] != dCurrentSnapshotDate)
+
+      # Get latest previous snapshot date
+      available_dates <- sort(unique(dfResultsLongitudinal[[strSnapshotDateColumn]]))
+      if (length(available_dates) == 0) {
+        cli::cli_alert_info("No valid previous snapshots in longitudinal data — returning current results unchanged.")
+        return(dfResults)
+      }
+    }
+
+    # Bind dfResults and dfResultsLongitudinal and keep appropriate columns
+    dfResults_combined <- dplyr::bind_rows(dfResultsLongitudinal, dfResults) %>%
       select(all_of(c(strIDColumns,
-               strSnapshotDateColumn,
-               strMetricColumns)))
+                      strSnapshotDateColumn,
+                      strMetricColumns)))
 
 
     # If dPrevSnapshotDate is not null, then filter the data to only the current and previous snapshot dates.
     # This is primarily for gismo implementation when intermediary snapshots are taken but not reported.
     if (!is.null(dPrevSnapshotDate)) {
-
-      # determine current snapshot date and ensure both are formatted as dates
-      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
       dPrevSnapshotDate <- dPrevSnapshotDate %>% as.Date()
-
       # ensure dPrevSnapshotDate is a date in dfResults$SnapshotDate
       # and that it is not equal to the current snapshot date.
       stop_if(
-        cnd = !dPrevSnapshotDate %in% dfResults$SnapshotDate,
+        cnd = !dPrevSnapshotDate %in% dfResults_combined$SnapshotDate,
         message = glue::glue("`{dPrevSnapshotDate} not found in `dfResults$SnapshotDate`.")
       )
       stop_if(
@@ -116,8 +133,7 @@ CalculateChange <- function(
         dplyr::filter(.data[[strSnapshotDateColumn]] %in% c(dPrevSnapshotDate, dCurrentSnapshotDate))
 
     } else {
-      dCurrentSnapshotDate <- max(dfResults[[strSnapshotDateColumn]])  %>% as.Date()
-      dPrevSnapshotDate <- sort(dfResults[[strSnapshotDateColumn]] %>% unique())[-2]
+      dPrevSnapshotDate <- sort(dfResults_combined[[strSnapshotDateColumn]] %>% unique())[-2]
     }
 
     # Calculate change from previous snapshot.
