@@ -6,7 +6,7 @@
 \usage{
 CalculateChange(
   dfResults,
-  dfPrevious = NULL,
+  dfResultsLongitudinal = NULL,
   strIDColumns = c("StudyID", "GroupLevel", "GroupID", "MetricID"),
   strSnapshotDateColumn = "SnapshotDate",
   dPrevSnapshotDate = NULL,
@@ -20,7 +20,7 @@ Created by passing a list of results returned by \code{\link[=Summarize]{Summari
 \code{Denominator}, \code{Metric}, \code{Score}, \code{Flag}, \code{MetricID}, \code{StudyID},
 \code{SnapshotDate}.}
 
-\item{dfPrevious}{\code{data.frame} A stacked summary of analysis pipeline output
+\item{dfResultsLongitudinal}{\code{data.frame} A stacked summary of analysis pipeline output
 from the previous snapshot.
 Created by passing a list of results returned by \code{\link[=Summarize]{Summarize()}} to
 \code{\link[=BindResults]{BindResults()}}. Expected columns: \code{GroupID}, \code{GroupLevel}, \code{Numerator},
