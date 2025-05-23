@@ -152,7 +152,8 @@ CalculateChange <- function(
         )))) %>%
       tidyr::pivot_wider(names_from = Param,
                          values_from = c(Value, Change, PercentChange),
-                         names_glue = "{Param}_{.value}",)
+                         names_glue = "{Param}_{.value}",) %>%
+      dplyr::rename_with(~ gsub("_Value", "", .x), tidyr::ends_with("_Value"))
 
     return(dfChanges)
 }
