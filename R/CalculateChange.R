@@ -90,8 +90,8 @@ CalculateChange <- function(
 
     # Filter out current snapshot from longitudinal data if present
     if (!is.null(dfResultsLongitudinal) && nrow(dfResultsLongitudinal) > 0) {
-      if (current_date %in% dfResultsLongitudinal[[strSnapshotDateColumn]]) {
-        cli::cli_alert_info("Current snapshot date ({current_date}) found in longitudinal data — removing to avoid duplication.")
+      if (dCurrentSnapshotDate %in% dfResultsLongitudinal[[strSnapshotDateColumn]]) {
+        cli::cli_alert_info("Current snapshot date ({dCurrentSnapshotDate}) found in longitudinal data — removing to avoid duplication.")
       }
 
       # Remove current snapshot from longitudinal data
