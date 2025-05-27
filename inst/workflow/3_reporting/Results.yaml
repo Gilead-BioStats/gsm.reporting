@@ -25,4 +25,5 @@ steps:
       lAnalysis: lAnalyzed
       strName: "Analysis_Summary"
       strStudyID: strStudyID
+      dSnapshotDate: dSnapshotDate
 
