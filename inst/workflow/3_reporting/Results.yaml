@@ -25,6 +25,7 @@ steps:
       lAnalysis: lAnalyzed
       strName: "Analysis_Summary"
       strStudyID: strStudyID
+      dSnapshotDate: dSnapshotDate
   # Stack latest snapshot with previous snapshots.
   - output: Reporting_Results_With_Changes
     name: gsm.reporting::CalculateChange
