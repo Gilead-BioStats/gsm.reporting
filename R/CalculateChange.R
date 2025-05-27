@@ -3,14 +3,14 @@
 #' Calculate the change from the previous snapshot date.
 #'
 #' @param dfResults `data.frame` A stacked summary of analysis pipeline output.
-#'   Created by passing a list of results returned by [Summarize()] to
-#'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
+#'   Created by passing a list of results returned by [gsm.core::Summarize()] to
+#'   [gsm.reporting::BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
 #'   `Denominator`, `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`,
 #'   `SnapshotDate`.
 #' @param dfResultsLongitudinal `data.frame` A stacked summary of analysis pipeline output
 #'   from the previous snapshot.
-#'   Created by passing a list of results returned by [Summarize()] to
-#'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
+#'   Created by passing a list of results returned by [gsm.core::Summarize()] to
+#'   [gsm.reporting::BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
 #'   `Denominator`, `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`,
 #'   `SnapshotDate`.
 #' @param strIDColumns `character` A vector of column names with which to group
@@ -94,7 +94,7 @@ CalculateChange <- function(
     # Filter out current snapshot from longitudinal data if present
     if (!is.null(dfResultsLongitudinal) && nrow(dfResultsLongitudinal) > 0) {
       if (dCurrentSnapshotDate %in% dfResultsLongitudinal[[strSnapshotDateColumn]]) {
-        cli::cli_alert_info("Current snapshot date ({dCurrentSnapshotDate}) found in longitudinal data — removing to avoid duplication.")
+        cli::cli_alert_info("Current snapshot date ({dCurrentSnapshotDate}) found in longitudinal data - removing to avoid duplication.")
       }
 
       # Remove current snapshot from longitudinal data
@@ -104,7 +104,7 @@ CalculateChange <- function(
       # Get latest previous snapshot date
       available_dates <- sort(unique(dfResultsLongitudinal[[strSnapshotDateColumn]]))
       if (length(available_dates) == 0) {
-        cli::cli_alert_info("No valid previous snapshots in longitudinal data — returning current results unchanged.")
+        cli::cli_alert_info("No valid previous snapshots in longitudinal data - returning current results unchanged.")
         return(dfResults)
       }
     }
