@@ -60,8 +60,8 @@ and the change from the previous snapshot.
 Calculate the change from the previous snapshot date.
 }
 \examples{
-dfResults <- gsm.core::reportingResults \%>\% dplyr::filter(SnapshotDate  == "2025-04-01")
-dfResultsLongitudinal <- gsm.core::reportingResults \%>\% dplyr::filter(SnapshotDate  != "2025-04-01")
+dfResults <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate  == "2025-04-01")
+dfResultsLongitudinal <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate  != "2025-04-01")
 dfChChChChanges <- CalculateChange(dfResults = dfResults,
                                    dfResultsLongitudinal = dfResultsLongitudinal)
 
