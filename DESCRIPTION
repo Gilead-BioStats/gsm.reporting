@@ -5,7 +5,7 @@ Authors@R: c(
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
     person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = "aut"),
-    person("Spencer", "Chidress", , spencer.childress@gilead.com", role = "aut",
+    person("Spencer", "Chidress", , "spencer.childress@gilead.com", role = "aut",
            comment = c(ORCID = "0000-0001-6877-8511")),
     person("Gilead Sciences", role = "cph")
     )
