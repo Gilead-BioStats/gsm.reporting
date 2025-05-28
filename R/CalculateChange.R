@@ -1,6 +1,8 @@
 #' Calculate Change
 #'
-#' Calculate the change from the previous snapshot date.
+#' Calculate the change of user-specified metrics from the previous snapshot date.
+#' The primary use case of this function is to check for changes in the metrics when determining if
+#' continued flags should be actioned.
 #'
 #' @param dfResults `data.frame` A stacked summary of analysis pipeline output.
 #'   Created by passing a list of results returned by [gsm.core::Summarize()] to
