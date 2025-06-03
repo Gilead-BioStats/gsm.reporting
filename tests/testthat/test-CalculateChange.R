@@ -71,7 +71,7 @@ test_that(
     expect_true(all(c(
       strIDColumns,
       strSnapshotDateColumn,
-      "PrevSnapshotDate",
+      "SnapshotDate_Previous",
       paste(strMetricColumns, "Previous", sep = "_"),
       paste(strMetricColumns, "Change", sep = "_"),
       paste(strMetricColumns, "PercentChange", sep = "_")

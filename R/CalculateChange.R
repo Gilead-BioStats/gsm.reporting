@@ -166,12 +166,12 @@ CalculateChange <- function(
       Previous = dplyr::lag(.data$Value),
       Change = Value - dplyr::lag(.data$Value),
       PercentChange = .data$Change / dplyr::lag(.data$Value) * 100,
-      PrevSnapshotDate = dplyr::lag(.data[[strSnapshotDateColumn]])
+      SnapshotDate_Previous = dplyr::lag(.data[[strSnapshotDateColumn]])
     ) %>%
     dplyr::ungroup() %>%
     dplyr::arrange(across(all_of(c(
       strIDColumns,
-      "PrevSnapshotDate",
+      "SnapshotDate_Previous",
       "Param",
       strSnapshotDateColumn
     )))) %>%
