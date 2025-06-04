@@ -16,19 +16,4 @@ Useful links:
 }
 
 }
-\author{
-\strong{Maintainer}: Jeremy Wildfire \email{jwildfire@gmail.com}
-
-Authors:
-\itemize{
-  \item Laura Maxwell \email{lkmaxwell23@gmail.com}
-  \item Zelos Zhu \email{zelos.zhu@atorusresearch.com}
-}
-
-Other contributors:
-\itemize{
-  \item Gilead Sciences [copyright holder]
-}
-
-}
 \keyword{internal}

@@ -57,12 +57,16 @@ previous snapshot. Default:
 and the change from the previous snapshot.
 }
 \description{
-Calculate the change from the previous snapshot date.
+Calculate the change of user-specified metrics from the previous snapshot date.
+The primary use case of this function is to check for changes in the metrics when determining if
+continued flags should be actioned.
 }
 \examples{
-dfResults <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate  == "2025-04-01")
-dfResultsLongitudinal <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate  != "2025-04-01")
-dfChChChChanges <- CalculateChange(dfResults = dfResults,
-                                   dfResultsLongitudinal = dfResultsLongitudinal)
+dfResults <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate == "2025-04-01")
+dfResultsLongitudinal <- gsm.core::reportingResults |> dplyr::filter(SnapshotDate != "2025-04-01")
+dfChChChChanges <- CalculateChange(
+  dfResults = dfResults,
+  dfResultsLongitudinal = dfResultsLongitudinal
+)
 
 }

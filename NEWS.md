@@ -1,3 +1,9 @@
+# gsm.reporting 1.1.0
+
+This minor release adds the capability to calculate the change of user-specified metrics from the previous snapshot date. The primary use case of this function is to check for changes in the metrics when determining if continued flags should be actioned.
+
+Edits have been made to the Results.yaml to support this functionality when longitudinal data is provided.
+
 # gsm.reporting 1.0.2
 
 This patch release updates the description file to incorporate min version for `gsm` packages.
