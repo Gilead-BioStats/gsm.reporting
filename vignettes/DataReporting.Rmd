@@ -324,7 +324,28 @@ module_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/4_modules", strPacka
 lReports <- gsm.core::RunWorkflows(module_wf, reporting)
 ```
 
+----------------------------------------------------------------
+## Incorporating Historical data into the Reporting Output
 
+Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into `gsm.core::RunWorkflows` as a component of the `lData` argument. 
+
+By including the `Reporting_Results_Longitudinal` data.frame, the `CalculateChange()` function is triggered. This functoin calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics.  This is useful for longitudinal studies where you want to compare current results with past snapshots.
+
+```{r eval = FALSE, include = TRUE}
+# Prepare historical data
+historical <- gsm.core::reportingResults %>% filter(SnapshotDate == "2025-03-01")
+
+# Re-run reporting model and KRI report with historical data
+reporting_long <- gsm.core::RunWorkflows(reporting_wf, 
+                                         lData = c(mapped, list(lAnalyzed = analyzed, 
+                                                                Reporting_Results_Longitudinal = historical, 
+                                                                lWorkflows = metrics_wf)))
+lReports_long <- gsm.core::RunWorkflows(module_wf, reporting_long)
+```
+
+Reporting data with this historical trend will produce an additional section of the KRI report which highlights the "Flags Changed" from the previous snapshot to the current snapshot. This section will look like the following:
+
+![](flags_changed_report.png){width="100%"}
 ----------------------------------------------------------------
     
 ### Recap - Reporting Workflow 

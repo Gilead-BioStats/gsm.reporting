@@ -20,7 +20,7 @@ Imports:
     cli,
     dplyr,
     glue,
-    gsm.core (>= 1.1.0),
+    gsm.core (>= 1.1.2),
     log4r,
     purrr,
     tibble,
@@ -29,7 +29,7 @@ Imports:
 Suggests:
     DT,
     gsm.kri (>= 1.1.1),
-    gsm.mapping (>= 1.0.2),
+    gsm.mapping (>= 1.1.0),
     gt,
     knitr,
     rmarkdown,
