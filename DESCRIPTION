@@ -28,7 +28,7 @@ Imports:
     yaml
 Suggests:
     DT,
-    gsm.kri (>= 1.1.1),
+    gsm.kri (>= 1.2.0),
     gsm.mapping (>= 1.1.0),
     gt,
     knitr,

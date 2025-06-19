@@ -329,7 +329,7 @@ lReports <- gsm.core::RunWorkflows(module_wf, reporting)
 
 Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into `gsm.core::RunWorkflows` as a component of the `lData` argument. 
 
-By including the `Reporting_Results_Longitudinal` data.frame, the `CalculateChange()` function is triggered. This functoin calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics.  This is useful for longitudinal studies where you want to compare current results with past snapshots.
+By including the `Reporting_Results_Longitudinal` data.frame, the `CalculateChange()` function is triggered. This function calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics.  This is useful for longitudinal studies where you want to compare current results with past snapshots.
 
 ```{r eval = FALSE, include = TRUE}
 # Prepare historical data
