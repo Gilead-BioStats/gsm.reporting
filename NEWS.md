@@ -1,3 +1,7 @@
+#gsm.reporting 1.1.1
+
+This patch release adds a section about incorporating historical data into the reporting data model, and updates tests to comply with new gsm.core sample data.
+
 # gsm.reporting 1.1.0
 
 This minor release adds the capability to calculate the change of user-specified metrics from the previous snapshot date. The primary use case of this function is to check for changes in the metrics when determining if continued flags should be actioned.
