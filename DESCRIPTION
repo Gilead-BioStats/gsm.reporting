@@ -1,6 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: c( 
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
@@ -20,7 +20,7 @@ Imports:
     cli,
     dplyr,
     glue,
-    gsm.core (>= 1.1.0),
+    gsm.core (>= 1.1.2),
     log4r,
     purrr,
     tibble,
@@ -28,8 +28,8 @@ Imports:
     yaml
 Suggests:
     DT,
-    gsm.kri (>= 1.1.1),
-    gsm.mapping (>= 1.0.2),
+    gsm.kri (>= 1.2.0),
+    gsm.mapping (>= 1.1.0),
     gt,
     knitr,
     rmarkdown,
