@@ -1,4 +1,8 @@
-#gsm.reporting 1.1.1
+# gsm.reporting 1.1.2
+
+This patch release addresses changes to an `.rda` object updated in `gsm.core` v1.1.3.
+
+# gsm.reporting 1.1.1
 
 This patch release adds a section about incorporating historical data into the reporting data model, and updates tests to comply with new gsm.core sample data.
 
