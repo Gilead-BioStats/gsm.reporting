@@ -35,7 +35,7 @@ BindResults <- function(
         } else {
           subResult <- result[[strName]]
         }
-        return(subResult %>% dplyr::mutate(MetricID = metric))
+        return(subResult)
       }
     ) %>%
     purrr::list_rbind()
