@@ -67,38 +67,63 @@ MakeBounds <- function(
     )
     return(NULL)
   }
+  if(!all(strMetric %in% unique(dfMetrics$MetricID))){
+    missing_metrics <- strMetric[which(!(strMetric %in% unique(dfMetrics$MetricID)))]
+    LogMessage(
+      level = "warn",
+      message = "{missing_metrics} is missing from `dfMetrics`."
+    )
+  }
 
   dfBounds <- strMetrics %>%
     purrr::map(function(strMetric) {
-      dfResult <- dplyr::filter(dfResults, .data$MetricID == strMetric)
-      lMetric <- dfMetrics %>%
-        dplyr::filter(.data$MetricID == strMetric) %>%
-        as.list()
-      vThreshold <- ParseThreshold(strThreshold = lMetric$Threshold)
-      if (!is.null(lMetric$AnalysisType) &&
-        tolower(unique(lMetric$AnalysisType)) %in% c("identity")) {
-        dfBounds <- NULL
-      } else if (!is.null(lMetric$AnalysisType) &&
-        tolower(unique(lMetric$AnalysisType)) %in% c("poisson")) {
-        dfBounds <- Analyze_Poisson_PredictBounds(
-          dfResult,
-          vThreshold = vThreshold
-        ) %>%
-          mutate(MetricID = strMetric) %>%
-          mutate(StudyID = strStudyID) %>%
-          mutate(SnapshotDate = dSnapshotDate)
-      } else {
-        dfBounds <- Analyze_NormalApprox_PredictBounds(
-          dfResult,
-          strType = lMetric$AnalysisType %||% "binary",
-          vThreshold = vThreshold
-        ) %>%
-          mutate(MetricID = strMetric) %>%
-          mutate(StudyID = strStudyID) %>%
-          mutate(SnapshotDate = dSnapshotDate)
-      }
+      tryCatch({
+        if (!(strMetric %in% dfMetrics$MetricID)) {
+          LogMessage(
+            level = "warn",
+            message = "{missing_metrics} is missing from `dfMetrics`."
+          )
+          return(NULL)
+        }
 
-      return(dfBounds)
+        dfResult <- dplyr::filter(dfResults, .data$MetricID == strMetric)
+        lMetric <- dfMetrics %>%
+          dplyr::filter(.data$MetricID == strMetric) %>%
+          as.list()
+
+        vThreshold <- ParseThreshold(strThreshold = lMetric$Threshold)
+
+        if (!is.null(lMetric$AnalysisType) &&
+            tolower(unique(lMetric$AnalysisType)) %in% "identity") {
+          return(NULL)
+        } else if (!is.null(lMetric$AnalysisType) &&
+                   tolower(unique(lMetric$AnalysisType)) %in% "poisson") {
+          Analyze_Poisson_PredictBounds(
+            dfResult,
+            vThreshold = vThreshold
+          ) %>%
+            mutate(
+              MetricID = strMetric,
+              StudyID = strStudyID,
+              SnapshotDate = dSnapshotDate
+            )
+        } else {
+          Analyze_NormalApprox_PredictBounds(
+            dfResult,
+            strType = lMetric$AnalysisType %||% "binary",
+            vThreshold = vThreshold
+          ) %>%
+            mutate(
+              MetricID = strMetric,
+              StudyID = strStudyID,
+              SnapshotDate = dSnapshotDate
+            )
+        }
+      },
+      error = function(e) {
+        warning(glue::glue("Error in processing '{strMetric}': {e$message}"))
+        return(NULL)
+      })
     }) %>%
     purrr::list_rbind()
 
