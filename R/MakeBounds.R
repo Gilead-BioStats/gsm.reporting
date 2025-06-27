@@ -67,13 +67,6 @@ MakeBounds <- function(
     )
     return(NULL)
   }
-  if(!all(strMetric %in% unique(dfMetrics$MetricID))){
-    missing_metrics <- strMetric[which(!(strMetric %in% unique(dfMetrics$MetricID)))]
-    LogMessage(
-      level = "warn",
-      message = "{missing_metrics} is missing from `dfMetrics`."
-    )
-  }
 
   dfBounds <- strMetrics %>%
     purrr::map(function(strMetric) {
@@ -81,7 +74,7 @@ MakeBounds <- function(
         if (!(strMetric %in% dfMetrics$MetricID)) {
           LogMessage(
             level = "warn",
-            message = "{missing_metrics} is missing from `dfMetrics`."
+            message = "{strMetric} is missing from `dfMetrics`."
           )
           return(NULL)
         }
