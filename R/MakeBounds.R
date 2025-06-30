@@ -70,8 +70,7 @@ MakeBounds <- function(
 
   dfBounds <- strMetrics %>%
     purrr::map(function(strMetric) {
-      tryCatch({
-        if (!(strMetric %in% dfMetrics$MetricID)) {
+      if (!(strMetric %in% dfMetrics$MetricID)) {
           LogMessage(
             level = "warn",
             message = "{strMetric} is missing from `dfMetrics`."
@@ -112,11 +111,6 @@ MakeBounds <- function(
               SnapshotDate = dSnapshotDate
             )
         }
-      },
-      error = function(e) {
-        warning(glue::glue("Error in processing '{strMetric}': {e$message}"))
-        return(NULL)
-      })
     }) %>%
     purrr::list_rbind()
 
