@@ -97,14 +97,13 @@ test_that("MakeBounds makes poisson dfBounds", {
 })
 
 test_that("MakeBounds has appropriate expected warnings", {
-  expect_warnming(
-    expect_warning(
-      dfBounds <- suppressMessages(
-        MakeBounds(
-          dfResults = gsm.kri::FilterByLatestSnapshotDate(gsm.core::reportingResults),
-          dfMetrics = gsm.core::reportingMetrics %>% filter(!(MetricID %in% c("Analysis_kri0001", "Analysis_kri0002")))
-        )
+  expect_warning(
+    dfBounds <- suppressMessages(
+      MakeBounds(
+        dfResults = gsm.kri::FilterByLatestSnapshotDate(gsm.core::reportingResults),
+        dfMetrics = gsm.core::reportingMetrics %>% filter(!(MetricID %in% c("Analysis_kri0001")))
       )
-    )
+    ),
+    regexp = "Analysis_kri0001 is missing from `dfMetrics`."
   )
 })
