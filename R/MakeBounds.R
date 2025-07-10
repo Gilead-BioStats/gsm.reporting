@@ -68,13 +68,18 @@ MakeBounds <- function(
     return(NULL)
   }
 
+  if(!all(strMetrics %in% dfMetrics$MetricID)){
+    missing <- strMetrics[which(!(strMetrics %in% dfMetrics$MetricID))]
+    plurality <- ifelse(length(missing) == 1, "is", "are")
+    LogMessage(
+      level = "warn",
+      message = "{glue::glue_collapse(missing, sep = '; ')} {plurality} missing from `dfMetrics`."
+    )
+  }
+
   dfBounds <- strMetrics %>%
     purrr::map(function(strMetric) {
       if (!(strMetric %in% dfMetrics$MetricID)) {
-          LogMessage(
-            level = "warn",
-            message = "{strMetric} is missing from `dfMetrics`."
-          )
           return(NULL)
         }
 

@@ -101,9 +101,9 @@ test_that("MakeBounds has appropriate expected warnings", {
     dfBounds <- suppressMessages(
       MakeBounds(
         dfResults = gsm.kri::FilterByLatestSnapshotDate(gsm.core::reportingResults),
-        dfMetrics = gsm.core::reportingMetrics %>% filter(!(MetricID %in% c("Analysis_kri0001")))
+        dfMetrics = gsm.core::reportingMetrics %>% filter(!(MetricID %in% c("Analysis_kri0001", "Analysis_kri0002")))
       )
     ),
-    regexp = "Analysis_kri0001 is missing from `dfMetrics`."
+    regexp = "Analysis_kri0001; Analysis_kri0002 are missing from `dfMetrics`."
   )
 })
