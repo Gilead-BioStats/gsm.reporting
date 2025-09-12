@@ -14,7 +14,7 @@ BindResults(
 }
 \arguments{
 \item{lAnalysis}{Named List of analysis results in the format returned by
-\code{\link[=RunWorkflows]{RunWorkflows()}}.}
+\code{\link[gsm.core:RunWorkflows]{gsm.core::RunWorkflows()}}.}
 
 \item{strName}{Name of the object to stack. Pulled from \code{lAnalysis} (or from
 \code{lAnalysis$lData} when \code{bUselData} is \code{TRUE}).}
