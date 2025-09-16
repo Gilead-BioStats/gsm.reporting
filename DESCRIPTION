@@ -1,6 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: c( 
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
@@ -37,13 +37,13 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@dev,
-    gsm.kri=Gilead-BioStats/gsm.kri@dev,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@dev
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    gsm.kri=Gilead-BioStats/gsm.kri@main,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

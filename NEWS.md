@@ -1,3 +1,7 @@
+# gsm.reporting 1.1.3
+
+This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a [bug](https://github.com/Gilead-BioStats/gsm.reporting/issues/25) in`MakeBounds()`
+
 # gsm.reporting 1.1.2
 
 This patch release addresses changes to an `.rda` object updated in `gsm.core` v1.1.3.
