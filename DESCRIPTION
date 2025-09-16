@@ -1,6 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: c( 
     person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
@@ -46,4 +46,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

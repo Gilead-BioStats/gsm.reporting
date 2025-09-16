@@ -16,4 +16,20 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Jeremy Wildfire \email{jwildfire@gmail.com}
+
+Authors:
+\itemize{
+  \item Laura Maxwell \email{lkmaxwell23@gmail.com}
+  \item Zelos Zhu \email{zelos.zhu@atorusresearch.com}
+  \item Spencer Chidress \email{spencer.childress@gilead.com} (\href{https://orcid.org/0000-0001-6877-8511}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Gilead Sciences [copyright holder]
+}
+
+}
 \keyword{internal}
