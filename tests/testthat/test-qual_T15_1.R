@@ -2,6 +2,7 @@ TestAtLogLevel("WARN")
 ## Test Setup
 kri_workflows <- gsm.core::MakeWorkflowList(
   strNames = c("kri", "srs"),
+  strPath = "workflow/2_metrics",
   strPackage = "gsm.kri"
 )
 reporting_workflows <- gsm.core::MakeWorkflowList(strPath =  file.path(system.file(package = "gsm.reporting"), "workflow", "3_reporting"))
