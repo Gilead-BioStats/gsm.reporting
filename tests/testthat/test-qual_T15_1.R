@@ -4,7 +4,7 @@ kri_workflows <- gsm.core::MakeWorkflowList(
   strNames = c("kri", "srs"),
   strPackage = "gsm.kri"
 )
-reporting_workflows <- gsm.core::MakeWorkflowList(strPath = system.file("workflow/3_reporting", package = "gsm.reporting"))
+reporting_workflows <- gsm.core::MakeWorkflowList(strPath =  file.path(system.file(package = "gsm.reporting"), "workflow", "3_reporting"))
 analyzed <- gsm.core::RunWorkflows(
   kri_workflows,
   lData = c(mapped_data, list(lWorkflows = kri_workflows))
