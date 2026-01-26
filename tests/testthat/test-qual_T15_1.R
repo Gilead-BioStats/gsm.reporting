@@ -14,7 +14,7 @@ analyzed <- gsm.core::RunWorkflows(
 outputs <- map(reporting_workflows, \(x) x$steps[[length(x$steps)]]$output)
 
 ## Test Code
-testthat::test_that("Qual: Given summarized analytics data, a properly specified reporting workflow creates cross-sectional results data set with one record per metric per group  (#159)", {
+testthat::test_that("Qual: Given summarized analytics data, a properly specified reporting workflow creates cross-sectional results data set with one record per metric per group  (#50)", {
   expect_message(
     {
       test <- RunWorkflows(
