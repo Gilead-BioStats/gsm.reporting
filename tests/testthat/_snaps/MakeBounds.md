@@ -1,4 +1,4 @@
-# MakeBounds makes dfBounds
+# MakeBounds makes dfBounds (#41)
 
     Code
       MakeBounds(dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate ==
@@ -51,7 +51,7 @@
       # i 10,887 more rows
       # i 1 more variable: SnapshotDate <date>
 
-# MakeBounds uses user-supplied strMetrics
+# MakeBounds uses user-supplied strMetrics (#41)
 
     Code
       MakeBounds(dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate ==
@@ -77,7 +77,7 @@
       # i 1,231 more rows
       # i 1 more variable: SnapshotDate <date>
 
-# MakeBounds makes poisson dfBounds
+# MakeBounds makes poisson dfBounds (#41)
 
     Code
       MakeBounds(dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate ==

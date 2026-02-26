@@ -1,4 +1,4 @@
-test_that("MakeBounds makes dfBounds", {
+test_that("MakeBounds makes dfBounds (#41)", {
   gsm.core::reportingResults %>% dplyr::count(SnapshotDate)
   expect_snapshot({
     MakeBounds(
@@ -8,7 +8,7 @@ test_that("MakeBounds makes dfBounds", {
   })
 })
 
-test_that("MakeBounds uses user-supplied strMetrics", {
+test_that("MakeBounds uses user-supplied strMetrics (#41)", {
   expect_snapshot({
     MakeBounds(
       dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2025-04-01"),
@@ -85,7 +85,7 @@ test_that("MakeBounds fails gracefully for multiple arg values", {
   expect_null(dfBounds)
 })
 
-test_that("MakeBounds makes poisson dfBounds", {
+test_that("MakeBounds makes poisson dfBounds (#41)", {
   reportingMetrics <- gsm.core::reportingMetrics
   reportingMetrics$Type <- "poisson"
   expect_snapshot({

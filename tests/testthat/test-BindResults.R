@@ -1,4 +1,4 @@
-test_that("BindResults binds dfs in lAnalysis", {
+test_that("BindResults binds dfs in lAnalysis (#24)", {
   lAnalysis <- list(
     resultA = list(
       tbl1 = tibble::tibble(
