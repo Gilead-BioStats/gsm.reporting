@@ -1,0 +1,33 @@
+---
+title: "Test Tag Reasons"
+format: html
+---
+
+## test-CalculateChange.R
+
+| Test | Issue | Reason |
+|------|-------|--------|
+| `[ CalculateChange ] correctly calculates change from the previous snapshot.` | [#31](https://github.com/Gilead-BioStats/gsm.reporting/issues/31) | Commit-linked. Issue 31 specifically describes calculating delta between current and previous snapshots for Z-score, Metric, Enrollment, Numerator, and Denominator — exactly what the test verifies via `CalculateChange()`. |
+| `[ CalculateChange ] correctly calculates change from the previous snapshot.` | [#35](https://github.com/Gilead-BioStats/gsm.reporting/issues/35) | Commit-linked. Issue 35 is specifically about renaming `prevSnapshotDate` to `SnapshotDate_Previous`; the test explicitly checks that `SnapshotDate_Previous` exists in the output columns. |
+| `[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied.` | [#31](https://github.com/Gilead-BioStats/gsm.reporting/issues/31) | Commit-linked. Issue 31 is the implementing feature for `CalculateChange()`; the additional comments note "Default to previous snapshot if no date is supplied," which covers the fallback behavior this test validates (message emitted and `dfResults` returned unchanged when no previous data is supplied). |
+
+## test-MakeBounds.R
+
+| Test | Issue | Reason |
+|------|-------|--------|
+| `MakeBounds has appropriate expected warnings` | [#25](https://github.com/Gilead-BioStats/gsm.reporting/issues/25) | Commit-linked. Issue 25 describes that `MakeBounds` should "alert the user" when there is a mismatch between metric IDs in `results` and `metrics`. The test checks for the exact warning message when metric IDs are absent from `dfMetrics`. |
+
+## Tests with no tags
+
+The following tests had no commit-linked issues and no unambiguous issue title match; they were skipped.
+
+| Test | File | Notes |
+|------|------|-------|
+| `BindResults binds dfs in lAnalysis` | test-BindResults.R | No commit-linked issues. Issue 24 is about the missing SnapshotDate parameter in the YAML workflow — not about general binding behavior. |
+| `BindResults binds dfs in lAnalysis$lData` | test-BindResults.R | No commit-linked issues. Same reasoning as above. |
+| `MakeBounds makes dfBounds` | test-MakeBounds.R | No commit-linked issues; no unambiguous title match. |
+| `MakeBounds uses user-supplied strMetrics` | test-MakeBounds.R | No commit-linked issues; no unambiguous title match. |
+| `MakeBounds fails for NULLed arguments` | test-MakeBounds.R | No commit-linked issues; no unambiguous title match. |
+| `MakeBounds fails gracefully for multiple arg values` | test-MakeBounds.R | No commit-linked issues; no unambiguous title match. |
+| `MakeBounds makes poisson dfBounds` | test-MakeBounds.R | No commit-linked issues; no unambiguous title match. |
+| `MakeMetric makes dfMetrics` | test-MakeMetric.R | No commit-linked issues; no unambiguous title match. |

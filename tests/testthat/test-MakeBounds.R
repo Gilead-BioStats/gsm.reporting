@@ -96,7 +96,7 @@ test_that("MakeBounds makes poisson dfBounds", {
   })
 })
 
-test_that("MakeBounds has appropriate expected warnings", {
+test_that("MakeBounds has appropriate expected warnings (#25)", {
   expect_warning(
     dfBounds <- suppressMessages(
       MakeBounds(

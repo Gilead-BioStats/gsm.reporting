@@ -44,7 +44,7 @@ strMetricColumns <- c(
 )
 
 test_that(
-  "[ CalculateChange ] correctly calculates change from the previous snapshot.",
+  "[ CalculateChange ] correctly calculates change from the previous snapshot. (#31, #35)",
   {
     # [ CalculateChange ] returns a data frame with one record per combination of the
     # following columns
@@ -147,7 +147,7 @@ test_that(
 )
 
 test_that(
-  "[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied.",
+  "[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied. (#31)",
   {
     dfChanges <- CalculateChange(
       dfResults = dfResults
