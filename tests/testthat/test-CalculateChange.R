@@ -174,15 +174,13 @@ test_that("[ CalculateChange ] correctly calculates change from the previous sna
 })
 
 test_that("[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied. (#31)", {
-  dfChanges <- CalculateChange(
-    dfResults = dfResults
+  expect_message(
+    {
+      dfChanges <- CalculateChange(
+        dfResults = dfResults
+      )
+    },
+    "dfResults will be returned unchanged"
   )
   expect_equal(dfChanges, dfResults)
-
-  expect_message(
-    CalculateChange(
-      dfResults = dfResults
-    ),
-    regexp = "dfResults will be returned unchanged"
-  )
 })

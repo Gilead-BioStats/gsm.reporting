@@ -2,7 +2,10 @@ test_that("MakeBounds makes dfBounds (#41)", {
   gsm.core::reportingResults %>% dplyr::count(SnapshotDate)
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2025-04-01"),
+      dfResults = dplyr::filter(
+        gsm.core::reportingResults,
+        SnapshotDate == "2025-04-01"
+      ),
       dfMetrics = gsm.core::reportingMetrics
     )
   })
@@ -11,7 +14,10 @@ test_that("MakeBounds makes dfBounds (#41)", {
 test_that("MakeBounds uses user-supplied strMetrics (#41)", {
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2025-04-01"),
+      dfResults = dplyr::filter(
+        gsm.core::reportingResults,
+        SnapshotDate == "2025-04-01"
+      ),
       dfMetrics = gsm.core::reportingMetrics,
       strMetrics = "Analysis_kri0001"
     )
@@ -72,7 +78,10 @@ test_that("MakeBounds fails gracefully for multiple arg values", {
       expect_message(
         {
           dfBounds <- MakeBounds(
-            dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2025-04-01"),
+            dfResults = dplyr::filter(
+              gsm.core::reportingResults,
+              SnapshotDate == "2025-04-01"
+            ),
             dfMetrics = gsm.core::reportingMetrics,
             strStudyID = c("a", "b")
           )
@@ -90,7 +99,10 @@ test_that("MakeBounds makes poisson dfBounds (#41)", {
   reportingMetrics$Type <- "poisson"
   expect_snapshot({
     MakeBounds(
-      dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate == "2025-04-01"),
+      dfResults = dplyr::filter(
+        gsm.core::reportingResults,
+        SnapshotDate == "2025-04-01"
+      ),
       dfMetrics = reportingMetrics
     )
   })
@@ -100,10 +112,16 @@ test_that("MakeBounds has appropriate expected warnings (#25)", {
   expect_warning(
     dfBounds <- suppressMessages(
       MakeBounds(
-        dfResults = gsm.kri::FilterByLatestSnapshotDate(gsm.core::reportingResults),
-        dfMetrics = gsm.core::reportingMetrics %>% filter(!(MetricID %in% c("Analysis_kri0001", "Analysis_kri0002")))
+        dfResults = gsm.kri::FilterByLatestSnapshotDate(
+          gsm.core::reportingResults
+        ),
+        dfMetrics = gsm.core::reportingMetrics %>%
+          dplyr::filter(
+            !(MetricID %in% c("Analysis_kri0001", "Analysis_kri0002"))
+          )
       )
     ),
     regexp = "Analysis_kri0001; Analysis_kri0002 are missing from `dfMetrics`."
-  )
+  ) |>
+    expect_warning("Failed to parse strThreshold")
 })

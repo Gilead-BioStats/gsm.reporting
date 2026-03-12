@@ -1,6 +1,5 @@
 ## General
 
-- When running R from the console, use `--quiet --vanilla`.
 - Always run `air format .` after generating code.
 - After adding or changing functions, update their documentation per @.github/skills/document/SKILL.md.
 
@@ -9,7 +8,7 @@
 Load skills from @.github/skills when the user triggers them.
 
 | Trigger               | Path                                           |
-|------------------------|------------------------------------------------|
+|-----------------------|------------------------------------------------|
 | tag tests with issues | @.github/skills/tag-tests-with-issues/SKILL.md |
 | document functions    | @.github/skills/document/SKILL.md              |
 

@@ -1,5 +1,8 @@
 library(yaml)
-
+# Ensure that the .onLoad() events of other packages have already triggered, so
+# we can set the logger safely.
+library(gsm.core)
+library(gsm.mapping)
 set.seed(123)
 
 ## Declare all the data
@@ -50,12 +53,16 @@ domains <- c(gsub("Raw_", "", names(lData)), "COUNTRY", "EXCLUSION")
 ## Get Mapped data
 mappings_wf <- MakeWorkflowList(
   strNames = domains,
-  strPath = file.path(system.file(package = "gsm.mapping"), "workflow", "1_mappings")
+  strPath = file.path(
+    system.file(package = "gsm.mapping"),
+    "workflow",
+    "1_mappings"
+  )
 )
 
 ConsoleAppender <- log4r::console_appender(layout = gsm.core::cli_fmt)
 gsm.core::SetLogger(log4r::logger(
-  threshold = "WARN",
+  threshold = "ERROR",
   appenders = ConsoleAppender
 ))
 mapped_data <- RunWorkflows(mappings_wf, lData)
