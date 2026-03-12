@@ -31,7 +31,7 @@ test_that("BindResults binds dfs in lAnalysis (#24)", {
   )
 })
 
-test_that("BindResults binds dfs in lAnalysis$lData", {
+test_that("BindResults binds dfs in lAnalysis$lData (#24)", {
   lAnalysis <- list(
     resultA = list(
       lData = list(
