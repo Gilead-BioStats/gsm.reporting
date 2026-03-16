@@ -1,4 +1,4 @@
-test_that("MakeBounds makes dfBounds (#41)", {
+test_that("MakeBounds makes dfBounds (#41, #42)", {
   gsm.core::reportingResults %>% dplyr::count(SnapshotDate)
   expect_snapshot({
     MakeBounds(
