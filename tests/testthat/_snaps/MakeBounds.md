@@ -1,4 +1,4 @@
-# MakeBounds makes dfBounds (#41)
+# MakeBounds makes dfBounds (#41, #42)
 
     Code
       MakeBounds(dfResults = dplyr::filter(gsm.core::reportingResults, SnapshotDate ==
