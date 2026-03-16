@@ -71,7 +71,7 @@ strMetricColumns <- c(
   "Flag"
 )
 
-test_that("[ CalculateChange ] correctly calculates change from the previous snapshot. (#6, #31, #35)", {
+test_that("[ CalculateChange ] correctly calculates change from the previous snapshot. (#6, #30, #31, #35)", {
   # [ CalculateChange ] returns a data frame with one record per combination of the
   # following columns
   # - StudyID
@@ -173,7 +173,7 @@ test_that("[ CalculateChange ] correctly calculates change from the previous sna
   )
 })
 
-test_that("[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied. (#31)", {
+test_that("[ CalculateChange ] returns message and dfResults unchanged if dfPrevious not supplied. (#31, #30)", {
   expect_message(
     {
       dfChanges <- CalculateChange(
