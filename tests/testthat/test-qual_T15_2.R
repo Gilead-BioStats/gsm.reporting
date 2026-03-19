@@ -5,7 +5,13 @@ kri_workflows <- gsm.core::MakeWorkflowList(
   strPath = "workflow/2_metrics",
   strPackage = "gsm.kri"
 )
-reporting_workflows <- gsm.core::MakeWorkflowList(strPath =  file.path(system.file(package = "gsm.reporting"), "workflow", "3_reporting"))
+reporting_workflows <- gsm.core::MakeWorkflowList(
+  strPath = file.path(
+    system.file(package = "gsm.reporting"),
+    "workflow",
+    "3_reporting"
+  )
+)
 analyzed <- gsm.core::RunWorkflows(
   kri_workflows,
   lData = c(mapped_data, list(lWorkflows = kri_workflows))
@@ -15,7 +21,7 @@ outputs <- map(reporting_workflows, \(x) x$steps[[length(x$steps)]]$output)
 historical_reporting_results <- gsm.core::reportingResults %>%
   dplyr::filter(SnapshotDate < max(.data$SnapshotDate))
 ## Test Code
-testthat::test_that("Qual: Given summarized analytics data and historical reporting results data, a properly specified reporting workflow creates cross-sectional results data set including changes from previous snapshot with one record per metric per group (#50)", {
+testthat::test_that("Qual: Given summarized analytics data and historical reporting results data, a properly specified reporting workflow creates cross-sectional results data set including changes from previous snapshot with one record per metric per group (#6, #30, #31, #35, #50)", {
   test <- RunWorkflows(
     reporting_workflows,
     lData = c(

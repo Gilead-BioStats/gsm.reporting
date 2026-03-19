@@ -5,3 +5,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^AGENTS\.md$
+^\.positai$
+^\.claude$
