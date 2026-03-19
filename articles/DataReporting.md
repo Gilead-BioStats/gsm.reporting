@@ -82,19 +82,17 @@ lRaw <- Ingest(lSource, mappings_spec)
 
 # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
 mapped <- RunWorkflows(mappings_wf, lRaw)
-#> Warning: Not all specified columns in the spec are present in the data, missing columns
-#> are: Raw_STUDY$db_lock_dt
 
 # Step 2 - Create Metrics - calculate metrics using mapped data
 metrics_wf <- MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri", strPackage = "gsm.kri")
 lAnalysis <- RunWorkflows(metrics_wf, mapped)
-#> Warning: 17 values of [ GroupID ] with a [ Denominator ] value of 0
+#> Warning: 20 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
-#> Warning: 9 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 9 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 9 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 9 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> Warning: 135 values of [ GroupID ] with a [ Denominator ] value of 0
+#> Warning: 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> Warning: 133 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
 ```
 
@@ -256,29 +254,29 @@ dfBounds <- gsm.reporting::MakeBounds(dfResults = dfResults,
                                       dfMetrics = dfMetrics)
 #> Creating stacked dfBounds data for strMetrics
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.388.
+#> nStep was not provided. Setting default step to 3.092.
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.388.
+#> nStep was not provided. Setting default step to 3.092.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.388.
+#> nStep was not provided. Setting default step to 3.092.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.388.
+#> nStep was not provided. Setting default step to 3.092.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 143.3.
+#> nStep was not provided. Setting default step to 150.692.
 #> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 0.052.
+#> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 0.052.
+#> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 276.736.
+#> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 17.296.
+#> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 69.184.
+#> Parsed 2,3 to numeric vector: 2, 3
+#> nStep was not provided. Setting default step to 276.736.
+#> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
 #> nStep was not provided. Setting default step to 0.064.
-#> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 0.064.
-#> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 288.768.
-#> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 18.048.
-#> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 72.192.
-#> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 288.768.
-#> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 0.076.
 #> Parsed 0.9,0.85 to numeric vector: 0.9, 0.85
 #> Parsed 1.5,2.5 to numeric vector: 1.5, 2.5
 ```
