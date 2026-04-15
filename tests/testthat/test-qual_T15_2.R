@@ -129,7 +129,7 @@ testthat::test_that("Qual: Given summarized analytics data and historical report
       "MetricID",
       "Param"
     )))) %>%
-    dplyr::arrange("SnapshotDate", .by_group = TRUE) %>%
+    dplyr::arrange(.data$SnapshotDate, .by_group = TRUE) %>%
     dplyr::mutate(
       Previous = dplyr::lag(.data$Value),
       Change = Value - dplyr::lag(.data$Value),
