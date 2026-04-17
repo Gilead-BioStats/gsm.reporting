@@ -39,7 +39,7 @@ VignetteBuilder:
     knitr
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
-        gsm.kri=Gilead-BioStats/gsm.kri@gsm.kri-v1.5.0-rc,
+    gsm.kri=Gilead-BioStats/gsm.kri@gsm.kri-v1.5.0-rc,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main
 Config/Needs/website:
     
