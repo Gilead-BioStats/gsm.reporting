@@ -26,6 +26,7 @@ A data frame.
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 library(gsm.core)
 lWorkflows <- MakeWorkflowList(
   strPath = "workflow/2_metrics",
@@ -33,4 +34,5 @@ lWorkflows <- MakeWorkflowList(
   strPackage = "gsm.kri"
 )
 dfMetrics <- MakeMetric(lWorkflows)
+} # }
 ```
