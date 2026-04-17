@@ -28,8 +28,8 @@ Imports:
     yaml
 Suggests:
     DT,
-    gsm.mapping (>= 1.1.0),
     gsm.kri (>= 1.2.0),
+    gsm.mapping (>= 1.1.0),
     gt,
     knitr,
     rmarkdown,
@@ -39,8 +39,8 @@ VignetteBuilder:
     knitr
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@main,
-    gsm.kri=Gilead-BioStats/gsm.kri@main
+    gsm.kri=Gilead-BioStats/gsm.kri@main,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
