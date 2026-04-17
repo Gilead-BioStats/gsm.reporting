@@ -40,7 +40,6 @@ Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main
 Config/needs/website: Gilead-BioStats/gsm.kri@main
-Config/needs/check: Gilead-BioStats/gsm.kri@main
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
