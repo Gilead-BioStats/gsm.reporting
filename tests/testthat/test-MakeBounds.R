@@ -112,9 +112,8 @@ test_that("MakeBounds has appropriate expected warnings (#25)", {
   expect_warning(
     dfBounds <- suppressMessages(
       MakeBounds(
-        dfResults = gsm.kri::FilterByLatestSnapshotDate(
-          gsm.core::reportingResults
-        ),
+        dfResults = gsm.core::reportingResults %>%
+          dplyr::filter(SnapshotDate == max(.data$SnapshotDate)),
         dfMetrics = gsm.core::reportingMetrics %>%
           dplyr::filter(
             !(MetricID %in% c("Analysis_kri0001", "Analysis_kri0002"))
