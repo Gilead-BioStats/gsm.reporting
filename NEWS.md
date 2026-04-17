@@ -1,3 +1,12 @@
+# gsm.reporting 1.1.4
+
+This patch release primarily focuses on tightening quality control (new qualitative tests + qcthat automation) and aligning docs/dependencies with the RC versions of upstream `gsm.*` packages.
+
+**Changes:**
+- Add qualitative test helpers + new qual test cases (T15.1 / T15.2) for reporting outputs and deltas.
+- Add qcthat GitHub Action workflow and repo guidance docs (agents + documentation skill).
+
+
 # gsm.reporting 1.1.3
 
 This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a [bug](https://github.com/Gilead-BioStats/gsm.reporting/issues/25) in`MakeBounds()`

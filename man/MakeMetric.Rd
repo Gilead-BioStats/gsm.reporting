@@ -21,6 +21,7 @@ This function takes a list of workflows and returns a data frame with one row
 per \code{MetricID}.
 }
 \examples{
+\dontrun{
 library(gsm.core)
 lWorkflows <- MakeWorkflowList(
   strPath = "workflow/2_metrics",
@@ -28,5 +29,6 @@ lWorkflows <- MakeWorkflowList(
   strPackage = "gsm.kri"
 )
 dfMetrics <- MakeMetric(lWorkflows)
+}
 
 }
