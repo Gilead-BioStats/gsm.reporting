@@ -68,7 +68,7 @@ used in the reporting workflow:
 3.  `mapped$Mapped_SUBJ` - mapped data.frame of enrolled participants
 
 ``` r
-core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB", "PK", "VISIT",
+core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB", "PK", "VISIT", "Death", "OverallResponse", "Randomization",
                    "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ", "IE", "EXCLUSION")
 
 lSource <- gsm.core::lSource
@@ -88,11 +88,11 @@ metrics_wf <- MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri",
 lAnalysis <- RunWorkflows(metrics_wf, mapped)
 #> Warning: 20 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
-#> Warning: 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> 11 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
-#> Warning: 133 values of [ GroupID ] with a [ Denominator ] value of 0
+#> Warning: 10 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 10 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 10 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> 10 values of [ GroupID ] with a [ Denominator ] value of 0 removed.
+#> Warning: 137 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
 ```
 
@@ -254,31 +254,32 @@ dfBounds <- gsm.reporting::MakeBounds(dfResults = dfResults,
                                       dfMetrics = dfMetrics)
 #> Creating stacked dfBounds data for strMetrics
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.092.
+#> nStep was not provided. Setting default step to 3.224.
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.092.
+#> nStep was not provided. Setting default step to 3.224.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.092.
+#> nStep was not provided. Setting default step to 3.224.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.092.
+#> nStep was not provided. Setting default step to 3.224.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 150.692.
+#> nStep was not provided. Setting default step to 139.448.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 0.052.
+#> nStep was not provided. Setting default step to 0.056.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 0.052.
+#> nStep was not provided. Setting default step to 0.056.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 276.736.
+#> nStep was not provided. Setting default step to 288.768.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 17.296.
+#> nStep was not provided. Setting default step to 18.048.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 69.184.
+#> nStep was not provided. Setting default step to 72.192.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 276.736.
+#> nStep was not provided. Setting default step to 288.768.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 0.064.
+#> nStep was not provided. Setting default step to 0.068.
 #> Parsed 0.9,0.85 to numeric vector: 0.9, 0.85
 #> Parsed 1.5,2.5 to numeric vector: 1.5, 2.5
+#> Parsed 1,2 to numeric vector: 1, 2
 ```
 
 The resulting `dfBounds` data frame contains the following columns:
