@@ -1,3 +1,4 @@
+testthat::skip_if_not_installed("gsm.kri")
 TestAtLogLevel("WARN")
 ## Test Setup
 kri_workflows <- gsm.core::MakeWorkflowList(
