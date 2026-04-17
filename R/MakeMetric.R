@@ -13,6 +13,7 @@
 #' @return A data frame.
 #'
 #' @examples
+#' \dontrun{
 #' library(gsm.core)
 #' lWorkflows <- MakeWorkflowList(
 #'   strPath = "workflow/2_metrics",
@@ -20,6 +21,7 @@
 #'   strPackage = "gsm.kri"
 #' )
 #' dfMetrics <- MakeMetric(lWorkflows)
+#' }
 #'
 #' @export
 MakeMetric <- function(lWorkflows) {
