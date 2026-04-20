@@ -1,3 +1,4 @@
+testthat::skip_if_not_installed("gsm.kri")
 TestAtLogLevel("WARN")
 ## Test Setup
 kri_workflows <- gsm.core::MakeWorkflowList(
@@ -129,7 +130,7 @@ testthat::test_that("Qual: Given summarized analytics data and historical report
       "MetricID",
       "Param"
     )))) %>%
-    dplyr::arrange("SnapshotDate", .by_group = TRUE) %>%
+    dplyr::arrange(.data$SnapshotDate, .by_group = TRUE) %>%
     dplyr::mutate(
       Previous = dplyr::lag(.data$Value),
       Change = Value - dplyr::lag(.data$Value),
