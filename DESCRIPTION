@@ -34,13 +34,15 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
+    workr,
     withr
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main,
-    gsm.kri=Gilead-BioStats/gsm.kri@main,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@main
+    gsm.core=Gilead-BioStats/gsm.core@workr-implementation,
+    gsm.kri=Gilead-BioStats/gsm.kri@workr-implementation,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@workr-implementation,
+    workr=Gilead-BioStats/workr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
