@@ -25,6 +25,7 @@ Imports:
     purrr,
     tibble,
     tidyr,
+    workr,
     yaml
 Suggests:
     DT,
@@ -34,7 +35,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    workr,
     withr
 VignetteBuilder: 
     knitr
