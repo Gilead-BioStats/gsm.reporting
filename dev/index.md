@@ -40,6 +40,7 @@ created are as follows:
 You can install the development version of gsm.reporting like so:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("Gilead-BioStats/gsm.reporting@dev")
 ```

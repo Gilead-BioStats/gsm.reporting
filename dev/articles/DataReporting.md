@@ -68,6 +68,7 @@ used in the reporting workflow:
 3.  `mapped$Mapped_SUBJ` - mapped data.frame of enrolled participants
 
 ``` r
+
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB", "PK", "VISIT", "Death", "OverallResponse", "Randomization",
                    "PD", "QUERY", "STUDY", "STUDCOMP", "SDRGCOMP", "SITE", "SUBJ", "IE", "EXCLUSION")
 
@@ -138,6 +139,7 @@ and `MakeLongMeta()`. These small tables are then bound together to
 create `dfGroups`.
 
 ``` r
+
 #Transform CTMS Site and Study Level data
 dfCTMSSite <- gsm.core::RunQuery(df = lSource$Raw_SITE, 
                                  strQuery = "SELECT pi_number as GroupID, site_status as Status, pi_first_name as InvestigatorFirstName, pi_last_name as InvestigatorLastName, city as City, state as State, country as Country, * FROM df") |>
@@ -190,6 +192,7 @@ information as the input,
 is used to produce a data frame with one row per metric.
 
 ``` r
+
 dfMetrics <- gsm.reporting::MakeMetric(lWorkflows = metrics_wf)
 ```
 
@@ -215,6 +218,7 @@ feeding the `lAnalysis` list from the analysis workflow into
 along with the snapshot date and the study id.
 
 ``` r
+
 dfResults <- gsm.reporting::BindResults(lAnalysis = lAnalysis,
                                         strName = "Analysis_Summary",
                                         dSnapshotDate = Sys.Date(),
@@ -250,6 +254,7 @@ that create the bounds based on the model used to estimate the
 metric(Normal Approximation or Poisson).
 
 ``` r
+
 dfBounds <- gsm.reporting::MakeBounds(dfResults = dfResults,
                                       dfMetrics = dfMetrics)
 #> Creating stacked dfBounds data for strMetrics
@@ -306,6 +311,7 @@ individually. Appendix 1 goes into more detail about each of these
 individual functions.
 
 ``` r
+
 lCharts <- gsm.kri::MakeCharts(dfResults = dfResults,
                                dfGroups = dfGroups,
                                dfBounds = dfBounds,
@@ -331,10 +337,12 @@ Below are the static and interactive versions of the scatter plot for
 the AE KRI:
 
 ``` r
+
 lCharts$Analysis_kri0001$scatter
 ```
 
 ``` r
+
 
 lCharts$Analysis_kri0001$scatterJS
 #> NULL
@@ -352,6 +360,7 @@ will be saved (`strOutputDir` and `strOutputFile`, respectively) into
 process will be saved in a temporary folder.
 
 ``` r
+
 lReport <- gsm.kri::Report_KRI(lCharts = lCharts,
                                dfResults = dfResults,
                                dfGroups = dfGroups,
@@ -382,6 +391,7 @@ workflow individually before moving on to the next step.
 #### Option 1 - Run All Workflows Separately
 
 ``` r
+
 # Step 1 - Create Mapped Data - filter/map raw data
 # Source Data
 core_mappings <- c("AE", "COUNTRY", "DATACHG", "DATAENT", "ENROLL", "LB", "PK", "VISIT",
@@ -410,15 +420,15 @@ module_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/4_modules", strPacka
 lReports <- gsm.core::RunWorkflows(module_wf, reporting)
 ```
 
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \## Incorporating Historical data into the Reporting Output                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into [`gsm.core::RunWorkflows`](https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html) as a component of the `lData` argument.                                                                                                                                                                                                                                |
+|  |
+|:---|
+| \## Incorporating Historical data into the Reporting Output |
+| Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into [`gsm.core::RunWorkflows`](https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html) as a component of the `lData` argument. |
 | By including the `Reporting_Results_Longitudinal` data.frame, the [`CalculateChange()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/CalculateChange.md) function is triggered. This function calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics. This is useful for longitudinal studies where you want to compare current results with past snapshots. |
-| \`\`\` r \# Prepare historical data historical \<- gsm.core::reportingResults %\>% filter(SnapshotDate == “2025-03-01”)                                                                                                                                                                                                                                                                                                                                                                                                 |
-| \# Re-run reporting model and KRI report with historical data reporting_long \<- gsm.core::RunWorkflows(reporting_wf, lData = c(mapped, list(lAnalyzed = analyzed, Reporting_Results_Longitudinal = historical, lWorkflows = metrics_wf))) lReports_long \<- gsm.core::RunWorkflows(module_wf, reporting_long) \`\`\`                                                                                                                                                                                                   |
-| Reporting data with this historical trend will produce an additional section of the KRI report which highlights the “Flags Changed” from the previous snapshot to the current snapshot. This section will look like the following:                                                                                                                                                                                                                                                                                      |
-| ![](flags_changed_report.png)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| \`\`\` r \# Prepare historical data historical \<- gsm.core::reportingResults %\>% filter(SnapshotDate == “2025-03-01”) |
+| \# Re-run reporting model and KRI report with historical data reporting_long \<- gsm.core::RunWorkflows(reporting_wf, lData = c(mapped, list(lAnalyzed = analyzed, Reporting_Results_Longitudinal = historical, lWorkflows = metrics_wf))) lReports_long \<- gsm.core::RunWorkflows(module_wf, reporting_long) \`\`\` |
+| Reporting data with this historical trend will produce an additional section of the KRI report which highlights the “Flags Changed” from the previous snapshot to the current snapshot. This section will look like the following: |
+| ![](flags_changed_report.png) |
 
 #### Recap - Reporting Workflow
 

@@ -1,5 +1,7 @@
 # Changelog
 
+## gsm.reporting (development version)
+
 ## gsm.reporting 1.1.4
 
 This patch release primarily focuses on tightening quality control (new
