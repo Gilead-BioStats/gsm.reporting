@@ -1,5 +1,10 @@
 # Changelog
 
+## gsm.reporting 1.1.5
+
+This patch release updates the GitHub action workflows to align with the
+new federated action framework in `gsm.utils`
+
 ## gsm.reporting 1.1.4
 
 This patch release primarily focuses on tightening quality control (new

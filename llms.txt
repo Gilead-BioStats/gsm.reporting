@@ -37,11 +37,22 @@ created are as follows:
 
 ## Installation
 
-You can install the development version of gsm.reporting like so:
+You can install the latest release of gsm.reporting from
+[GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.reporting@dev")
+pak::pak("Gilead-BioStats/gsm.reporting@*release")
+```
+
+You can install the development version of gsm.reporting from
+[GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("pak")
+pak::pak("Gilead-BioStats/gsm.reporting")
 ```
 
 # Package index
