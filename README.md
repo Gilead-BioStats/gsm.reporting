@@ -1,7 +1,23 @@
 # gsm.reporting
 
 <!-- badges: start -->
-  [![R-CMD-check](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml)
+
+<div class="pkgdown-release">
+
+[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml)
+
+</div>
+
+<div class="pkgdown-devel">
+
+[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml)
+
+</div>
+
 <!-- badges: end -->
 
 The {gsm} ecosystem provides a standardized Risk Based Quality Monitoring (RBQM) framework for clinical trials that pairs a flexible data pipeline with robust reports like the one shown below.  
@@ -24,13 +40,23 @@ With all necessary inputs to the reporting model created via functions in `{gsm.
  results returned by `Summarize()` to `BindResults()`.
 4. `dfBounds`: Set of predicted percentages/rates and upper- and lower-bounds across the full range of sample sizes/total exposure values for reporting. Created by passing `dfResults` and `dfMetrics` to `MakeBounds()`. 
 
-
-
 ## Installation
 
-You can install the development version of gsm.reporting like so:
+You can install the latest release of gsm.reporting from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.reporting@dev")
+pak::pak("Gilead-BioStats/gsm.reporting@*release")
 ```
+
+<div class="pkgdown-devel">
+
+You can install the development version of gsm.reporting from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("Gilead-BioStats/gsm.reporting")
+```
+
+</div>

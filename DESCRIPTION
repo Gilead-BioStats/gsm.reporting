@@ -1,14 +1,14 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.4
-Authors@R: c( 
-    person("Jeremy", "Wildfire", email = "jwildfire@gmail.com", role = c("aut", "cre")),
+Version: 1.1.5
+Authors@R: c(
+    person("Jeremy", "Wildfire", , "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
     person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = "aut"),
     person("Spencer", "Chidress", , "spencer.childress@gilead.com", role = "aut",
            comment = c(ORCID = "0000-0001-6877-8511")),
     person("Gilead Sciences", role = "cph")
-    )
+  )
 Description: The Good Statistical Monitoring or 'gsm' suite of R packages
     provides a framework for statistical data monitoring. 'gsm.reporting'
     provides workflows to generate the reporting data model needed to
