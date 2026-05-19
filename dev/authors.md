@@ -19,13 +19,13 @@ Source:
 [`DESCRIPTION`](https://github.com/Gilead-BioStats/gsm.reporting/blob/dev/DESCRIPTION)
 
 Wildfire J, Maxwell L, Zhu Z, Chidress S (2026). *gsm.reporting: Good
-Statistical Monitoring Reporting*. R package version 1.1.4.9000,
+Statistical Monitoring Reporting*. R package version 1.1.5,
 <https://gilead-biostats.github.io/gsm.reporting/>.
 
     @Manual{,
       title = {gsm.reporting: Good Statistical Monitoring Reporting},
       author = {Jeremy Wildfire and Laura Maxwell and Zelos Zhu and Spencer Chidress},
       year = {2026},
-      note = {R package version 1.1.4.9000},
+      note = {R package version 1.1.5},
       url = {https://gilead-biostats.github.io/gsm.reporting/},
     }
