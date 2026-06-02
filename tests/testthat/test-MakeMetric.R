@@ -24,7 +24,7 @@ test_that("MakeMetric includes Active column when present in meta (#62)", {
   expect_identical(result$Active, c(TRUE, FALSE))
 })
 
-test_that("MakeMetric includes GenerateSignal column when present in meta (#62)", {
+test_that("MakeMetric includes GenerateRiskSignal column when present in meta (#62)", {
   given <- list(
     a = list(
       meta = list(
@@ -32,7 +32,7 @@ test_that("MakeMetric includes GenerateSignal column when present in meta (#62)"
         ID = "kri0001",
         GroupLevel = "Site",
         Abbreviation = "AE",
-        GenerateSignal = TRUE
+        GenerateRiskSignal = TRUE
       )
     ),
     b = list(
@@ -41,13 +41,13 @@ test_that("MakeMetric includes GenerateSignal column when present in meta (#62)"
         ID = "kri0002",
         GroupLevel = "Site",
         Abbreviation = "SAE",
-        GenerateSignal = FALSE
+        GenerateRiskSignal = FALSE
       )
     )
   )
   result <- MakeMetric(given)
-  expect_true("GenerateSignal" %in% names(result))
-  expect_identical(result$GenerateSignal, c(TRUE, FALSE))
+  expect_true("GenerateRiskSignal" %in% names(result))
+  expect_identical(result$GenerateRiskSignal, c(TRUE, FALSE))
 })
 
 test_that("MakeMetric makes dfMetrics", {
