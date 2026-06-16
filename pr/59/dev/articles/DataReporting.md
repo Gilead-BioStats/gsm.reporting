@@ -22,13 +22,13 @@ All of the functions to create the data frames in the reporting data
 model will run automatically and sequentially when a user specifies the
 metadata and data needed for the report, and calls
 [`workr::RunWorkflow()`](https://gilead-biostats.github.io/workr/reference/RunWorkflow.html)
-on the yaml files in the `workflow/3_reporting` directory. To create a
-report, the output of the reporting yamls is fed into the yamls in the
-`workflow/4_modules` directory to produce and html document with all
+on the YAML files in the `workflow/3_reporting` directory. To create a
+report, the output of the reporting YAMLs is fed into the YAMLs in the
+`workflow/4_modules` directory to produce an HTML document with all
 charts and tables created in the reporting workflow. For a more detailed
-discussion of the yaml file and directory structure, see the
+discussion of the YAML file and directory structure, see the
 [`{gsm.core}` Extensions
-vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html)\`).
+vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html).
 
 Each of the individual functions can also be run independently outside
 of a specified yaml workflow.
