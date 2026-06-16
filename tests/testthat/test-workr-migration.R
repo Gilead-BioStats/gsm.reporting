@@ -6,20 +6,20 @@
 # home). Staying analytics functions (Analyze_*, Summarize, etc.) remain on
 # gsm.core:: and are out of scope here.
 
-test_that("reporting workflow specs load through the workr runtime (#64)", {
+testthat::test_that("reporting workflow specs load through the workr runtime (#64)", {
   wf_dir <- file.path(
     system.file(package = "gsm.reporting"),
     "workflow",
     "3_reporting"
   )
-  skip_if(!dir.exists(wf_dir), "reporting workflow specs not found")
+  testthat::skip_if(!dir.exists(wf_dir), "reporting workflow specs not found")
 
   reporting_workflows <- workr::MakeWorkflowList(strPath = wf_dir)
 
-  expect_type(reporting_workflows, "list")
-  expect_gt(length(reporting_workflows), 0)
+  testthat::expect_type(reporting_workflows, "list")
+  testthat::expect_gt(length(reporting_workflows), 0)
   # Each loaded workflow exposes runtime steps (the workr workflow contract).
-  expect_true(all(vapply(
+  testthat::expect_true(all(vapply(
     reporting_workflows,
     function(w) length(w$steps) > 0,
     logical(1)
