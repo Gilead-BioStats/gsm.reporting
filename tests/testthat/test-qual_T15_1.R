@@ -6,7 +6,7 @@ kri_workflows <- workr::MakeWorkflowList(
   strPath = "workflow/2_metrics",
   strPackage = "gsm.kri"
 )
-reporting_workflows <- workr::MakeWorkflowList(strPath =  file.path(system.file(package = "gsm.reporting"), "workflow", "3_reporting"))
+reporting_workflows <- workr::MakeWorkflowList(strPath = file.path(system.file(package = "gsm.reporting"), "workflow", "3_reporting"))
 analyzed <- workr::RunWorkflows(
   kri_workflows,
   lData = c(mapped_data, list(lWorkflows = kri_workflows))
