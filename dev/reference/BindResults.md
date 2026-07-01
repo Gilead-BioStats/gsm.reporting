@@ -3,8 +3,9 @@
 **\[stable\]**
 
 Used to stack results (e.g. `dfSummary`) from a list of analysis
-pipeline output formatted like the result of `RunWorkflows()`. Also adds
-study level metadata when provided.
+pipeline output formatted like the result of
+[`workr::RunWorkflows()`](https://gilead-biostats.github.io/workr/reference/RunWorkflows.html).
+Also adds study level metadata when provided.
 
 ## Usage
 
@@ -23,7 +24,7 @@ BindResults(
 - lAnalysis:
 
   Named List of analysis results in the format returned by
-  [`gsm.core::RunWorkflows()`](https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html).
+  [`workr::RunWorkflows()`](https://gilead-biostats.github.io/workr/reference/RunWorkflows.html).
 
 - strName:
 

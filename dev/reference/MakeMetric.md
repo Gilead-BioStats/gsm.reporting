@@ -17,7 +17,7 @@ MakeMetric(lWorkflows)
 - lWorkflows:
 
   A list of workflows, like the one returned by
-  [`gsm.core::MakeWorkflowList()`](https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html).
+  [`workr::MakeWorkflowList()`](https://gilead-biostats.github.io/workr/reference/MakeWorkflowList.html).
 
 ## Value
 
@@ -27,8 +27,7 @@ A data frame.
 
 ``` r
 if (FALSE) { # \dontrun{
-library(gsm.core)
-lWorkflows <- MakeWorkflowList(
+lWorkflows <- workr::MakeWorkflowList(
   strPath = "workflow/2_metrics",
   strNames = "kri",
   strPackage = "gsm.kri"
