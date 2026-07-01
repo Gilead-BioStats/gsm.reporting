@@ -1,19 +1,19 @@
 testthat::skip_if_not_installed("gsm.kri")
 TestAtLogLevel("WARN")
 ## Test Setup
-kri_workflows <- gsm.core::MakeWorkflowList(
+kri_workflows <- workr::MakeWorkflowList(
   strNames = c("kri", "srs"),
   strPath = "workflow/2_metrics",
   strPackage = "gsm.kri"
 )
-reporting_workflows <- gsm.core::MakeWorkflowList(
+reporting_workflows <- workr::MakeWorkflowList(
   strPath = file.path(
     system.file(package = "gsm.reporting"),
     "workflow",
     "3_reporting"
   )
 )
-analyzed <- gsm.core::RunWorkflows(
+analyzed <- workr::RunWorkflows(
   kri_workflows,
   lData = c(mapped_data, list(lWorkflows = kri_workflows))
 ) %>%
@@ -23,7 +23,7 @@ historical_reporting_results <- gsm.core::reportingResults %>%
   dplyr::filter(SnapshotDate < max(.data$SnapshotDate))
 ## Test Code
 testthat::test_that("Qual: Given summarized analytics data and historical reporting results data, a properly specified reporting workflow creates cross-sectional results data set including changes from previous snapshot with one record per metric per group (#6, #30, #31, #35, #50)", {
-  test <- RunWorkflows(
+  test <- workr::RunWorkflows(
     reporting_workflows,
     lData = c(
       mapped_data,

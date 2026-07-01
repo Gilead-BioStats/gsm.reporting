@@ -8,14 +8,13 @@
 #' per `MetricID`.
 #'
 #' @param lWorkflows A list of workflows, like the one returned by
-#'   [gsm.core::MakeWorkflowList()].
+#'   [workr::MakeWorkflowList()].
 #'
 #' @return A data frame.
 #'
 #' @examples
 #' \dontrun{
-#' library(gsm.core)
-#' lWorkflows <- MakeWorkflowList(
+#' lWorkflows <- workr::MakeWorkflowList(
 #'   strPath = "workflow/2_metrics",
 #'   strNames = "kri",
 #'   strPackage = "gsm.kri"

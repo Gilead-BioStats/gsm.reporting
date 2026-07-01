@@ -4,11 +4,11 @@
 #' `r lifecycle::badge("stable")`
 #'
 #' Used to stack results (e.g. `dfSummary`) from a list of analysis pipeline
-#' output formatted like the result of `RunWorkflows()`. Also adds study level
-#' metadata when provided.
+#' output formatted like the result of [workr::RunWorkflows()]. Also adds study
+#' level metadata when provided.
 #'
 #' @param lAnalysis Named List of analysis results in the format returned by
-#'   [RunWorkflows()].
+#'   [workr::RunWorkflows()].
 #' @param strName Name of the object to stack. Pulled from `lAnalysis` (or from
 #'   `lAnalysis$lData` when `bUselData` is `TRUE`).
 #' @param dSnapshotDate Date of the snapshot. Default is [Sys.Date()].
