@@ -42,7 +42,8 @@ Remotes:
     gsm.core=Gilead-BioStats/gsm.core@gsm.core-v1.3.0-rc,
     gsm.kri=Gilead-BioStats/gsm.kri@gsm.kri-v1.6.0-rc,
     gsm.mapping=Gilead-BioStats/gsm.mapping@gsm.mapping-v1.1.5-rc,
-    workr=Gilead-BioStats/workr@rc-v1.1.0
+    workr=Gilead-BioStats/workr@rc-v1.1.0,
+    log4r=r-lib/log4r
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
