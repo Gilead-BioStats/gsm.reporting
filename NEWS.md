@@ -1,3 +1,5 @@
+# gsm.reporting (development version)
+
 # gsm.reporting 1.1.6
 
 This release migrates workflow orchestration to the new `workr` package and improves how metric metadata flows through to reports.
