@@ -1,6 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.5
+Version: 1.1.6
 Authors@R: c(
     person("Jeremy", "Wildfire", , "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
@@ -25,6 +25,7 @@ Imports:
     purrr,
     tibble,
     tidyr,
+    workr,
     yaml
 Suggests:
     DT,
@@ -40,7 +41,9 @@ VignetteBuilder:
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.kri=Gilead-BioStats/gsm.kri@main,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@main
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main,
+    workr=Gilead-BioStats/workr@main,
+    log4r=r-lib/log4r
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8

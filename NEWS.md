@@ -1,3 +1,12 @@
+# gsm.reporting 1.1.6
+
+This release migrates workflow orchestration to the new `workr` package and improves how metric metadata flows through to reports.
+
+**Changes:**
+- Workflow orchestration functions (such as `MakeWorkflowList()` and `RunWorkflows()`) are now provided by the new `workr` package. Documentation and examples have been updated to reference `workr::` in place of `gsm.core::`.
+- `MakeMetric()` now passes through all metadata fields defined on a workflow (for example `Active` and `GenerateRiskSignal`), so custom metadata is preserved in the metrics data used by charts and reports ([#62](https://github.com/Gilead-BioStats/gsm.reporting/issues/62)).
+- The bundled reporting workflows (Bounds, Groups, Metrics, Results) now set `Active: true` so they are included by default when running the reporting pipeline.
+
 # gsm.reporting 1.1.5
 
 This patch release updates the GitHub action workflows to align with the new federated action framework in `gsm.utils`

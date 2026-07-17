@@ -14,7 +14,7 @@ BindResults(
 }
 \arguments{
 \item{lAnalysis}{Named List of analysis results in the format returned by
-\code{\link[gsm.core:RunWorkflows]{gsm.core::RunWorkflows()}}.}
+\code{\link[workr:RunWorkflows]{workr::RunWorkflows()}}.}
 
 \item{strName}{Name of the object to stack. Pulled from \code{lAnalysis} (or from
 \code{lAnalysis$lData} when \code{bUselData} is \code{TRUE}).}
@@ -33,6 +33,6 @@ A data frame.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Used to stack results (e.g. \code{dfSummary}) from a list of analysis pipeline
-output formatted like the result of \code{RunWorkflows()}. Also adds study level
-metadata when provided.
+output formatted like the result of \code{\link[workr:RunWorkflows]{workr::RunWorkflows()}}. Also adds study
+level metadata when provided.
 }
