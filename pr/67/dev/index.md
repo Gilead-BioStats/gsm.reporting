@@ -43,7 +43,7 @@ You can install the latest release of gsm.reporting from
 ``` r
 
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.reporting@main")
+pak::pak("Gilead-BioStats/gsm.reporting@*release")
 ```
 
 You can install the development version of gsm.reporting from
