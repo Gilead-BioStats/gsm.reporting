@@ -89,6 +89,13 @@ metrics_wf <- workr::MakeWorkflowList(strPath = "workflow/2_metrics", strNames =
 lAnalysis <- workr::RunWorkflows(metrics_wf, mapped)
 #> Warning: 8 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
+#> Warning: `RunQuery()` was deprecated in gsm.core 1.3.0.
+#> ℹ Please use `workr::RunQuery()` instead.
+#> ℹ The deprecated feature was likely used in the workr package.
+#>   Please report the issue to the authors.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 #> Warning: 5 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
 ```
