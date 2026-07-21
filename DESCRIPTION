@@ -39,7 +39,7 @@ VignetteBuilder:
     knitr
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core#162,
-    gsm.kri=Gilead-BioStats/gsm.kri@dev,
+    gsm.kri=Gilead-BioStats/gsm.kri#267,
     gsm.mapping=Gilead-BioStats/gsm.mapping#148,
     workr=Gilead-BioStats/workr@main
 Config/testthat/edition: 3
