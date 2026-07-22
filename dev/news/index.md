@@ -1,5 +1,7 @@
 # Changelog
 
+## gsm.reporting (development version)
+
 ## gsm.reporting 1.1.6
 
 This release migrates workflow orchestration to the new `workr` package

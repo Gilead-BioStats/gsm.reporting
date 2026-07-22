@@ -19,6 +19,8 @@ Useful links:
 
 Authors:
 
+- Jeremy Wildfire <jwildfire@gmail.com>
+
 - Laura Maxwell <lkmaxwell23@gmail.com>
 
 - Zelos Zhu <zelos.zhu@atorusresearch.com>
