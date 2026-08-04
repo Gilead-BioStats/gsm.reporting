@@ -21,7 +21,7 @@ data in the Raw/Raw+ format.
 All of the functions to create the data frames in the reporting data
 model will run automatically and sequentially when a user specifies the
 metadata and data needed for the report, and calls
-[`workr::RunWorkflow()`](https://gilead-biostats.github.io/workr/reference/RunWorkflow.html)
+[`workr::RunWorkflow()`](https://rdrr.io/pkg/workr/man/RunWorkflow.html)
 on the YAML files in the `workflow/3_reporting` directory. To create a
 report, the output of the reporting YAMLs is fed into the YAMLs in the
 `workflow/4_modules` directory to produce an HTML document with all
@@ -130,9 +130,9 @@ country-level information in the final report. This table is based on
 CTMS data and the mapped `dfEnrolled` data frame created in the Analysis
 workflow. Creating this table requires the creation of 5 smaller tables
 that summarize the data at each group level using
-[`workr::RunQuery()`](https://gilead-biostats.github.io/workr/reference/RunQuery.html)
-and `MakeLongMeta()`. These small tables are then bound together to
-create `dfGroups`.
+[`workr::RunQuery()`](https://rdrr.io/pkg/workr/man/RunQuery.html) and
+`MakeLongMeta()`. These small tables are then bound together to create
+`dfGroups`.
 
 ``` r
 
@@ -419,7 +419,7 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 |  |
 |:---|
 | \## Incorporating Historical data into the Reporting Output |
-| Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into [`workr::RunWorkflows`](https://gilead-biostats.github.io/workr/reference/RunWorkflows.html) as a component of the `lData` argument. |
+| Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into [`workr::RunWorkflows`](https://rdrr.io/pkg/workr/man/RunWorkflows.html) as a component of the `lData` argument. |
 | By including the `Reporting_Results_Longitudinal` data.frame, the [`CalculateChange()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/CalculateChange.md) function is triggered. This function calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics. This is useful for longitudinal studies where you want to compare current results with past snapshots. |
 | \`\`\` r \# Prepare historical data historical \<- gsm.core::reportingResults %\>% filter(SnapshotDate == “2025-03-01”) |
 | \# Re-run reporting model and KRI report with historical data reporting_long \<- workr::RunWorkflows(reporting_wf, lData = c(mapped, list(lAnalyzed = analyzed, Reporting_Results_Longitudinal = historical, lWorkflows = metrics_wf))) lReports_long \<- workr::RunWorkflows(module_wf, reporting_long) \`\`\` |
@@ -429,7 +429,7 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 #### Recap - Reporting Workflow
 
 - `dfGroups` created from CTMS data using
-  [`workr::RunQuery()`](https://gilead-biostats.github.io/workr/reference/RunQuery.html),
+  [`workr::RunQuery()`](https://rdrr.io/pkg/workr/man/RunQuery.html),
   `MakeLongMeta()` and `bind_rows()`
 - `dfMetrics` created from `lWorkflow` using
   [`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md)
@@ -448,7 +448,7 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 
 #### Mapping Functions
 
-- [`workr::RunQuery()`](https://gilead-biostats.github.io/workr/reference/RunQuery.html):
+- [`workr::RunQuery()`](https://rdrr.io/pkg/workr/man/RunQuery.html):
   Run a SQL query to create new data.frames with filtering and column
   name specifications.
 
