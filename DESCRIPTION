@@ -38,9 +38,9 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@dev,
-    gsm.kri=Gilead-BioStats/gsm.kri@dev,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@dev,
+    gsm.core=Gilead-BioStats/gsm.core@feature-156-lsource-nonstarter,
+    gsm.kri=Gilead-BioStats/gsm.kri@feature-258-nonstarter-metrics,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@feature-139-nonstarter-mapping,
     workr=Gilead-BioStats/workr@main
 Config/testthat/edition: 3
 Config/testthat/parallel: true
