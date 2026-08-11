@@ -15,7 +15,7 @@ Vignette](https://gilead-public.github.io/gsm.reporting/gsmReporting.html)
 for additional details.
 
 With all necessary inputs to the reporting model created via functions
-in [gsm.mapping](https://github.com/Gilead-BioStats/gsm.mapping) and
+in [gsm.mapping](https://github.com/Gilead-Public/gsm.mapping) and
 [gsm.core](https://gilead-biostats.github.io/gsm.core),
 [gsm.reporting](https://gilead-public.github.io/gsm.reporting/)
 generates the reporting data model data frames. These data frames
