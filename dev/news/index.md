@@ -8,12 +8,12 @@ This release migrates workflow orchestration to the new `workr` package
 and improves how metric metadata flows through to reports.
 
 **Changes:** - Workflow orchestration functions (such as
-[`MakeWorkflowList()`](https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html)
+[`MakeWorkflowList()`](https://rdrr.io/pkg/gsm.core/man/MakeWorkflowList.html)
 and
-[`RunWorkflows()`](https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html))
+[`RunWorkflows()`](https://rdrr.io/pkg/gsm.core/man/RunWorkflows.html))
 are now provided by the new `workr` package. Documentation and examples
 have been updated to reference `workr::` in place of `gsm.core::`. -
-[`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md)
+[`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md)
 now passes through all metadata fields defined on a workflow (for
 example `Active` and `GenerateRiskSignal`), so custom metadata is
 preserved in the metrics data used by charts and reports
@@ -42,7 +42,7 @@ workflow and repo guidance docs (agents + documentation skill).
 This patch release adds new contributor guidelines and standardized
 issue templates, as well as a small edit to resolve a
 [bug](https://github.com/Gilead-BioStats/gsm.reporting/issues/25)
-in[`MakeBounds()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeBounds.md)
+in[`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md)
 
 ## gsm.reporting 1.1.2
 
@@ -90,19 +90,19 @@ modularized ecosystem for the GSM pipeline.
   qualification reports, streamlining the process and automating report
   generation for better efficiency.  
   [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/12)
-  [\#12](https://github.com/Gilead-BioStats/gsm.reporting/issues/12)
+  [\#12](https://github.com/Gilead-Public/gsm.reporting/issues/12)
 
 - **Replacement of `clindata` with `gsm.datasim`:**  
   The outdated `clindata` data has been replaced with `gsm.datasim`, a
   more advanced and reliable module for data simulation.  
   [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/13)
-  [\#13](https://github.com/Gilead-BioStats/gsm.reporting/issues/13)
+  [\#13](https://github.com/Gilead-Public/gsm.reporting/issues/13)
 
 - **Vignette Updates and Enhancements:**  
   Several changes have been made to improve the documentation, to ensure
   users can easily navigate the reporting workflows.  
   [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/14)
-  [\#14](https://github.com/Gilead-BioStats/gsm.reporting/issues/14)
+  [\#14](https://github.com/Gilead-Public/gsm.reporting/issues/14)
 
 ### Additional Changes:
 
@@ -117,4 +117,4 @@ Happy reporting!
 
 This initial release migrates the reporting data model functions,
 workflows and documentation from `{gsm}` to
-[gsm.reporting](https://gilead-biostats.github.io/gsm.reporting/).
+[gsm.reporting](https://gilead-public.github.io/gsm.reporting/).

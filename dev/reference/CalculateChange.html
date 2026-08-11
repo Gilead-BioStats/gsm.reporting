@@ -27,7 +27,7 @@ continued flags should be actioned."><meta name="robots" content="noindex"></hea
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/Gilead-BioStats/gsm.reporting/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/Gilead-Public/gsm.reporting/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -37,7 +37,7 @@ continued flags should be actioned."><meta name="robots" content="noindex"></hea
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Calculate Change</h1>
-      <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.reporting/blob/dev/R/CalculateChange.R" class="external-link"><code>R/CalculateChange.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Gilead-Public/gsm.reporting/blob/dev/R/CalculateChange.R" class="external-link"><code>R/CalculateChange.R</code></a></small>
       <div class="d-none name"><code>CalculateChange.Rd</code></div>
     </div>
 
@@ -65,7 +65,7 @@ continued flags should be actioned.</p>
 
 <dl><dt id="arg-dfresults">dfResults<a class="anchor" aria-label="anchor" href="#arg-dfresults"></a></dt>
 <dd><p><code>data.frame</code> A stacked summary of analysis pipeline output.
-Created by passing a list of results returned by <code><a href="https://gilead-biostats.github.io/gsm.core/reference/Summarize.html" class="external-link">gsm.core::Summarize()</a></code> to
+Created by passing a list of results returned by <code><a href="https://rdrr.io/pkg/gsm.core/man/Summarize.html" class="external-link">gsm.core::Summarize()</a></code> to
 <code><a href="BindResults.html">BindResults()</a></code>. Expected columns: <code>GroupID</code>, <code>GroupLevel</code>, <code>Numerator</code>,
 <code>Denominator</code>, <code>Metric</code>, <code>Score</code>, <code>Flag</code>, <code>MetricID</code>, <code>StudyID</code>,
 <code>SnapshotDate</code>.</p></dd>
@@ -74,7 +74,7 @@ Created by passing a list of results returned by <code><a href="https://gilead-b
 <dt id="arg-dfresultslongitudinal">dfResultsLongitudinal<a class="anchor" aria-label="anchor" href="#arg-dfresultslongitudinal"></a></dt>
 <dd><p><code>data.frame</code> A stacked summary of analysis pipeline output
 from the previous snapshot.
-Created by passing a list of results returned by <code><a href="https://gilead-biostats.github.io/gsm.core/reference/Summarize.html" class="external-link">gsm.core::Summarize()</a></code> to
+Created by passing a list of results returned by <code><a href="https://rdrr.io/pkg/gsm.core/man/Summarize.html" class="external-link">gsm.core::Summarize()</a></code> to
 <code><a href="BindResults.html">BindResults()</a></code>. Expected columns: <code>GroupID</code>, <code>GroupLevel</code>, <code>Numerator</code>,
 <code>Denominator</code>, <code>Metric</code>, <code>Score</code>, <code>Flag</code>, <code>MetricID</code>, <code>StudyID</code>,
 <code>SnapshotDate</code>.</p></dd>
@@ -117,8 +117,8 @@ and the change from the previous snapshot.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dfResults</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.core/reference/reportingResults.html" class="external-link">reportingResults</a></span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">SnapshotDate</span> <span class="op">==</span> <span class="st">"2025-04-01"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">dfResultsLongitudinal</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.core/reference/reportingResults.html" class="external-link">reportingResults</a></span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">SnapshotDate</span> <span class="op">!=</span> <span class="st">"2025-04-01"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dfResults</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsm.core/man/reportingResults.html" class="external-link">reportingResults</a></span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">SnapshotDate</span> <span class="op">==</span> <span class="st">"2025-04-01"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dfResultsLongitudinal</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gsm.core/man/reportingResults.html" class="external-link">reportingResults</a></span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">SnapshotDate</span> <span class="op">!=</span> <span class="st">"2025-04-01"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dfChChChChanges</span> <span class="op">&lt;-</span> <span class="fu">CalculateChange</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  dfResults <span class="op">=</span> <span class="va">dfResults</span>,</span></span>
 <span class="r-in"><span>  dfResultsLongitudinal <span class="op">=</span> <span class="va">dfResultsLongitudinal</span></span></span>

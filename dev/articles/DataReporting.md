@@ -4,10 +4,10 @@
 
 This vignette walks users through the mechanics of the functions and
 workflows that produce all of the Reporting output within the
-[gsm.reporting](https://gilead-biostats.github.io/gsm.reporting/)
-package. The `{gsm}` suite of packages leverages Key Risk Indicators
-(KRIs) and thresholds to conduct study-level, country-level and
-site-level Risk Based Monitoring for clinical trials.
+[gsm.reporting](https://gilead-public.github.io/gsm.reporting/) package.
+The `{gsm}` suite of packages leverages Key Risk Indicators (KRIs) and
+thresholds to conduct study-level, country-level and site-level Risk
+Based Monitoring for clinical trials.
 
 These functions and workflows produce data frames, visualizations,
 metadata, and reports to be used in reporting and error checking at
@@ -28,7 +28,7 @@ report, the output of the reporting YAMLs is fed into the YAMLs in the
 charts and tables created in the reporting workflow. For a more detailed
 discussion of the YAML file and directory structure, see the
 [`{gsm.core}` Extensions
-vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html).
+vignette](https://gilead-public.github.io/gsm.core/articles/gsmExtensions.html).
 
 Each of the individual functions can also be run independently outside
 of a specified yaml workflow.
@@ -43,11 +43,11 @@ process reporting-level data.
 ### Case Study - Step-by-Step Full Site-Level Report
 
 We will use sample clinical data simulated from the
-[`{gsm.datasim}`](https://github.com/Gilead-BioStats/gsm.datasim)
-package to run the full site-level report for all 12 KRIs included in
-this package. The focus of this vignette is the reporting workflow, so
-the output of the analytics workflow will be briefly discussed, but only
-in the context of *inputs* to the reporting workflow.
+[`{gsm.datasim}`](https://github.com/Gilead-Public/gsm.datasim) package
+to run the full site-level report for all 12 KRIs included in this
+package. The focus of this vignette is the reporting workflow, so the
+output of the analytics workflow will be briefly discussed, but only in
+the context of *inputs* to the reporting workflow.
 
 Additional supporting functions are explored in [Appendix
 1](#appendix-1).
@@ -87,9 +87,9 @@ mapped <- workr::RunWorkflows(mappings_wf, lRaw)
 # Step 2 - Create Metrics - calculate metrics using mapped data
 metrics_wf <- workr::MakeWorkflowList(strPath = "workflow/2_metrics", strNames = "kri", strPackage = "gsm.kri")
 lAnalysis <- workr::RunWorkflows(metrics_wf, mapped)
-#> Warning: 8 values of [ GroupID ] with a [ Denominator ] value of 0
+#> Warning: 7 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
-#> Warning: 5 values of [ GroupID ] with a [ Denominator ] value of 0
+#> Warning: 9 values of [ GroupID ] with a [ Denominator ] value of 0
 #> removed.
 ```
 
@@ -103,17 +103,16 @@ created are as follows:
     site and study data to `MakeLongMeta()`.
 2.  `dfMetrics`: Metric-specific metadata for use in charts and
     reporting. Created by passing an `lWorkflow` object to
-    [`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md).
+    [`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md).
 3.  `dfResults`: A stacked summary of analysis pipeline output. Created
     by passing a list of results returned by
-    [`Summarize()`](https://gilead-biostats.github.io/gsm.core/reference/Summarize.html)
-    to
-    [`BindResults()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/BindResults.md).
+    [`Summarize()`](https://rdrr.io/pkg/gsm.core/man/Summarize.html) to
+    [`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md).
 4.  `dfBounds`: Set of predicted percentages/rates and upper- and
     lower-bounds across the full range of sample sizes/total exposure
     values for reporting. Created by passing `dfResults` and `dfMetrics`
     to
-    [`MakeBounds()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeBounds.md).
+    [`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md).
 
 For more details on any of these tables, see `vignette("DataModel")`.
 
@@ -184,7 +183,7 @@ The `dfMetrics` table contains the metadata for each of the KRIs in the
 report. This information comes from the `meta` section of the metric
 workflows, `metrics_wf` defined in Step 0. Using this workflow
 information as the input,
-[`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md)
+[`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md)
 is used to produce a data frame with one row per metric.
 
 ``` r
@@ -210,7 +209,7 @@ The resulting `dfMetrics` dataframe contains the following columns:
 The reporting workflow requires that all metrics are stacked into a
 single data frame, `dfResults`. This stacked data frame is created by
 feeding the `lAnalysis` list from the analysis workflow into
-[`BindResults()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/BindResults.md)
+[`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md)
 along with the snapshot date and the study id.
 
 ``` r
@@ -242,9 +241,9 @@ intervals and bounds to delineate the observations based on the flag
 they receive (no flag, amber or red). In order to create the data frame
 that contains the information about these boundaries, `dfBounds`,
 `dfResults` and `dfMetrics` is fed into the
-[`MakeBounds()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeBounds.md)
+[`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md)
 function. The
-[`MakeBounds()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeBounds.md)
+[`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md)
 function is a wrapper around the `Analyze_*_PredictBounds()` functions
 that create the bounds based on the model used to estimate the
 metric(Normal Approximation or Poisson).
@@ -255,29 +254,29 @@ dfBounds <- gsm.reporting::MakeBounds(dfResults = dfResults,
                                       dfMetrics = dfMetrics)
 #> Creating stacked dfBounds data for strMetrics
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.192.
+#> nStep was not provided. Setting default step to 2.944.
 #> Parsed -2,-1,2,3 to numeric vector: -2, -1, 2, 3
-#> nStep was not provided. Setting default step to 3.192.
+#> nStep was not provided. Setting default step to 2.944.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.192.
+#> nStep was not provided. Setting default step to 2.944.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 3.192.
+#> nStep was not provided. Setting default step to 2.944.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 19.188.
+#> nStep was not provided. Setting default step to 16.116.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 0.052.
+#> nStep was not provided. Setting default step to 0.064.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 0.052.
+#> nStep was not provided. Setting default step to 0.064.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 32.768.
+#> nStep was not provided. Setting default step to 31.744.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 2.048.
+#> nStep was not provided. Setting default step to 1.984.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 8.192.
+#> nStep was not provided. Setting default step to 7.936.
 #> Parsed 2,3 to numeric vector: 2, 3
-#> nStep was not provided. Setting default step to 32.768.
+#> nStep was not provided. Setting default step to 31.744.
 #> Parsed -3,-2,2,3 to numeric vector: -3, -2, 2, 3
-#> nStep was not provided. Setting default step to 0.072.
+#> nStep was not provided. Setting default step to 0.076.
 #> Parsed 0.9,0.85 to numeric vector: 0.9, 0.85
 #> Parsed 1.5,2.5 to numeric vector: 1.5, 2.5
 #> Parsed 1,2 to numeric vector: 1, 2
@@ -420,7 +419,7 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 |:---|
 | \## Incorporating Historical data into the Reporting Output |
 | Using the output from the section above, you can modify the reporting workflow to include historical data by feeding the historical data into [`workr::RunWorkflows`](https://rdrr.io/pkg/workr/man/RunWorkflows.html) as a component of the `lData` argument. |
-| By including the `Reporting_Results_Longitudinal` data.frame, the [`CalculateChange()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/CalculateChange.md) function is triggered. This function calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics. This is useful for longitudinal studies where you want to compare current results with past snapshots. |
+| By including the `Reporting_Results_Longitudinal` data.frame, the [`CalculateChange()`](https://gilead-public.github.io/gsm.reporting/dev/reference/CalculateChange.md) function is triggered. This function calculates the change in the value (`_Change`) and the percentage change in the value (`_PercentChange`) between the previous snapshot and the current snapshot for all Reporting Result metrics. This is useful for longitudinal studies where you want to compare current results with past snapshots. |
 | \`\`\` r \# Prepare historical data historical \<- gsm.core::reportingResults %\>% filter(SnapshotDate == “2025-03-01”) |
 | \# Re-run reporting model and KRI report with historical data reporting_long \<- workr::RunWorkflows(reporting_wf, lData = c(mapped, list(lAnalyzed = analyzed, Reporting_Results_Longitudinal = historical, lWorkflows = metrics_wf))) lReports_long \<- workr::RunWorkflows(module_wf, reporting_long) \`\`\` |
 | Reporting data with this historical trend will produce an additional section of the KRI report which highlights the “Flags Changed” from the previous snapshot to the current snapshot. This section will look like the following: |
@@ -432,11 +431,11 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
   [`workr::RunQuery()`](https://rdrr.io/pkg/workr/man/RunQuery.html),
   `MakeLongMeta()` and `bind_rows()`
 - `dfMetrics` created from `lWorkflow` using
-  [`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md)
+  [`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md)
 - `dfResults` created from `lAnalysis$dfSummary` using
-  [`BindResults()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/BindResults.md)
+  [`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md)
 - `dfBounds` created from `dfResults` using
-  [`MakeBounds()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeBounds.md)
+  [`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md)
 - List of all charts and tables (`lCharts`) created from `dfResults`,
   `dfBounds`, `dfMetrics` and `dfGroups` using `MakeCharts()`
 - Report generated from `lCharts`, `dfResults`, `dfMetrics` and
@@ -454,36 +453,36 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 
 #### Visualization Functions
 
-- [`gsm.kri::Visualize_Scatter()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Scatter.html):
+- [`gsm.kri::Visualize_Scatter()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Scatter.html):
   Creates scatter plot of Total Exposure (in days, on log scale) vs
   Total Number of Event(s) of Interest (on linear scale). Each data
   point represents one site. Outliers are plotted in red with the site
   label attached. This plot is only created when statistical method is
   **not** defined as `identity`. Chart is called `scatter` in the
   `lCharts` object.
-- [`gsm.kri::Visualize_Score()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Score.html):
+- [`gsm.kri::Visualize_Score()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Score.html):
   Provides a standard visualization for Score or KRI. Charts are called
   `barScore` or `barMetric` in the `lCharts` object.
-- [`gsm.kri::Visualize_Metric()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Metric.html):
+- [`gsm.kri::Visualize_Metric()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Metric.html):
   Creates all available charts and tables for a metric using the data
   provided.
 
 #### Widget Functions
 
-- [`gsm.kri::Widget_GroupOverview()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_GroupOverview.html):
+- [`gsm.kri::Widget_GroupOverview()`](https://rdrr.io/pkg/gsm.kri/man/Widget_GroupOverview.html):
   Creates an interactive table displaying the flag distribution for all
   groups across all metrics.
-- [`gsm.kri::Widget_BarChart()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_BarChart.html):
+- [`gsm.kri::Widget_BarChart()`](https://rdrr.io/pkg/gsm.kri/man/Widget_BarChart.html):
   Creates an interactive bar chart visualization for Score or KRI.
   Charts are called `barScoreJS` or `barMetricJS` in the `lCharts`
   object.
-- [`gsm.kri::Widget_ScatterPlot()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_ScatterPlot.html):
+- [`gsm.kri::Widget_ScatterPlot()`](https://rdrr.io/pkg/gsm.kri/man/Widget_ScatterPlot.html):
   Creates an interactive scatter plot of Total Exposure (in days, on log
   scale) vs Total Number of Event(s) of Interest (on linear scale). Each
   data point represents one site. Outliers are plotted in red with the
   site label attached.Chart is called `scatterJS` in the `lCharts`
   object.
-- [`gsm.kri::Widget_TimeSeries()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_TimeSeries.html):
+- [`gsm.kri::Widget_TimeSeries()`](https://rdrr.io/pkg/gsm.kri/man/Widget_TimeSeries.html):
   Creates an interactive time series scatter plot of the score, metric
   or numerator. Charts are called `timeSeriesContinuousScoreJS`,
   `timeSeriesContinuousMetricJS`, or `timeSeriesContinuousNumeratorJS`
@@ -491,6 +490,6 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 
 #### Table Functions
 
-- [`gsm.kri::Report_MetricTable()`](https://gilead-biostats.github.io/gsm.kri/reference/Report_MetricTable.html):
+- [`gsm.kri::Report_MetricTable()`](https://rdrr.io/pkg/gsm.kri/man/Report_MetricTable.html):
   Creates a sortable table displaying the flags per group (e.g. Site,
   Country) for one metric at a time.

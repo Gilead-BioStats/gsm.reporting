@@ -22,9 +22,9 @@ MakeBounds(
 
   `data.frame` A stacked summary of analysis pipeline output. Created by
   passing a list of results returned by
-  [`Summarize()`](https://gilead-biostats.github.io/gsm.core/reference/Summarize.html)
+  [`gsm.core::Summarize()`](https://rdrr.io/pkg/gsm.core/man/Summarize.html)
   to
-  [`BindResults()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/BindResults.md).
+  [`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md).
   Expected columns: `GroupID`, `GroupLevel`, `Numerator`, `Denominator`,
   `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`, `SnapshotDate`.
 
@@ -32,7 +32,7 @@ MakeBounds(
 
   `data.frame` Metric-specific metadata for use in charts and reporting.
   Created by passing an `lWorkflow` object to
-  [`MakeMetric()`](https://gilead-biostats.github.io/gsm.reporting/dev/reference/MakeMetric.md).
+  [`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md).
   Expected columns: `File`, `MetricID`, `Group`, `Abbreviation`,
   `Metric`, `Numerator`, `Denominator`, `Model`, `Score`, and
   `Threshold`. For more details see the Data Model vignette:
