@@ -1,4 +1,6 @@
-# gsm.reporting (development version)
+# gsm.reporting 1.1.7
+
+This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#66).
 
 # gsm.reporting 1.1.6
 
