@@ -17,7 +17,7 @@ MakeMetric(lWorkflows)
 - lWorkflows:
 
   A list of workflows, like the one returned by
-  [`workr::MakeWorkflowList()`](https://gilead-biostats.github.io/workr/reference/MakeWorkflowList.html).
+  [`workr::MakeWorkflowList()`](https://rdrr.io/pkg/workr/man/MakeWorkflowList.html).
 
 ## Value
 

@@ -9,15 +9,17 @@ reports.
 
 Useful links:
 
-- <https://gilead-biostats.github.io/gsm.reporting/>
+- <https://gilead-public.github.io/gsm.reporting/>
 
-- <https://github.com/Gilead-BioStats/gsm.reporting/>
+- <https://github.com/Gilead-Public/gsm.reporting/>
 
 ## Author
 
 **Maintainer**: Jeremy Wildfire <jwildfire@gmail.com>
 
 Authors:
+
+- Jeremy Wildfire <jwildfire@gmail.com>
 
 - Laura Maxwell <lkmaxwell23@gmail.com>
 
