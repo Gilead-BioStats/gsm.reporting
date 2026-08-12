@@ -21,7 +21,7 @@ have been updated to reference `workr::` in place of `gsm.core::`. -
 now passes through all metadata fields defined on a workflow (for
 example `Active` and `GenerateRiskSignal`), so custom metadata is
 preserved in the metrics data used by charts and reports
-([\#62](https://github.com/Gilead-BioStats/gsm.reporting/issues/62)). -
+([\#62](https://github.com/Gilead-Public/gsm.reporting/issues/62)). -
 The bundled reporting workflows (Bounds, Groups, Metrics, Results) now
 set `Active: true` so they are included by default when running the
 reporting pipeline.
@@ -45,7 +45,7 @@ workflow and repo guidance docs (agents + documentation skill).
 
 This patch release adds new contributor guidelines and standardized
 issue templates, as well as a small edit to resolve a
-[bug](https://github.com/Gilead-BioStats/gsm.reporting/issues/25)
+[bug](https://github.com/Gilead-Public/gsm.reporting/issues/25)
 in[`MakeBounds()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeBounds.md)
 
 ## gsm.reporting 1.1.2
@@ -93,19 +93,19 @@ modularized ecosystem for the GSM pipeline.
   A new GitHub Actions workflow has been integrated for generating
   qualification reports, streamlining the process and automating report
   generation for better efficiency.  
-  [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/12)
+  [PR](https://github.com/Gilead-Public/gsm.reporting/pull/12)
   [\#12](https://github.com/Gilead-Public/gsm.reporting/issues/12)
 
 - **Replacement of `clindata` with `gsm.datasim`:**  
   The outdated `clindata` data has been replaced with `gsm.datasim`, a
   more advanced and reliable module for data simulation.  
-  [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/13)
+  [PR](https://github.com/Gilead-Public/gsm.reporting/pull/13)
   [\#13](https://github.com/Gilead-Public/gsm.reporting/issues/13)
 
 - **Vignette Updates and Enhancements:**  
   Several changes have been made to improve the documentation, to ensure
   users can easily navigate the reporting workflows.  
-  [PR](https://github.com/Gilead-BioStats/gsm.reporting/pull/14)
+  [PR](https://github.com/Gilead-Public/gsm.reporting/pull/14)
   [\#14](https://github.com/Gilead-Public/gsm.reporting/issues/14)
 
 ### Additional Changes:
