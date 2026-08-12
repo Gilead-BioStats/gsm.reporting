@@ -5,7 +5,6 @@
 #' @import dplyr
 #' @import gsm.core
 #' @import purrr
-#' @import log4r
 #' @import tidyr
 #' @importFrom cli cli_abort
 #' @importFrom cli cli_alert

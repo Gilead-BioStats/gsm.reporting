@@ -4,17 +4,17 @@
 
 <div class="pkgdown-release">
 
-[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml)
-[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml)
+[![R-CMD-check](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=main)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=main)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/pkgdown-all.yaml)
 
 </div>
 
 <div class="pkgdown-devel">
 
-[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/test-coverage.yaml)
-[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.reporting/actions/workflows/pkgdown-all.yaml)
+[![R-CMD-check](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/R-CMD-check.yaml/badge.svg?branch=dev)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/test-coverage.yaml/badge.svg?branch=dev)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/pkgdown-all.yaml/badge.svg?branch=dev)](https://github.com/Gilead-Public/gsm.reporting/actions/workflows/pkgdown-all.yaml)
 
 </div>
 
@@ -30,7 +30,7 @@ The {gsm} ecosystem provides a standardized Risk Based Quality Monitoring (RBQM)
 
 
 The `{gsm.reporting}` package provides the necessary functions and workflows to produce the reporting data model that is used by many packages to produce visualizations and reports.
-This README provides a high-level overview of {gsm.reporting}; see the [gsm Reporting Vignette](https://gilead-biostats.github.io/gsm.reporting/gsmReporting.html) for additional details.
+This README provides a high-level overview of {gsm.reporting}; see the [gsm Reporting Vignette](https://gilead-public.github.io/gsm.reporting/gsmReporting.html) for additional details.
 
 With all necessary inputs to the reporting model created via functions in `{gsm.mapping}` and `{gsm.core}`, `{gsm.reporting}` generates the reporting data model data frames. These data frames created are as follows:
 
@@ -46,7 +46,7 @@ You can install the latest release of gsm.reporting from [GitHub](https://github
 
 ``` r
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.reporting@*release")
+pak::pak("Gilead-Public/gsm.reporting@*release")
 ```
 
 <div class="pkgdown-devel">
@@ -56,7 +56,7 @@ You can install the development version of gsm.reporting from
 
 ``` r
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.reporting")
+pak::pak("Gilead-Public/gsm.reporting")
 ```
 
 </div>

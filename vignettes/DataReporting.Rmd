@@ -43,7 +43,7 @@ These functions and workflows produce data frames, visualizations, metadata, and
 
 ![](data_model_detailed.png){width="100%"}
 
-All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls `workr::RunWorkflow()` on the YAML files in the `workflow/3_reporting` directory. To create a report, the output of the reporting YAMLs is fed into the YAMLs in the `workflow/4_modules` directory to produce an HTML document with all charts and tables created in the reporting workflow. For a more detailed discussion of the YAML file and directory structure, see the [`{gsm.core}` Extensions vignette](https://gilead-biostats.github.io/gsm.core/articles/gsmExtensions.html).
+All of the functions to create the data frames in the reporting data model will run automatically and sequentially when a user specifies the metadata and data needed for the report, and calls `workr::RunWorkflow()` on the YAML files in the `workflow/3_reporting` directory. To create a report, the output of the reporting YAMLs is fed into the YAMLs in the `workflow/4_modules` directory to produce an HTML document with all charts and tables created in the reporting workflow. For a more detailed discussion of the YAML file and directory structure, see the [`{gsm.core}` Extensions vignette](https://gilead-public.github.io/gsm.core/articles/gsmExtensions.html).
 
 Each of the individual functions can also be run independently outside of a specified yaml workflow.
 
@@ -53,7 +53,7 @@ For the purposes of this documentation, we will evaluate the input(s) and output
   
 ## Case Study - Step-by-Step Full Site-Level Report
   
-We will use sample clinical data simulated from the [`{gsm.datasim}`](https://github.com/Gilead-BioStats/gsm.datasim) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
+We will use sample clinical data simulated from the [`{gsm.datasim}`](https://github.com/Gilead-Public/gsm.datasim) package to run the full site-level report for all 12 KRIs included in this package. The focus of this vignette is the reporting workflow, so the output of the analytics workflow will be briefly discussed, but only in the context of *inputs*  to the reporting workflow.
 
 Additional supporting functions are explored in [Appendix 1](#appendix-1).
 
