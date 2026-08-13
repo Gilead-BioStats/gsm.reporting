@@ -1,6 +1,6 @@
 Package: gsm.reporting
 Title: Good Statistical Monitoring Reporting
-Version: 1.1.6.9000
+Version: 1.1.7.9000
 Authors@R: c(
     person("Jeremy", "Wildfire", , "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "lkmaxwell23@gmail.com", role = "aut"),
@@ -16,6 +16,8 @@ Description: The Good Statistical Monitoring or 'gsm' suite of R packages
 License: Apache License (>= 2)
 URL: https://gilead-public.github.io/gsm.reporting/,
     https://github.com/Gilead-Public/gsm.reporting/
+Depends:
+    R (>= 4.1.0)
 Imports: 
     cli,
     dplyr,
@@ -24,7 +26,6 @@ Imports:
     purrr,
     tibble,
     tidyr,
-    workr,
     yaml
 Suggests:
     DT,
@@ -34,7 +35,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    withr
+    withr,
+    workr
 VignetteBuilder: 
     knitr
 Remotes:
@@ -46,6 +48,5 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
-LazyData: true
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

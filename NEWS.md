@@ -1,12 +1,16 @@
 # gsm.reporting (development version)
 
+# gsm.reporting 1.1.7
+
+This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#66).
+
 # gsm.reporting 1.1.6
 
 This release migrates workflow orchestration to the new `workr` package and improves how metric metadata flows through to reports.
 
 **Changes:**
 - Workflow orchestration functions (such as `MakeWorkflowList()` and `RunWorkflows()`) are now provided by the new `workr` package. Documentation and examples have been updated to reference `workr::` in place of `gsm.core::`.
-- `MakeMetric()` now passes through all metadata fields defined on a workflow (for example `Active` and `GenerateRiskSignal`), so custom metadata is preserved in the metrics data used by charts and reports ([#62](https://github.com/Gilead-BioStats/gsm.reporting/issues/62)).
+- `MakeMetric()` now passes through all metadata fields defined on a workflow (for example `Active` and `GenerateRiskSignal`), so custom metadata is preserved in the metrics data used by charts and reports ([#62](https://github.com/Gilead-Public/gsm.reporting/issues/62)).
 - The bundled reporting workflows (Bounds, Groups, Metrics, Results) now set `Active: true` so they are included by default when running the reporting pipeline.
 
 # gsm.reporting 1.1.5
@@ -24,7 +28,7 @@ This patch release primarily focuses on tightening quality control (new qualitat
 
 # gsm.reporting 1.1.3
 
-This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a [bug](https://github.com/Gilead-BioStats/gsm.reporting/issues/25) in`MakeBounds()`
+This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a [bug](https://github.com/Gilead-Public/gsm.reporting/issues/25) in`MakeBounds()`
 
 # gsm.reporting 1.1.2
 
@@ -56,15 +60,15 @@ We are pleased to introduce the first major release of the `gsm.reporting` packa
 ## Key Updates:
 - **Qualification Report GitHub Actions (GHA):**  
   A new GitHub Actions workflow has been integrated for generating qualification reports, streamlining the process and automating report generation for better efficiency.  
-  [PR #12](https://github.com/Gilead-BioStats/gsm.reporting/pull/12)
+  [PR #12](https://github.com/Gilead-Public/gsm.reporting/pull/12)
 
 - **Replacement of `clindata` with `gsm.datasim`:**  
   The outdated `clindata` data has been replaced with `gsm.datasim`, a more advanced and reliable module for data simulation.  
-  [PR #13](https://github.com/Gilead-BioStats/gsm.reporting/pull/13)
+  [PR #13](https://github.com/Gilead-Public/gsm.reporting/pull/13)
 
 - **Vignette Updates and Enhancements:**  
   Several changes have been made to improve the documentation, to ensure users can easily navigate the reporting workflows.  
-  [PR #14](https://github.com/Gilead-BioStats/gsm.reporting/pull/14)
+  [PR #14](https://github.com/Gilead-Public/gsm.reporting/pull/14)
 
 
 ## Additional Changes:
