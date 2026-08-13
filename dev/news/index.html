@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gsm.reporting</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.6.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.7.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,13 @@
 <h2 class="pkg-version" data-toc-text="development version" id="gsmreporting-development-version">gsm.reporting (development version)<a class="anchor" aria-label="anchor" href="#gsmreporting-development-version"></a></h2>
 </div>
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.7" id="gsmreporting-117">gsm.reporting 1.1.7<a class="anchor" aria-label="anchor" href="#gsmreporting-117"></a></h2>
+<p>This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (<a href="https://github.com/Gilead-Public/gsm.reporting/issues/66" class="external-link">#66</a>).</p>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.6" id="gsmreporting-116">gsm.reporting 1.1.6<a class="anchor" aria-label="anchor" href="#gsmreporting-116"></a></h2>
 <p>This release migrates workflow orchestration to the new <code>workr</code> package and improves how metric metadata flows through to reports.</p>
-<p><strong>Changes:</strong> - Workflow orchestration functions (such as <code><a href="https://rdrr.io/pkg/gsm.core/man/MakeWorkflowList.html" class="external-link">MakeWorkflowList()</a></code> and <code><a href="https://rdrr.io/pkg/gsm.core/man/RunWorkflows.html" class="external-link">RunWorkflows()</a></code>) are now provided by the new <code>workr</code> package. Documentation and examples have been updated to reference <code>workr::</code> in place of <code>gsm.core::</code>. - <code><a href="../reference/MakeMetric.html">MakeMetric()</a></code> now passes through all metadata fields defined on a workflow (for example <code>Active</code> and <code>GenerateRiskSignal</code>), so custom metadata is preserved in the metrics data used by charts and reports (<a href="https://github.com/Gilead-BioStats/gsm.reporting/issues/62" class="external-link">#62</a>). - The bundled reporting workflows (Bounds, Groups, Metrics, Results) now set <code>Active: true</code> so they are included by default when running the reporting pipeline.</p>
+<p><strong>Changes:</strong> - Workflow orchestration functions (such as <code><a href="https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html" class="external-link">MakeWorkflowList()</a></code> and <code><a href="https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html" class="external-link">RunWorkflows()</a></code>) are now provided by the new <code>workr</code> package. Documentation and examples have been updated to reference <code>workr::</code> in place of <code>gsm.core::</code>. - <code><a href="../reference/MakeMetric.html">MakeMetric()</a></code> now passes through all metadata fields defined on a workflow (for example <code>Active</code> and <code>GenerateRiskSignal</code>), so custom metadata is preserved in the metrics data used by charts and reports (<a href="https://github.com/Gilead-Public/gsm.reporting/issues/62" class="external-link">#62</a>). - The bundled reporting workflows (Bounds, Groups, Metrics, Results) now set <code>Active: true</code> so they are included by default when running the reporting pipeline.</p>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.5" id="gsmreporting-115">gsm.reporting 1.1.5<a class="anchor" aria-label="anchor" href="#gsmreporting-115"></a></h2>
@@ -55,7 +59,7 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.3" id="gsmreporting-113">gsm.reporting 1.1.3<a class="anchor" aria-label="anchor" href="#gsmreporting-113"></a></h2>
-<p>This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a <a href="https://github.com/Gilead-BioStats/gsm.reporting/issues/25" class="external-link">bug</a> in<code><a href="../reference/MakeBounds.html">MakeBounds()</a></code></p>
+<p>This patch release adds new contributor guidelines and standardized issue templates, as well as a small edit to resolve a <a href="https://github.com/Gilead-Public/gsm.reporting/issues/25" class="external-link">bug</a> in<code><a href="../reference/MakeBounds.html">MakeBounds()</a></code></p>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.2" id="gsmreporting-112">gsm.reporting 1.1.2<a class="anchor" aria-label="anchor" href="#gsmreporting-112"></a></h2>
@@ -84,11 +88,11 @@
 <div class="section level3">
 <h3 id="key-updates-1-0-0">Key Updates:<a class="anchor" aria-label="anchor" href="#key-updates-1-0-0"></a></h3>
 <ul><li><p><strong>Qualification Report GitHub Actions (GHA):</strong><br>
-A new GitHub Actions workflow has been integrated for generating qualification reports, streamlining the process and automating report generation for better efficiency.<br><a href="https://github.com/Gilead-BioStats/gsm.reporting/pull/12" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/12" class="external-link">#12</a></p></li>
+A new GitHub Actions workflow has been integrated for generating qualification reports, streamlining the process and automating report generation for better efficiency.<br><a href="https://github.com/Gilead-Public/gsm.reporting/pull/12" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/12" class="external-link">#12</a></p></li>
 <li><p><strong>Replacement of <code>clindata</code> with <code>gsm.datasim</code>:</strong><br>
-The outdated <code>clindata</code> data has been replaced with <code>gsm.datasim</code>, a more advanced and reliable module for data simulation.<br><a href="https://github.com/Gilead-BioStats/gsm.reporting/pull/13" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/13" class="external-link">#13</a></p></li>
+The outdated <code>clindata</code> data has been replaced with <code>gsm.datasim</code>, a more advanced and reliable module for data simulation.<br><a href="https://github.com/Gilead-Public/gsm.reporting/pull/13" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/13" class="external-link">#13</a></p></li>
 <li><p><strong>Vignette Updates and Enhancements:</strong><br>
-Several changes have been made to improve the documentation, to ensure users can easily navigate the reporting workflows.<br><a href="https://github.com/Gilead-BioStats/gsm.reporting/pull/14" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/14" class="external-link">#14</a></p></li>
+Several changes have been made to improve the documentation, to ensure users can easily navigate the reporting workflows.<br><a href="https://github.com/Gilead-Public/gsm.reporting/pull/14" class="external-link">PR </a><a href="https://github.com/Gilead-Public/gsm.reporting/issues/14" class="external-link">#14</a></p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="additional-changes-1-0-0">Additional Changes:<a class="anchor" aria-label="anchor" href="#additional-changes-1-0-0"></a></h3>

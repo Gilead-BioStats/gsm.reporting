@@ -22,7 +22,7 @@ MakeBounds(
 
   `data.frame` A stacked summary of analysis pipeline output. Created by
   passing a list of results returned by
-  [`gsm.core::Summarize()`](https://rdrr.io/pkg/gsm.core/man/Summarize.html)
+  [`Summarize()`](https://gilead-biostats.github.io/gsm.core/reference/Summarize.html)
   to
   [`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md).
   Expected columns: `GroupID`, `GroupLevel`, `Numerator`, `Denominator`,

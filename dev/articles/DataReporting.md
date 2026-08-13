@@ -106,7 +106,8 @@ created are as follows:
     [`MakeMetric()`](https://gilead-public.github.io/gsm.reporting/dev/reference/MakeMetric.md).
 3.  `dfResults`: A stacked summary of analysis pipeline output. Created
     by passing a list of results returned by
-    [`Summarize()`](https://rdrr.io/pkg/gsm.core/man/Summarize.html) to
+    [`Summarize()`](https://gilead-biostats.github.io/gsm.core/reference/Summarize.html)
+    to
     [`BindResults()`](https://gilead-public.github.io/gsm.reporting/dev/reference/BindResults.md).
 4.  `dfBounds`: Set of predicted percentages/rates and upper- and
     lower-bounds across the full range of sample sizes/total exposure
@@ -453,36 +454,36 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 
 #### Visualization Functions
 
-- [`gsm.kri::Visualize_Scatter()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Scatter.html):
+- [`gsm.kri::Visualize_Scatter()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Scatter.html):
   Creates scatter plot of Total Exposure (in days, on log scale) vs
   Total Number of Event(s) of Interest (on linear scale). Each data
   point represents one site. Outliers are plotted in red with the site
   label attached. This plot is only created when statistical method is
   **not** defined as `identity`. Chart is called `scatter` in the
   `lCharts` object.
-- [`gsm.kri::Visualize_Score()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Score.html):
+- [`gsm.kri::Visualize_Score()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Score.html):
   Provides a standard visualization for Score or KRI. Charts are called
   `barScore` or `barMetric` in the `lCharts` object.
-- [`gsm.kri::Visualize_Metric()`](https://rdrr.io/pkg/gsm.kri/man/Visualize_Metric.html):
+- [`gsm.kri::Visualize_Metric()`](https://gilead-biostats.github.io/gsm.kri/reference/Visualize_Metric.html):
   Creates all available charts and tables for a metric using the data
   provided.
 
 #### Widget Functions
 
-- [`gsm.kri::Widget_GroupOverview()`](https://rdrr.io/pkg/gsm.kri/man/Widget_GroupOverview.html):
+- [`gsm.kri::Widget_GroupOverview()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_GroupOverview.html):
   Creates an interactive table displaying the flag distribution for all
   groups across all metrics.
-- [`gsm.kri::Widget_BarChart()`](https://rdrr.io/pkg/gsm.kri/man/Widget_BarChart.html):
+- [`gsm.kri::Widget_BarChart()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_BarChart.html):
   Creates an interactive bar chart visualization for Score or KRI.
   Charts are called `barScoreJS` or `barMetricJS` in the `lCharts`
   object.
-- [`gsm.kri::Widget_ScatterPlot()`](https://rdrr.io/pkg/gsm.kri/man/Widget_ScatterPlot.html):
+- [`gsm.kri::Widget_ScatterPlot()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_ScatterPlot.html):
   Creates an interactive scatter plot of Total Exposure (in days, on log
   scale) vs Total Number of Event(s) of Interest (on linear scale). Each
   data point represents one site. Outliers are plotted in red with the
   site label attached.Chart is called `scatterJS` in the `lCharts`
   object.
-- [`gsm.kri::Widget_TimeSeries()`](https://rdrr.io/pkg/gsm.kri/man/Widget_TimeSeries.html):
+- [`gsm.kri::Widget_TimeSeries()`](https://gilead-biostats.github.io/gsm.kri/reference/Widget_TimeSeries.html):
   Creates an interactive time series scatter plot of the score, metric
   or numerator. Charts are called `timeSeriesContinuousScoreJS`,
   `timeSeriesContinuousMetricJS`, or `timeSeriesContinuousNumeratorJS`
@@ -490,6 +491,6 @@ lReports <- workr::RunWorkflows(module_wf, reporting)
 
 #### Table Functions
 
-- [`gsm.kri::Report_MetricTable()`](https://rdrr.io/pkg/gsm.kri/man/Report_MetricTable.html):
+- [`gsm.kri::Report_MetricTable()`](https://gilead-biostats.github.io/gsm.kri/reference/Report_MetricTable.html):
   Creates a sortable table displaying the flags per group (e.g. Site,
   Country) for one metric at a time.
