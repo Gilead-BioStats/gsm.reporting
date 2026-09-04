@@ -52,7 +52,10 @@ lData <- list(
 ## Data with missing values (15% NA's)
 
 ## specify domains
-domains <- c(gsub("Raw_", "", names(lData)), "COUNTRY", "EXCLUSION")
+# IPNS, like COUNTRY/EXCLUSION, is a derived mapping (it runs over Mapped_SUBJ,
+# not a Raw_* domain) so it has no Raw_* entry in lData to derive its name from
+# and must be named explicitly to be included.
+domains <- c(gsub("Raw_", "", names(lData)), "COUNTRY", "EXCLUSION", "IPNS")
 
 ## Get Mapped data
 mappings_wf <- workr::MakeWorkflowList(
